@@ -1,10 +1,11 @@
 #VRML_SIM R2021a utf8
 WorldInfo {
+  basicTimeStep 8
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.22597553768812223 0.8642323593329126 0.4494858011644318 4.0595686639076884
-  position -2.3581838774124573 2.9983529397004496 -0.9231925196501682
+  orientation 0.18512080230365865 0.901591578646253 0.39097687127067626 4.061839414905592
+  position -1.9914010560282003 1.8038197787225954 -0.9443871527515648
 }
 TexturedBackground {
 }
@@ -14,8 +15,23 @@ RectangleArena {
   floorSize 5 5
 }
 DEF ACKERMAN Robot {
-  translation -0.200497 0.1 -0.05858
+  translation -0.200497 0.12 -0.05858
   children [
+    DEF BODY Transform {
+      translation 0 0.04 0
+      children [
+        DEF BODY_SHAPE Shape {
+          appearance PBRAppearance {
+            baseColor 0.8 0.8 0.8
+            roughness 1
+            metalness 0
+          }
+          geometry Box {
+            size 0.65 0.2 0.5
+          }
+        }
+      ]
+    }
     DEF FRONT_AXEL Transform {
       translation -0.23 0 0
       rotation 1 0 0 1.5707996938995747
@@ -158,16 +174,6 @@ DEF ACKERMAN Robot {
       ]
       name "rear_left_led"
     }
-    DEF BODY_SHAPE Shape {
-      appearance PBRAppearance {
-        baseColor 0.8 0.8 0.8
-        roughness 1
-        metalness 0
-      }
-      geometry Box {
-        size 0.65 0.1 0.6
-      }
-    }
     DEF REAR_RIGHT_WHEEL HingeJoint {
       jointParameters HingeJointParameters {
         axis 0 0 1
@@ -179,7 +185,7 @@ DEF ACKERMAN Robot {
         }
       ]
       endPoint Solid {
-        translation 0.23 0 -0.36
+        translation 0.23000025068267285 0.0003289606580058875 -0.36000009204616956
         rotation 0 0 1 0
         children [
           DEF WHEEL_ROT Transform {
@@ -210,8 +216,8 @@ DEF ACKERMAN Robot {
                 metalness 0
               }
               geometry DEF WHEEL_CYL Cylinder {
-                height 0.04
-                radius 0.08
+                height 0.06
+                radius 0.12
               }
             }
           ]
@@ -231,7 +237,7 @@ DEF ACKERMAN Robot {
         }
       ]
       endPoint Solid {
-        translation 0.23 0 0.36
+        translation 0.23000011369411358 0.00034110684509667253 0.359999996949649
         rotation 0 0 1 0
         children [
           DEF WHEEL_ROT Transform {
@@ -270,7 +276,7 @@ DEF ACKERMAN Robot {
         }
       ]
       endPoint Solid {
-        translation -0.23 0 -0.36
+        translation -0.22999974606786244 0.0005961068314368008 -0.36000000527313425
         children [
           DEF FRONT_RIGHT_WHEEL HingeJoint {
             jointParameters HingeJointParameters {
@@ -313,7 +319,7 @@ DEF ACKERMAN Robot {
         }
       ]
       endPoint Solid {
-        translation -0.23 0 0.36
+        translation -0.22999949624110283 0.000594152008900778 0.3599999208276233
         children [
           DEF FRONT_LEFT_WHEEL HingeJoint {
             jointParameters HingeJointParameters {
@@ -345,16 +351,7 @@ DEF ACKERMAN Robot {
     }
   ]
   name "ackerman"
-  boundingObject DEF BODY_SHAPE Shape {
-    appearance PBRAppearance {
-      baseColor 0.8 0.8 0.8
-      roughness 1
-      metalness 0
-    }
-    geometry Box {
-      size 0.4 0.1 0.2
-    }
-  }
+  boundingObject USE BODY
   physics Physics {
   }
   controller "robot_controller"

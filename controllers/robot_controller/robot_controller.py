@@ -3,6 +3,7 @@
 # You may need to import some classes of the controller module. Ex:
 #  from controller import Robot, Motor, DistanceSensor
 from controller import Robot
+from controller import Motor
 import rospy
 from custom_msgs.msg import ControlStamped
 

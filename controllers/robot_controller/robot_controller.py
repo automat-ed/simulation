@@ -52,10 +52,10 @@ def set_Velocity(speed, acceleration):
     rear_left_wheel.setPosition(float('+inf'))
     front_right_wheel.setPosition(float('+inf'))
     front_left_wheel.setPosition(float('+inf'))
-    rear_right_wheel.setVelocity(control.speed)
-    rear_left_wheel.setVelocity(control.speed)
-    front_right_wheel.setVelocity(control.speed)
-    front_left_wheel.setVelocity(control.speed)
+    rear_right_wheel.setVelocity(speed)
+    rear_left_wheel.setVelocity(speed)
+    front_right_wheel.setVelocity(speed)
+    front_left_wheel.setVelocity(speed)
 
 def set_front_leds(value):
     front_left_led.set(value)

@@ -29,7 +29,13 @@ WHEEL_BASE_LENGTH = 46
 CENTRE_TO_WHEEL_DISTANCE = 36
 
 def steer(angle_in_degrees):
-    # The angle in degrees should be inside <-26,26> because of the steering limit 
+    # The angle_in_degrees should be inside <-26,26> because of the steering limit
+    # If angle_in_degrees is 0 then retrun wheels to default position
+    if angle_in_degrees == 0:
+        left_steer.setPosition(0)
+        right_steer.setPosition(0)
+        return    
+
     ideal_wheel_angle = math.radians(angle_in_degrees)
     ideal_curvature_radius = WHEEL_BASE_LENGTH / math.tan(ideal_wheel_angle)
     inside_wheel_angle = math.atan(WHEEL_BASE_LENGTH / (ideal_curvature_radius - CENTRE_TO_WHEEL_DISTANCE))

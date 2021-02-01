@@ -9,9 +9,12 @@
   <buildtool_depend>catkin</buildtool_depend>
 
   <build_depend>rospy</build_depend>
-  <build_export_depend>rospy</build_export_depend>
+  <build_depend>custom_msgs</build_depend>
+
   <exec_depend>rospy</exec_depend>
-  <depend>std_msgs</depend>
-  <depend>custom_msgs</depend>
+  <exec_depend>custom_msgs</exec_depend>
+
+  <build_export_depend>rospy</build_export_depend>
+  <build_export_depend>custom_msgs</build_export_depend>
 
 </package>

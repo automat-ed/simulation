@@ -1,11 +1,10 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """robot_controller controller."""
 
 # You may need to import some classes of the controller module. Ex:
 #  from controller import Robot, Motor, DistanceSensor
 from controller import Robot
-from controller import Motor
 import rospy
 from custom_msgs.msg import ControlStamped
 
@@ -22,6 +21,7 @@ front_left_wheel = robot.getDevice("front_left_wheel")
 left_steer = robot.getDevice("left_steer")
 right_steer = robot.getDevice("right_steer")
 
+
 class Control:
     def __init__(self):
         rospy.init_node('robot_controller', anonymous=True)
@@ -33,10 +33,11 @@ class Control:
 
     # Publishers
 
-    def receive_command(self, data):	
+    def receive_command(self, data):
         self.speed = data.control.speed
         self.acceleration = data.control.acceleration
         self.steering_angle = data.control.steering_angle
+
 
 # Instantiate ROS node
 control = Control()
@@ -54,8 +55,3 @@ while robot.step(timestep) != -1:
     front_left_wheel.setVelocity(control.speed)
     left_steer.setPosition(control.steering_angle)
     right_steer.setPosition(control.steering_angle)
-    
-    
-    
-
-# Enter here exit cleanup code.

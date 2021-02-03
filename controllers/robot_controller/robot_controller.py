@@ -75,18 +75,15 @@ set_rear_leds(1)
 class Control:
     def __init__(self):
         rospy.init_node('robot_controller', anonymous=True)
-        self.speed = 0
-        self.acceleration = 0
-        self.steering_angle = 0
+
     # Subscribers
         self.control_sub = rospy.Subscriber('/cmd', ControlStamped, self.receive_command, queue_size=10)
 
     # Publishers
 
     def receive_command(self, data):
-        self.speed = data.control.speed
-        self.acceleration = data.control.acceleration
-        self.steering_angle = data.control.steering_angle
+        set_Velocity(data.speed, data.acceleration)
+        steer(data.steering_angle)
 
 
 # Instantiate ROS node
@@ -95,8 +92,7 @@ control = Control()
 # Main loop:
 # - perform simulation steps until Webots is stopping the controller
 while robot.step(timestep) != -1:
-    set_Velocity(control.speed, control.acceleration)
-    steer(control.steering_angle)
+    pass
     
 
 # Enter here exit cleanup code.

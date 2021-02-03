@@ -28,6 +28,7 @@ rear_left_led = robot.getDevice("rear_left_led")
 # Distance between front and rear wheels
 WHEEL_BASE_LENGTH = 46
 CENTRE_TO_WHEEL_DISTANCE = 36
+WHEEL_RADIUS = 12
 
 def steer(angle_in_degrees):
     # The angle_in_degrees should be inside <-26,26> because of the steering limit
@@ -49,14 +50,15 @@ def steer(angle_in_degrees):
         right_steer.setPosition(inside_wheel_angle)
 
 def set_Velocity(speed, acceleration):
+    angular_velocity = speed / WHEEL_RADIUS
     rear_right_wheel.setPosition(float('+inf'))
     rear_left_wheel.setPosition(float('+inf'))
     front_right_wheel.setPosition(float('+inf'))
     front_left_wheel.setPosition(float('+inf'))
-    rear_right_wheel.setVelocity(speed)
-    rear_left_wheel.setVelocity(speed)
-    front_right_wheel.setVelocity(speed)
-    front_left_wheel.setVelocity(speed)
+    rear_right_wheel.setVelocity(angular_velocity)
+    rear_left_wheel.setVelocity(angular_velocity)
+    front_right_wheel.setVelocity(angular_velocity)
+    front_left_wheel.setVelocity(angular_velocity)
 
 def set_front_leds(value):
     front_left_led.set(value)

@@ -6,7 +6,15 @@
 #  from controller import Robot, Motor, DistanceSensor
 from controller import Robot
 import rospy
+from rospy.numpy_msg import numpy_msg
+from sensor_msgs.msg import Image
 from custom_msgs.msg import ControlStamped
+from std_msgs.msg import UInt8MultiArray
+from std_msgs.msg import String, MultiArrayLayout
+from cv_bridge import CvBridge
+import cv2
+
+import numpy as np
 
 # create the Robot instance.
 robot = Robot()
@@ -22,9 +30,15 @@ left_steer = robot.getDevice("left_steer")
 right_steer = robot.getDevice("right_steer")
 
 
+# Camera
+kinect_camera = robot.getDevice("kinect color")
+kinect_camera.enable(10)
+
+
 class Control:
     def __init__(self):
         rospy.init_node('robot_controller', anonymous=True)
+        self.bridge = CvBridge()
         self.speed = 0
         self.acceleration = 0
         self.steering_angle = 0
@@ -32,6 +46,7 @@ class Control:
         self.control_sub = rospy.Subscriber('/cmd', ControlStamped, self.receive_command, queue_size=10)
 
     # Publishers
+        self.camera_pub = rospy.Publisher('/camera', Image, queue_size=10)
 
     def receive_command(self, data):
         self.speed = data.control.speed
@@ -55,3 +70,23 @@ while robot.step(timestep) != -1:
     front_left_wheel.setVelocity(control.speed)
     left_steer.setPosition(control.steering_angle)
     right_steer.setPosition(control.steering_angle)
+    
+   # raw_image = kinect_camera.getImageArray()
+    #np_arr_image = np.frombuffer(raw_image_bytes, np.uint8).reshape((kinect_camera.getHeight(), kinect_camera.getWidth(), -1))
+    
+    #raw_image = np.array(raw_image, np.uint8) / 255.0
+   # img_msg = control.bridge.cv2_to_imgmsg(raw_image, '64FC3')
+
+    
+    raw_image = kinect_camera.getImage()
+    img = np.frombuffer(raw_image, dtype='uint8')
+    cv2.imshow('test', img)
+    cv2.waitKey(3)
+    #img = cv2.imdecode(img, cv2.IMREAD_COLOR)
+    
+    
+    
+    img_msg = control.bridge.cv2_to_imgmsg(img)
+    
+    control.camera_pub.publish(img_msg)
+    

@@ -6,9 +6,11 @@ find_package(catkin REQUIRED
     COMPONENTS
     rospy
     custom_msgs
+    sensor_msgs
+    std_msgs
 )
 
-catkin_package(CATKIN_DEPENDS rospy custom_msgs)
+catkin_package(CATKIN_DEPENDS rospy custom_msgs sensor_msgs std_msgs)
 
 catkin_install_python(PROGRAMS controllers/robot_controller/robot_controller.py
                                launch/webots_launcher.py

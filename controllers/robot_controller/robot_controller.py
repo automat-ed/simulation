@@ -71,22 +71,8 @@ while robot.step(timestep) != -1:
     left_steer.setPosition(control.steering_angle)
     right_steer.setPosition(control.steering_angle)
     
-   # raw_image = kinect_camera.getImageArray()
-    #np_arr_image = np.frombuffer(raw_image_bytes, np.uint8).reshape((kinect_camera.getHeight(), kinect_camera.getWidth(), -1))
-    
-    #raw_image = np.array(raw_image, np.uint8) / 255.0
-   # img_msg = control.bridge.cv2_to_imgmsg(raw_image, '64FC3')
-
-    
+    # Publish camera image
     raw_image = kinect_camera.getImage()
-    img = np.frombuffer(raw_image, dtype='uint8')
-    cv2.imshow('test', img)
-    cv2.waitKey(3)
-    #img = cv2.imdecode(img, cv2.IMREAD_COLOR)
-    
-    
-    
+    img = np.frombuffer(raw_image, dtype=np.uint8).reshape((kinect_camera.getHeight(), kinect_camera.getWidth(), -1))
     img_msg = control.bridge.cv2_to_imgmsg(img)
-    
     control.camera_pub.publish(img_msg)
-    

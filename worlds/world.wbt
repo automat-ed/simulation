@@ -4,8 +4,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.18512080230365865 0.901591578646253 0.39097687127067626 4.061839414905592
-  position -2.1382381864849336 1.9780260528784908 -1.0323538968107284
+  orientation 0.2797880576192324 0.9097524422832459 0.3067069229302243 4.6776230930923015
+  position -2.746502453354762 1.7522906156076126 0.002754422798888656
 }
 TexturedBackground {
 }
@@ -40,7 +40,7 @@ DEF ACKERMAN Robot {
           appearance PBRAppearance {
           }
           geometry Cylinder {
-            height 0.7
+            height 0.6
             radius 0.01
           }
         }
@@ -54,7 +54,7 @@ DEF ACKERMAN Robot {
           appearance PBRAppearance {
           }
           geometry Cylinder {
-            height 0.7
+            height 0.6
             radius 0.01
           }
         }
@@ -177,7 +177,7 @@ DEF ACKERMAN Robot {
     DEF REAR_RIGHT_WHEEL HingeJoint {
       jointParameters HingeJointParameters {
         axis 0 0 1
-        anchor 0.23 0 -0.36
+        anchor 0.23 0 -0.3
       }
       device [
         RotationalMotor {
@@ -185,7 +185,7 @@ DEF ACKERMAN Robot {
         }
       ]
       endPoint Solid {
-        translation 0.23000025068267285 0.0003289606580058875 -0.36000009204616956
+        translation 0.23 0 -0.3
         rotation 0 0 1 0
         children [
           DEF WHEEL_ROT Transform {
@@ -229,7 +229,7 @@ DEF ACKERMAN Robot {
     DEF REAR_LEFT_WHEEL HingeJoint {
       jointParameters HingeJointParameters {
         axis 0 0 1
-        anchor 0.23 0 0.36
+        anchor 0.23 0 0.3
       }
       device [
         RotationalMotor {
@@ -237,7 +237,7 @@ DEF ACKERMAN Robot {
         }
       ]
       endPoint Solid {
-        translation 0.23000011369411358 0.00034110684509667253 0.359999996949649
+        translation 0.23 0 0.3
         rotation 0 0 1 0
         children [
           DEF WHEEL_ROT Transform {
@@ -266,7 +266,7 @@ DEF ACKERMAN Robot {
     DEF FRONT_RIGHT_WHEEL HingeJoint {
       jointParameters HingeJointParameters {
         axis 0 0 1
-        anchor -0.23 0 -0.36
+        anchor -0.23 0 -0.3
       }
       device [
         RotationalMotor {
@@ -274,7 +274,7 @@ DEF ACKERMAN Robot {
         }
       ]
       endPoint Solid {
-        translation -0.23 0 -0.36
+        translation -0.23 0 -0.3
         rotation 0 0 1 0
         children [
           USE WHEEL_ROT
@@ -287,7 +287,7 @@ DEF ACKERMAN Robot {
     DEF FRONT_LEFT_WHEEL HingeJoint {
       jointParameters HingeJointParameters {
         axis 0 0 1
-        anchor -0.23 0 0.36
+        anchor -0.23 0 0.3
       }
       device [
         RotationalMotor {
@@ -295,7 +295,7 @@ DEF ACKERMAN Robot {
         }
       ]
       endPoint Solid {
-        translation -0.23 0 0.36
+        translation -0.23 0 0.3
         rotation 0 0 1 0
         children [
           USE WHEEL_ROT

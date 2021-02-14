@@ -1,14 +1,315 @@
 #VRML_SIM R2021a utf8
 WorldInfo {
+  basicTimeStep 8
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation -0.4200260595617348 0.8808034526598802 0.21854836323220625 1.0385974792383845
-  position 2.09217363390769 1.4630268304826817 1.7495499813293283
+  orientation 0.2797880576192324 0.9097524422832459 0.3067069229302243 4.6776230930923015
+  position -2.746502453354762 1.7522906156076126 0.002754422798888656
 }
 TexturedBackground {
 }
 TexturedBackgroundLight {
 }
 RectangleArena {
+  floorSize 5 5
+}
+DEF ACKERMAN Robot {
+  translation -0.200497 0.12 -0.05858
+  children [
+    DEF BODY Transform {
+      translation 0 0.04 0
+      children [
+        DEF BODY_SHAPE Shape {
+          appearance PBRAppearance {
+            baseColor 0.8 0.8 0.8
+            roughness 1
+            metalness 0
+          }
+          geometry Box {
+            size 0.65 0.2 0.5
+          }
+        }
+      ]
+    }
+    DEF FRONT_AXEL Transform {
+      translation -0.23 0 0
+      rotation 1 0 0 1.5707996938995747
+      children [
+        Shape {
+          appearance PBRAppearance {
+          }
+          geometry Cylinder {
+            height 0.6
+            radius 0.01
+          }
+        }
+      ]
+    }
+    DEF REAR_AXEL Transform {
+      translation 0.23 0 0
+      rotation 1 0 0 1.5707996938995747
+      children [
+        Shape {
+          appearance PBRAppearance {
+          }
+          geometry Cylinder {
+            height 0.6
+            radius 0.01
+          }
+        }
+      ]
+    }
+    LED {
+      translation -0.33 0 -0.18
+      children [
+        Group {
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0.74902 0.74902 0.74902
+                roughness 1
+                metalness 0
+              }
+              geometry Box {
+                size 0.04 0.07 0.1
+              }
+            }
+            SpotLight {
+              attenuation 0 0 1
+              beamWidth 0.7
+              color 0 0 0
+              direction -1 0 0
+              on FALSE
+            }
+          ]
+        }
+      ]
+      name "front_right_led"
+      color [
+        1 1 1
+      ]
+    }
+    LED {
+      translation -0.33 0 0.18
+      children [
+        Group {
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0.74902 0.74902 0.74902
+                roughness 1
+                metalness 0
+              }
+              geometry Box {
+                size 0.04 0.07 0.1
+              }
+            }
+            SpotLight {
+              attenuation 0 0 1
+              beamWidth 0.7
+              color 0 0 0
+              direction -1 0 0
+              on FALSE
+            }
+          ]
+        }
+      ]
+      name "front_left_led"
+      color [
+        1 1 1
+      ]
+    }
+    LED {
+      translation 0.33 0 -0.18
+      children [
+        Group {
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0.74902 0.74902 0.74902
+                roughness 1
+                metalness 0
+              }
+              geometry Box {
+                size 0.04 0.07 0.1
+              }
+            }
+            SpotLight {
+              attenuation 0 0 1
+              beamWidth 0.7
+              color 0 0 0
+              direction 0 0 0
+              on FALSE
+            }
+          ]
+        }
+      ]
+      name "rear_right_led"
+    }
+    LED {
+      translation 0.33 0 0.18
+      children [
+        Group {
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0.74902 0.74902 0.74902
+                roughness 1
+                metalness 0
+              }
+              geometry Box {
+                size 0.04 0.07 0.1
+              }
+            }
+            SpotLight {
+              attenuation 0 0 1
+              beamWidth 0.7
+              color 0 0 0
+              direction 0 0 0
+              on FALSE
+            }
+          ]
+        }
+      ]
+      name "rear_left_led"
+    }
+    DEF REAR_RIGHT_WHEEL HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 0 1
+        anchor 0.23 0 -0.3
+      }
+      device [
+        RotationalMotor {
+          name "rear_right_wheel"
+        }
+      ]
+      endPoint Solid {
+        translation 0.23 0 -0.3
+        rotation 0 0 1 0
+        children [
+          DEF WHEEL_ROT Transform {
+            rotation 1 0 0 1.5708
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor 0.8 0.8 0.8
+                  roughness 1
+                  metalness 0
+                }
+                geometry DEF WHEEL_CYL Cylinder {
+                  height 0.06
+                  radius 0.12
+                }
+              }
+            ]
+          }
+        ]
+        name "rear right wheel"
+        boundingObject DEF WHEEL_ROT Transform {
+          rotation 1 0 0 1.5708
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0.8 0.8 0.8
+                roughness 1
+                metalness 0
+              }
+              geometry DEF WHEEL_CYL Cylinder {
+                height 0.06
+                radius 0.12
+              }
+            }
+          ]
+        }
+        physics Physics {
+        }
+      }
+    }
+    DEF REAR_LEFT_WHEEL HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 0 1
+        anchor 0.23 0 0.3
+      }
+      device [
+        RotationalMotor {
+          name "rear_left_wheel"
+        }
+      ]
+      endPoint Solid {
+        translation 0.23 0 0.3
+        rotation 0 0 1 0
+        children [
+          DEF WHEEL_ROT Transform {
+            rotation 1 0 0 1.5708
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor 0.8 0.8 0.8
+                  roughness 1
+                  metalness 0
+                }
+                geometry DEF WHEEL_CYL Cylinder {
+                  height 0.06
+                  radius 0.12
+                }
+              }
+            ]
+          }
+        ]
+        name "rear left wheel"
+        boundingObject USE WHEEL_ROT
+        physics Physics {
+        }
+      }
+    }
+    DEF FRONT_RIGHT_WHEEL HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 0 1
+        anchor -0.23 0 -0.3
+      }
+      device [
+        RotationalMotor {
+          name "front_right_wheel"
+        }
+      ]
+      endPoint Solid {
+        translation -0.23 0 -0.3
+        rotation 0 0 1 0
+        children [
+          USE WHEEL_ROT
+        ]
+        boundingObject USE WHEEL_ROT
+        physics Physics {
+        }
+      }
+    }
+    DEF FRONT_LEFT_WHEEL HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 0 1
+        anchor -0.23 0 0.3
+      }
+      device [
+        RotationalMotor {
+          name "front_left_wheel"
+        }
+      ]
+      endPoint Solid {
+        translation -0.23 0 0.3
+        rotation 0 0 1 0
+        children [
+          USE WHEEL_ROT
+        ]
+        name "solid(1)"
+        boundingObject USE WHEEL_ROT
+        physics Physics {
+        }
+      }
+    }
+  ]
+  name "ackerman"
+  boundingObject USE BODY
+  physics Physics {
+  }
+  controller "<extern>"
 }

@@ -311,5 +311,5 @@ DEF ACKERMAN Robot {
   boundingObject USE BODY
   physics Physics {
   }
-  controller "robot_controller"
+  controller "<extern>"
 }

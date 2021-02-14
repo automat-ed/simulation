@@ -19,8 +19,6 @@ rear_right_wheel = robot.getDevice("rear_right_wheel")
 rear_left_wheel = robot.getDevice("rear_left_wheel")
 front_right_wheel = robot.getDevice("front_right_wheel")
 front_left_wheel = robot.getDevice("front_left_wheel")
-left_steer = robot.getDevice("left_steer")
-right_steer = robot.getDevice("right_steer")
 front_right_led = robot.getDevice("front_right_led")
 front_left_led = robot.getDevice("front_left_led")
 rear_right_led = robot.getDevice("rear_right_led")
@@ -34,8 +32,6 @@ def steer(angle_in_degrees):
     # The angle_in_degrees should be inside <-26,26> because of the steering limit
     # If angle_in_degrees is 0 then retrun wheels to default position
     if angle_in_degrees == 0:
-        left_steer.setPosition(0)
-        right_steer.setPosition(0)
         return    
 
     ideal_wheel_angle = math.radians(angle_in_degrees)
@@ -84,8 +80,8 @@ class Control:
     # Publishers
 
     def receive_command(self, data):
-        set_Velocity(data.speed, data.acceleration)
-        steer(data.steering_angle)
+        set_Velocity(data.control.speed, data.control.acceleration)
+        steer(data.control.steering_angle)
 
 
 # Instantiate ROS node

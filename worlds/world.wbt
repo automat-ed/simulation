@@ -5,7 +5,7 @@ WorldInfo {
 }
 Viewpoint {
   orientation 0.18512080230365865 0.901591578646253 0.39097687127067626 4.061839414905592
-  position -1.9914010560282003 1.8038197787225954 -0.9443871527515648
+  position -2.1382381864849336 1.9780260528784908 -1.0323538968107284
 }
 TexturedBackground {
 }
@@ -263,88 +263,45 @@ DEF ACKERMAN Robot {
         }
       }
     }
-    DEF RIGHT_STEER HingeJoint {
+    DEF FRONT_RIGHT_WHEEL HingeJoint {
       jointParameters HingeJointParameters {
-        axis 0 1 0
+        axis 0 0 1
         anchor -0.23 0 -0.36
       }
       device [
         RotationalMotor {
-          name "right_steer"
-          minPosition -0.7
-          maxPosition 0.7
+          name "front_right_wheel"
         }
       ]
       endPoint Solid {
-        translation -0.22999974606786244 0.0005961068314368008 -0.36000000527313425
+        translation -0.23 0 -0.36
+        rotation 0 0 1 0
         children [
-          DEF FRONT_RIGHT_WHEEL HingeJoint {
-            jointParameters HingeJointParameters {
-              axis 0 0 1
-            }
-            device [
-              RotationalMotor {
-                name "front_right_wheel"
-              }
-            ]
-            endPoint Solid {
-              rotation 0 0 1 0
-              children [
-                USE WHEEL_ROT
-              ]
-              boundingObject USE WHEEL_ROT
-              physics Physics {
-              }
-            }
-          }
+          USE WHEEL_ROT
         ]
-        name "right steer"
-        boundingObject DEF DUMMY Sphere {
-          radius 0.01
-        }
+        boundingObject USE WHEEL_ROT
         physics Physics {
         }
       }
     }
-    DEF LEFT_STEER HingeJoint {
+    DEF FRONT_LEFT_WHEEL HingeJoint {
       jointParameters HingeJointParameters {
-        axis 0 1 0
+        axis 0 0 1
         anchor -0.23 0 0.36
       }
       device [
         RotationalMotor {
-          name "left_steer"
-          minPosition -0.7
-          maxPosition 0.7
+          name "front_left_wheel"
         }
       ]
       endPoint Solid {
-        translation -0.22999949624110283 0.000594152008900778 0.3599999208276233
+        translation -0.23 0 0.36
+        rotation 0 0 1 0
         children [
-          DEF FRONT_LEFT_WHEEL HingeJoint {
-            jointParameters HingeJointParameters {
-              axis 0 0 1
-            }
-            device [
-              RotationalMotor {
-                name "front_left_wheel"
-              }
-            ]
-            endPoint Solid {
-              rotation 0 0 1 0
-              children [
-                USE WHEEL_ROT
-              ]
-              boundingObject USE WHEEL_ROT
-              physics Physics {
-              }
-            }
-          }
+          USE WHEEL_ROT
         ]
-        name "left steer"
-        boundingObject DEF DUMMY Sphere {
-          radius 0.01
-        }
+        name "solid(1)"
+        boundingObject USE WHEEL_ROT
         physics Physics {
         }
       }

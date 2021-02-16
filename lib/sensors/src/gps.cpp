@@ -35,25 +35,15 @@ GPS::~GPS() {
 }
 
 void GPS::publishGPSCoordinate() {
-  if (gps->getCoordinateSystem() == webots::GPS::WGS84) {
-    sensor_msgs::NavSatFix gps_value_msg;
-    gps_value_msg.header.stamp = ros::Time::now();
-    gps_value_msg.header.frame_id = gps->getName();
-    gps_value_msg.latitude = gps->getValues()[0];
-    gps_value_msg.longitude = gps->getValues()[1];
-    gps_value_msg.altitude = gps->getValues()[2];
-    gps_value_msg.position_covariance_type = sensor_msgs::NavSatFix::COVARIANCE_TYPE_UNKNOWN;
-    gps_value_msg.status.service = sensor_msgs::NavSatStatus::SERVICE_GPS;
-    gps_coordinate_pub.publish(gps_value_msg);
-  } else {
-    geometry_msgs::PointStamped gps_value_msg;
-    gps_value_msg.header.stamp = ros::Time::now();
-    gps_value_msg.header.frame_id = gps->getName();
-    gps_value_msg.point.x = gps->getValues()[0];
-    gps_value_msg.point.y = gps->getValues()[1];
-    gps_value_msg.point.z = gps->getValues()[2];
-    gps_coordinate_pub.publish(gps_value_msg);
-  }
+  sensor_msgs::NavSatFix gps_value_msg;
+  gps_value_msg.header.stamp = ros::Time::now();
+  gps_value_msg.header.frame_id = gps->getName();
+  gps_value_msg.latitude = gps->getValues()[0];
+  gps_value_msg.longitude = gps->getValues()[1];
+  gps_value_msg.altitude = gps->getValues()[2];
+  gps_value_msg.position_covariance_type = sensor_msgs::NavSatFix::COVARIANCE_TYPE_UNKNOWN;
+  gps_value_msg.status.service = sensor_msgs::NavSatStatus::SERVICE_GPS;
+  gps_coordinate_pub.publish(gps_value_msg);
 }
 
 void GPS::publishGPSSpeed() {

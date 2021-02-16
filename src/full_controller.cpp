@@ -11,7 +11,7 @@ int main(int argc, char **argv) {
 
   // Get ROS parameters
   std::string gps_name;
-  nh.getParam("gps_name", gps_name);
+  nh.getParam("gps", gps_name);
   int step_size;
   nh.getParam("step_size", step_size);
 

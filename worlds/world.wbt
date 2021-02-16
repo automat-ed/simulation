@@ -17,6 +17,8 @@ RectangleArena {
 DEF ACKERMAN Robot {
   translation -0.200497 0.12 -0.05858
   children [
+    GPS {
+    }
     DEF BODY Transform {
       translation 0 0.04 0
       children [

@@ -11,7 +11,7 @@ int main(int argc, char **argv) {
 
   // Get ROS parameters
   std::string imu_name;
-  nh.getParam("imu_name", imu_name);
+  nh.getParam("imu", imu_name);
   int step_size;
   nh.getParam("step_size", step_size);
 

@@ -4,8 +4,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.2797880576192324 0.9097524422832459 0.3067069229302243 4.6776230930923015
-  position -2.746502453354762 1.7522906156076126 0.002754422798888656
+  orientation 0.36357126679557755 0.8805965847482636 0.3039170756807735 4.919652511317711
+  position -3.3389993267832976 2.2795023332304396 1.1134290039838723
 }
 TexturedBackground {
 }
@@ -17,6 +17,10 @@ RectangleArena {
 DEF ACKERMAN Robot {
   translation -0.200497 0.12 -0.05858
   children [
+    VelodyneVLP-16 {
+      translation 0 0.19 0
+      name "Velodyne_VLP16"
+    }
     DEF BODY Transform {
       translation 0 0.04 0
       children [

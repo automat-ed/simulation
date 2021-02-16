@@ -40,6 +40,7 @@ int main(int argc, char **argv) {
     lidar.publishPointCloud();
     gps.publishGPSCoordinate();
     gps.publishGPSSpeed();
+    imu.publishImuQuaternion();
   }
 
   // Clean up

@@ -13,9 +13,9 @@ GPS::GPS(webots::GPS *device, ros::NodeHandle *ros_handle) {
 
   // Get ROS parameters
   nh->param("gps/sampling_period", sampling_period, 32);
-  nh->param<std::string>("gps/gps_coordinate_topic", gps_coordinate_topic,
-                          "gps/gps_coordinate");
-  nh->param<std::string>("gps/gps_speed_topic", gps_speed_topic,
+  nh->param<std::string>("gps/coordinate_topic", gps_coordinate_topic,
+                          "gps/coordinate");
+  nh->param<std::string>("gps/speed_topic", gps_speed_topic,
                           "gps/speed");
 
   // Create publishers

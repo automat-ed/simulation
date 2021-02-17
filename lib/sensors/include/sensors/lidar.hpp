@@ -21,4 +21,4 @@ private:
   ros::Publisher laser_scan_pub;
 };
 
-} // namespace AutomatED
+}

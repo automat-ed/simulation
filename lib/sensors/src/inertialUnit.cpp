@@ -18,7 +18,7 @@ InertialUnit::InertialUnit(webots::InertialUnit *device, ros::NodeHandle *ros_ha
 
   // Create publishers
   imu_quaternion_pub = 
-      nh->advertise<sensor_msgs::Imu>(imu_quaternion_topic, 10);
+      nh->advertise<sensor_msgs::Imu>(imu_quaternion_topic, 1);
 
   // Enable IMU device
   imu->enable(sampling_period);

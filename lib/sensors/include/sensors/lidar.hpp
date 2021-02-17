@@ -8,7 +8,7 @@ public:
   Lidar(webots::Lidar *device, ros::NodeHandle *ros_handle);
   ~Lidar();
 
-  void publishPointCloud();
+  void publishLaserScan();
 
 private:
   webots::Lidar *lidar;
@@ -16,9 +16,9 @@ private:
 
   // ROS parameters
   int sampling_period;
-  std::string point_cloud_topic;
+  std::string laser_scan_topic;
 
-  ros::Publisher point_cloud_pub;
+  ros::Publisher laser_scan_pub;
 };
 
 } // namespace AutomatED

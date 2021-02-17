@@ -11,7 +11,7 @@ int main(int argc, char **argv) {
 
   // Get ROS parameters
   std::string lidar_name;
-  nh.getParam("Velodyne_VLP16", lidar_name);
+  nh.getParam("RobotisLds01", lidar_name);
   int step_size;
   nh.getParam("step_size", step_size);
 
@@ -19,13 +19,13 @@ int main(int argc, char **argv) {
   webots::Robot *robot = new webots::Robot();
 
   // Get webot devices
-  webots::Lidar *wb_lidar = robot->getLidar("Velodyne_VLP16");
+  webots::Lidar *wb_lidar = robot->getLidar("RobotisLds01");
 
   // Instantiate sensor wrappers
   AutomatED::Lidar lidar = AutomatED::Lidar(wb_lidar, &nh);
 
   while (robot->step(step_size) != -1) {
-    lidar.publishPointCloud();
+    lidar.publishLaserScan();
   }
 
   // Clean up

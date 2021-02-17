@@ -1,9 +1,7 @@
-#include "webots/Lidar.hpp"
-#include "geometry_msgs/Point32.h"
 #include "ros/ros.h"
-#include "sensor_msgs/ChannelFloat32.h"
-#include "sensor_msgs/PointCloud.h"
+#include "sensor_msgs/LaserScan.h"
 #include "sensors/lidar.hpp"
+#include "webots/Lidar.hpp"
 
 using namespace AutomatED;
 
@@ -13,45 +11,37 @@ Lidar::Lidar(webots::Lidar *device, ros::NodeHandle *ros_handle) {
 
   // Get ROS parameters
   nh->param("lidar/sampling_period", sampling_period, 32);
-  nh->param<std::string>("lidar/point_cloud_topic", point_cloud_topic,
-                         "/lidar/point_cloud");
+  nh->param<std::string>("lidar/laser_scan_topic", laser_scan_topic,
+                         "/lidar/laser_scan");
   // Create publishers
-  point_cloud_pub =
-      nh->advertise<sensor_msgs::PointCloud>(point_cloud_topic, 10);
+  laser_scan_pub =
+      nh->advertise<sensor_msgs::LaserScan>(laser_scan_topic, 10);
 
   // Enable lidar device
   lidar->enable(sampling_period);
-  lidar->enablePointCloud();
 }
 
 Lidar::~Lidar() {
   // Clean up
-  point_cloud_pub.shutdown();
-  lidar->disablePointCloud();
+  laser_scan_pub.shutdown();
   lidar->disable();
 }
 
-void Lidar::publishPointCloud() {
-  // Get point cloud from Webots
-  const webots::LidarPoint *wb_point_cloud = lidar->getPointCloud();
-
-  // Create point cloud message
-  sensor_msgs::PointCloud point_cloud_msg;
-  point_cloud_msg.header.stamp = ros::Time::now();
-  point_cloud_msg.header.frame_id = lidar->getName();
-
-  sensor_msgs::ChannelFloat32 layerChannel;
-  for (int i = 0; i < lidar->getNumberOfPoints(); i++) {
-    geometry_msgs::Point32 point;
-    point.x = wb_point_cloud[i].x;
-    point.y = wb_point_cloud[i].y;
-    point.z = wb_point_cloud[i].z;
-    point_cloud_msg.points.push_back(point);
-
-    layerChannel.values.push_back(wb_point_cloud[i].layer_id);
+void Lidar::publishLaserScan() {
+  for (int layer = 0; layer < lidar->getNumberOfLayers(); ++layer) {
+    const float *rangeImageVector = lidar->getLayerRangeImage(layer);
+    sensor_msgs::LaserScan laser_scan_msg;
+    laser_scan_msg.header.stamp = ros::Time::now();
+    laser_scan_msg.header.frame_id = lidar->getName();
+    laser_scan_msg.angle_min = -lidar->getFov() / 2.0;
+    laser_scan_msg.angle_max = lidar->getFov() / 2.0;
+    laser_scan_msg.angle_increment = lidar->getFov() / lidar->getHorizontalResolution();
+    laser_scan_msg.time_increment = (double)lidar->getSamplingPeriod() / (1000.0 * lidar->getHorizontalResolution());
+    laser_scan_msg.scan_time = (double)lidar->getSamplingPeriod() / 1000.0;
+    laser_scan_msg.range_min = lidar->getMinRange();
+    laser_scan_msg.range_max = lidar->getMaxRange();
+    for (int i = 0; i < lidar->getHorizontalResolution(); ++i)
+      laser_scan_msg.ranges.push_back(rangeImageVector[i]);
+    laser_scan_pub.publish(laser_scan_msg);
   }
-  point_cloud_msg.channels.push_back(layerChannel);
-
-  // Publish
-  point_cloud_pub.publish(point_cloud_msg);
 }

@@ -23,8 +23,8 @@ int main(int argc, char **argv) {
   webots::Robot *robot = new webots::Robot();
 
   // Get webot devices
-  webots::Lidar *wb_lidar = robot->getLidar("RobotisLds01");
-  webots::InertialUnit *wb_imu = robot->getInertialUnit("imu");
+  webots::Lidar *wb_lidar = robot->getLidar(lidar_name);
+  webots::InertialUnit *wb_imu = robot->getInertialUnit(imu_name);
 
   // Instantiate sensor wrappers
   AutomatED::Lidar lidar = AutomatED::Lidar(wb_lidar, &nh);

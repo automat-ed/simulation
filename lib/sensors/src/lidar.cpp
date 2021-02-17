@@ -27,6 +27,7 @@ Lidar::~Lidar() {
   lidar->disable();
 }
 
+
 void Lidar::publishLaserScan() {
   for (int layer = 0; layer < lidar->getNumberOfLayers(); ++layer) {
     const float *rangeImageVector = lidar->getLayerRangeImage(layer);

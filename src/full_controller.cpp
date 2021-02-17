@@ -11,9 +11,9 @@ int main(int argc, char **argv) {
 
   // Get ROS parameters
   std::string lidar_name;
-  nh.getParam("RobotisLds01", lidar_name);
+  nh.param<std::string>("lidar_name", lidar_name, "RobotisLds01");
   int step_size;
-  nh.getParam("step_size", step_size);
+  nh.param("step_size", step_size, 32);
 
   // Set up Webots
   webots::Robot *robot = new webots::Robot();

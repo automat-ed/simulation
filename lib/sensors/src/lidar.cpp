@@ -15,7 +15,7 @@ Lidar::Lidar(webots::Lidar *device, ros::NodeHandle *ros_handle) {
                          "/lidar/laser_scan");
   // Create publishers
   laser_scan_pub =
-      nh->advertise<sensor_msgs::LaserScan>(laser_scan_topic, 10);
+      nh->advertise<sensor_msgs::LaserScan>(laser_scan_topic, 1);
 
   // Enable lidar device
   lidar->enable(sampling_period);

@@ -13,8 +13,8 @@ InertialUnit::InertialUnit(webots::InertialUnit *device, ros::NodeHandle *ros_ha
 
   // Get ROS parameters
   nh->param("imu/sampling_period", sampling_period, 32);
-  nh->param<std::string>("imu/imu_quaternion_topic", imu_quaternion_topic,
-                         "imu/imu_quaternion");
+  nh->param<std::string>("imu/quaternion_topic", imu_quaternion_topic,
+                         "imu/quaternion");
 
   // Create publishers
   imu_quaternion_pub = 

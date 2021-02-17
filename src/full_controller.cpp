@@ -28,6 +28,7 @@ int main(int argc, char **argv) {
 
   // Get webot devices
   webots::Lidar *wb_lidar = robot->getLidar(lidar_name);
+  webots::GPS *wb_gps = robot->getGPS(gps_name);
   webots::InertialUnit *wb_imu = robot->getInertialUnit(imu_name);
 
   // Instantiate sensor wrappers

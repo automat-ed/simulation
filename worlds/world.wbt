@@ -24,6 +24,9 @@ DEF ACKERMAN Robot {
     InertialUnit {
       name "imu"
     }
+    GPS {
+      name "gps"
+    }
     RobotisLds01 {
       translation 0 0.16 0
       name "RobotisLds01"

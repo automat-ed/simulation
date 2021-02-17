@@ -1,4 +1,6 @@
 #include "ros/ros.h"
+#include "sensors/gps.hpp"
+#include "webots/GPS.hpp"
 #include "sensors/lidar.hpp"
 #include "webots/Lidar.hpp"
 #include "sensors/inertialUnit.hpp"
@@ -16,6 +18,8 @@ int main(int argc, char **argv) {
   nh.param<std::string>("lidar/name", lidar_name, "RobotisLds01");
   std::string imu_name;
   nh.param<std::string>("imu/name", imu_name, "imu");
+  std::string gps_name;
+  nh.param<std::string>("gps/name", gps_name, "gps");
   int step_size;
   nh.param("step_size", step_size, 32);
 
@@ -28,10 +32,13 @@ int main(int argc, char **argv) {
 
   // Instantiate sensor wrappers
   AutomatED::Lidar lidar = AutomatED::Lidar(wb_lidar, &nh);
+  AutomatED::GPS gps = AutomatED::GPS(wb_gps, &nh);
   AutomatED::InertialUnit imu = AutomatED::InertialUnit(wb_imu, &nh);
 
   while (robot->step(step_size) != -1) {
     lidar.publishLaserScan();
+    gps.publishGPSCoordinate();
+    gps.publishGPSSpeed();
     imu.publishImuQuaternion();
   }
 

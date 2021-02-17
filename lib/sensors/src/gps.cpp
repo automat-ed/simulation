@@ -20,9 +20,9 @@ GPS::GPS(webots::GPS *device, ros::NodeHandle *ros_handle) {
 
   // Create publishers
   gps_coordinate_pub = 
-      nh->advertise<sensor_msgs::NavSatFix>(gps_coordinate_topic, 10);
+      nh->advertise<sensor_msgs::NavSatFix>(gps_coordinate_topic, 1);
   gps_speed_pub = 
-      nh->advertise<webots_ros::Float64Stamped>(gps_speed_topic, 10);
+      nh->advertise<webots_ros::Float64Stamped>(gps_speed_topic, 1);
 
   // Enable GPS device
   gps->enable(sampling_period);

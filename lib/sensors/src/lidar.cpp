@@ -12,7 +12,7 @@ Lidar::Lidar(webots::Lidar *device, ros::NodeHandle *ros_handle) {
   // Get ROS parameters
   nh->param("lidar/sampling_period", sampling_period, 32);
   nh->param<std::string>("lidar/laser_scan_topic", laser_scan_topic,
-                         "/lidar/laser_scan");
+                         "lidar/laser_scan");
   // Create publishers
   laser_scan_pub =
       nh->advertise<sensor_msgs::LaserScan>(laser_scan_topic, 1);

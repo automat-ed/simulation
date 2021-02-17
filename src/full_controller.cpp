@@ -11,7 +11,7 @@ int main(int argc, char **argv) {
 
   // Get ROS parameters
   std::string lidar_name;
-  nh.param<std::string>("lidar_name", lidar_name, "RobotisLds01");
+  nh.param<std::string>("lidar/name", lidar_name, "RobotisLds01");
   int step_size;
   nh.param("step_size", step_size, 32);
 

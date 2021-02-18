@@ -14,9 +14,6 @@ int main(int argc, char **argv) {
   ros::NodeHandle nh("~");
 
   // Get ROS parameters
-
-  std::string imu_name;
-  nh.param<std::string>("imu/name", imu_name, "imu");
   std::string gps_name;
   nh.param<std::string>("gps/name", gps_name, "gps");
   int step_size;
@@ -27,12 +24,11 @@ int main(int argc, char **argv) {
 
   // Get webot devices
   webots::GPS *wb_gps = supervisor->getGPS(gps_name);
-  webots::InertialUnit *wb_imu = supervisor->getInertialUnit(imu_name);
 
   // Instantiate sensor wrappers
   AutomatED::Lidar lidar = AutomatED::Lidar(supervisor, &nh);
   AutomatED::GPS gps = AutomatED::GPS(wb_gps, &nh);
-  AutomatED::InertialUnit imu = AutomatED::InertialUnit(wb_imu, &nh);
+  AutomatED::InertialUnit imu = AutomatED::InertialUnit(supervisor, &nh);
 
   while (supervisor->step(step_size) != -1) {
     lidar.publishLaserScan();

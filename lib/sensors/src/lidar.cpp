@@ -2,6 +2,7 @@
 #include "geometry_msgs/TransformStamped.h"
 #include "ros/ros.h"
 #include "sensor_msgs/LaserScan.h"
+#include "tf2/LinearMath/Quaternion.h"
 #include "tf2_ros/static_transform_broadcaster.h"
 #include "webots/Lidar.hpp"
 #include "webots/Supervisor.hpp"

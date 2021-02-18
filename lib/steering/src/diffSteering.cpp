@@ -12,7 +12,7 @@ DiffSteering::DiffSteering(webots::Motor motors[4], ros::NodeHandle *ros_handle)
   wheel_radius = 0.12;
 
   // Create Subscriber
-  cmd_vel_sub = nh.subscribe("cmd_vel", 1000, subscribeVelocities);
+  cmd_vel_sub = nh.subscribe("cmd_vel", 1000, subscribeVelocity);
 
   // Turn on motors
   turnOnMotors();

@@ -14,20 +14,15 @@ int main(int argc, char **argv) {
   ros::NodeHandle nh("~");
 
   // Get ROS parameters
-  std::string gps_name;
-  nh.param<std::string>("gps/name", gps_name, "gps");
   int step_size;
   nh.param("step_size", step_size, 32);
 
   // Set up Webots
   webots::Supervisor *supervisor = new webots::Supervisor();
 
-  // Get webot devices
-  webots::GPS *wb_gps = supervisor->getGPS(gps_name);
-
   // Instantiate sensor wrappers
   AutomatED::Lidar lidar = AutomatED::Lidar(supervisor, &nh);
-  AutomatED::GPS gps = AutomatED::GPS(wb_gps, &nh);
+  AutomatED::GPS gps = AutomatED::GPS(supervisor, &nh);
   AutomatED::InertialUnit imu = AutomatED::InertialUnit(supervisor, &nh);
 
   while (supervisor->step(step_size) != -1) {

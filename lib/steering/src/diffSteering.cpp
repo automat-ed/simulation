@@ -2,6 +2,7 @@
 #include "steering/diffSteering.hpp"
 #include "geometry_msgs/Twist.h"
 #include "webots/Motor.hpp"
+#include "webots/Keyboard.hpp"
 
 using namespace AutomatED;
 
@@ -52,5 +53,36 @@ void shutDownMotors() {
   for (int i = 0; i < std::size(wheels); i++) {
     wheels[i]->setVelocity(0.0);
   }
-  
+}
+
+void keyboardInput() {
+  double speed = 2.0;
+  webots::Keyborad keyboard;
+  int key = keyboard.getKey();
+  if (key >= 0) {
+    switch (key) {
+      case keyboard.UP:
+        wheels[0]->setVelocity(speed);
+        wheels[2]->setVelocity(speed);
+        wheels[1]->setVelocity(speed);
+        wheels[3]->setVelocity(speed);
+        break;
+      case keyboard.DOWN:
+        wheels[0]->setVelocity(-speed);
+        wheels[2]->setVelocity(-speed);
+        wheels[1]->setVelocity(-speed);
+        wheels[3]->setVelocity(-speed);
+        break;
+      case keyboard.RIGHT:
+        wheels[0]->setVelocity(speed);
+        wheels[2]->setVelocity(speed);
+        wheels[1]->setVelocity(-speed);
+        wheels[3]->setVelocity(-speed);
+        break;
+      case keyboard.LEFT:
+        wheels[0]->setVelocity(-speed);
+        wheels[2]->setVelocity(-speed);
+        wheels[1]->setVelocity(speed);
+        wheels[3]->setVelocity(speed);
+        break;
 }

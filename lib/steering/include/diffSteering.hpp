@@ -21,6 +21,7 @@ private:
   void subscribeVelocity(const geometry_msgs::Twist& cmd);
   void turnOnMotors();
   void shutDownMotors();
+  void keyboardInput();
 }
 
 } // namespace AutomatED

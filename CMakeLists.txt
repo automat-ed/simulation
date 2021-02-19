@@ -95,7 +95,9 @@ install(TARGETS sensors
 install(DIRECTORY lib/sensors/include/sensors/
     DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
 )
-install(DIRECTORY lib/steering/include)
+install(DIRECTORY lib/steering/include/steering/
+    DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+)
 
 
 

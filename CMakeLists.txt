@@ -63,6 +63,7 @@ target_link_libraries(steering ${WEBOTS_LIB} ${catkin_LIBRARIES})
 ## Declare a C++ executable
 add_executable(full_controller src/full_controller.cpp)
 target_link_libraries(full_controller sensors ${WEBOTS_LIB} ${catkin_LIBRARIES})
+target_link_libraries(full_controller steering ${WEBOTS_LIB} ${catkin_LIBRARIES})
 
 #############
 ## Install ##
@@ -86,6 +87,11 @@ install(TARGETS full_controller
 ## Mark libraries for installation
 ## See http://docs.ros.org/melodic/api/catkin/html/howto/format1/building_libraries.html
 install(TARGETS sensors
+    ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+    LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+    RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION}
+)
+install(TARGETS steering
     ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
     LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
     RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION}

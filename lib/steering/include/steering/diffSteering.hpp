@@ -22,6 +22,6 @@ private:
   void velocityCallback(const geometry_msgs::Twist& cmd);
   void turnOnMotors();
   void shutDownMotors();
-}
+};
 
 } // namespace AutomatED

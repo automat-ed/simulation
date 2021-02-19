@@ -9,11 +9,13 @@ using namespace AutomatED;
 DiffSteering::DiffSteering(webots::Motor motors[4], ros::NodeHandle *ros_handle){
   wheels = motors;
   nh = ros_handle;
-  wheel_separation = 0.6;
-  wheel_radius = 0.12;
+
+  // Get ROS parameters
+  nh->param("diffSteering/wheel_separation", wheel_separation, 0.6);
+  nh->param("diffSteering/wheel_radius", wheel_radius, 0.12);
 
   // Create Subscriber
-  cmd_vel_sub = nh.subscribe("cmd_vel", 1000, subscribeVelocity);
+  cmd_vel_sub = nh.subscribe("cmd_vel", 1, velocityCallback);
 
   // Turn on motors
   turnOnMotors();
@@ -21,12 +23,12 @@ DiffSteering::DiffSteering(webots::Motor motors[4], ros::NodeHandle *ros_handle)
 }
 
 DiffSteering::~DiffSteering(){
-  //Clean up
+  // Clean up
   cmd_vel_sub.shutdown()
   shutDownMotors()
 }
 
-void subscribeVelocity(const geometry_msgs::Twist& cmd){
+void velocityCallback(const geometry_msgs::Twist& cmd){
   double linear_vel = cmd.linear.x;
   double angular_vel = cmd.angluar.z;
   
@@ -57,7 +59,7 @@ void shutDownMotors() {
 
 void keyboardInput() {
   double speed = 2.0;
-  webots::Keyborad keyboard;
+  webots::Keyboard keyboard;
   int key = keyboard.getKey();
   if (key >= 0) {
     switch (key) {

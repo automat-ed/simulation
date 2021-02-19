@@ -31,15 +31,12 @@ int main(int argc, char **argv) {
   webots::Lidar *wb_lidar = robot->getLidar(lidar_name);
   webots::GPS *wb_gps = robot->getGPS(gps_name);
   webots::InertialUnit *wb_imu = robot->getInertialUnit(imu_name);
-  webots::Motor *front_left_wheel = robot->getMotor("front_left_wheel");
-  webots::Motor *front_right_wheel = robot->getMotor("front_right_wheel");
-  webots::Motor *rear_left_wheel = robot->getMotor("rear_left_wheel");
-  webots::Motor *rear_right_wheel = robot->getMotor("rear_right_wheel");
-  webots::Motor *motors[4];
-  motors[0] = front_left_wheel;
-  motors[1] = front_right_wheel;
-  motors[2] = rear_left_wheel;
-  motors[3] = rear_right_wheel;
+  webots::Motor *motors[4] = {
+    robot->getMotor("front_left_wheel"),
+    robot->getMotor("front_right_wheel"),
+    robot->getMotor("rear_left_wheel"),
+    robot->getMotor("rear_right_wheel")
+  };
 
   // Instantiate sensor wrappers
   AutomatED::Lidar lidar = AutomatED::Lidar(wb_lidar, &nh);

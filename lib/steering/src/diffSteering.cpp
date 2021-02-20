@@ -37,7 +37,6 @@ void DiffSteering::velocityCallback(const geometry_msgs::Twist& cmd){
   const double vel_right =
           (linear_vel + angular_vel * wheel_separation / 2.0)/wheel_radius;
 
-  std::cout << vel_left;
   // Set velocity to left wheels
   wheels[0]->setVelocity(vel_left);
   wheels[2]->setVelocity(vel_left);

@@ -4,6 +4,7 @@
 #include "sensors/lidar.hpp"
 #include "webots/GPS.hpp"
 #include "webots/InertialUnit.hpp"
+#include "sensors/wheelOdometry.hpp"
 #include "webots/Lidar.hpp"
 #include "webots/Motor.hpp"
 #include "webots/Supervisor.hpp"
@@ -24,12 +25,15 @@ int main(int argc, char **argv) {
   AutomatED::Lidar lidar = AutomatED::Lidar(supervisor, &nh);
   AutomatED::GPS gps = AutomatED::GPS(supervisor, &nh);
   AutomatED::InertialUnit imu = AutomatED::InertialUnit(supervisor, &nh);
+  AutomatED::WheelOdometry wheel_odometry = AutomatED::WheelOdometry(supervisor, &nh);
+
 
   while (supervisor->step(step_size) != -1) {
     lidar.publishLaserScan();
     gps.publishGPSCoordinate();
     gps.publishGPSSpeed();
     imu.publishImuQuaternion();
+    wheel_odometry.publishWheelOdometry();
   }
 
   // Clean up

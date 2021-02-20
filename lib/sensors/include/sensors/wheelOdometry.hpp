@@ -19,12 +19,13 @@ private:
   ros::NodeHandle *nh;
 
   // Webots devices
-  webots::Motor *wheels[];
+  webots::Motor *wheels[4];
 
   // ROS parameters
-  std::string wheel_names[];
   int sampling_period;
-  std::string wheel_odometry_topic;
+  std::string wheel_odometry_twist_topic;
+  double wheel_separation;
+  double wheel_radius;
 
   // ROS publisher
   ros::Publisher wheel_odometry_pub;

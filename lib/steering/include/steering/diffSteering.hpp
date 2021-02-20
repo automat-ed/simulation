@@ -8,7 +8,6 @@ class DiffSteering {
 public:
   DiffSteering(webots::Motor *motors[], ros::NodeHandle *ros_handle);
   ~DiffSteering();
-  void keyboardInput();
 
 private:
   webots::Motor **wheels;

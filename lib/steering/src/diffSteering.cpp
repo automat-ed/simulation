@@ -57,37 +57,4 @@ void DiffSteering::shutDownMotors() {
     wheels[i]->setVelocity(0.0);
   }
 }
-
-void DiffSteering::keyboardInput() {
-  double speed = 2.0;
-  webots::Keyboard keyboard;
-  int key = keyboard.getKey();
-  if (key >= 0) {
-    switch (key) {
-      case keyboard.UP:
-        wheels[0]->setVelocity(speed);
-        wheels[2]->setVelocity(speed);
-        wheels[1]->setVelocity(speed);
-        wheels[3]->setVelocity(speed);
-        break;
-      case keyboard.DOWN:
-        wheels[0]->setVelocity(-speed);
-        wheels[2]->setVelocity(-speed);
-        wheels[1]->setVelocity(-speed);
-        wheels[3]->setVelocity(-speed);
-        break;
-      case keyboard.RIGHT:
-        wheels[0]->setVelocity(speed);
-        wheels[2]->setVelocity(speed);
-        wheels[1]->setVelocity(-speed);
-        wheels[3]->setVelocity(-speed);
-        break;
-      case keyboard.LEFT:
-        wheels[0]->setVelocity(-speed);
-        wheels[2]->setVelocity(-speed);
-        wheels[1]->setVelocity(speed);
-        wheels[3]->setVelocity(speed);
-        break;
-    }    
-  }        
 }

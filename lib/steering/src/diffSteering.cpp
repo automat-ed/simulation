@@ -57,4 +57,3 @@ void DiffSteering::shutDownMotors() {
     wheels[i]->setVelocity(0.0);
   }
 }
-}

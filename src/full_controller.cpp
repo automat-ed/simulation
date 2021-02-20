@@ -51,6 +51,7 @@ int main(int argc, char **argv) {
     gps.publishGPSCoordinate();
     gps.publishGPSSpeed();
     imu.publishImuQuaternion();
+    ros::spinOnce();
   }
 
   // Clean up

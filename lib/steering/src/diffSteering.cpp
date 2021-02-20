@@ -6,7 +6,7 @@
 
 using namespace AutomatED;
 
-DiffSteering::DiffSteering(webots::Motor motors[4], ros::NodeHandle *ros_handle){
+DiffSteering::DiffSteering(webots::Motor *motors[], ros::NodeHandle *ros_handle){
   wheels = motors;
   nh = ros_handle;
 
@@ -15,7 +15,7 @@ DiffSteering::DiffSteering(webots::Motor motors[4], ros::NodeHandle *ros_handle)
   nh->param("diffSteering/wheel_radius", wheel_radius, 0.12);
 
   // Create Subscriber
-  cmd_vel_sub = nh.subscribe("cmd_vel", 1, velocityCallback);
+  cmd_vel_sub = nh->subscribe("/cmd_vel", 1, &DiffSteering::velocityCallback, this);
 
   // Turn on motors
   turnOnMotors();
@@ -24,19 +24,20 @@ DiffSteering::DiffSteering(webots::Motor motors[4], ros::NodeHandle *ros_handle)
 
 DiffSteering::~DiffSteering(){
   // Clean up
-  cmd_vel_sub.shutdown()
-  shutDownMotors()
+  cmd_vel_sub.shutdown();
+  shutDownMotors();
 }
 
-void velocityCallback(const geometry_msgs::Twist& cmd){
+void DiffSteering::velocityCallback(const geometry_msgs::Twist& cmd){
   double linear_vel = cmd.linear.x;
-  double angular_vel = cmd.angluar.z;
+  double angular_vel = cmd.angular.z;
   
   const double vel_left  = 
           (linear_vel - angular_vel * wheel_separation / 2.0)/wheel_radius;
   const double vel_right =
           (linear_vel + angular_vel * wheel_separation / 2.0)/wheel_radius;
 
+  std::cout << vel_left;
   // Set velocity to left wheels
   wheels[0]->setVelocity(vel_left);
   wheels[2]->setVelocity(vel_left);
@@ -45,19 +46,20 @@ void velocityCallback(const geometry_msgs::Twist& cmd){
   wheels[3]->setVelocity(vel_right);
 }
 
-void turnOnMotors() {
-  for (int i = 0; i < std::size(wheels); i++) {
-    wheels[i]->setPosition(std::numeric_limits<double>::infinity);
+void DiffSteering::turnOnMotors() {
+  for (int i = 0; i < 4; i++) {
+    wheels[i]->setPosition(INFINITY);
+    wheels[i]->setVelocity(0.0);
   } 
 }
 
-void shutDownMotors() {
-  for (int i = 0; i < std::size(wheels); i++) {
+void DiffSteering::shutDownMotors() {
+  for (int i = 0; i < 4; i++) {
     wheels[i]->setVelocity(0.0);
   }
 }
 
-void keyboardInput() {
+void DiffSteering::keyboardInput() {
   double speed = 2.0;
   webots::Keyboard keyboard;
   int key = keyboard.getKey();
@@ -87,4 +89,6 @@ void keyboardInput() {
         wheels[1]->setVelocity(speed);
         wheels[3]->setVelocity(speed);
         break;
+    }    
+  }        
 }

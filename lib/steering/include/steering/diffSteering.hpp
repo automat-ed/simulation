@@ -6,15 +6,15 @@ namespace AutomatED {
     
 class DiffSteering {
 public:
-  DiffSteering(webots::Motor motors[4], ros::NodeHandle *ros_handle);
+  DiffSteering(webots::Motor *motors[], ros::NodeHandle *ros_handle);
   ~DiffSteering();
   void keyboardInput();
 
 private:
-  webots::Motor wheels[4];
+  webots::Motor **wheels;
   ros::NodeHandle *nh;
-  const double wheel_separation;
-  const double wheel_radius;
+  double wheel_separation;
+  double wheel_radius;
   
   // Create Subscriber
   ros::Subscriber cmd_vel_sub;

@@ -9,6 +9,7 @@ using namespace AutomatED;
 DiffSteering::DiffSteering(webots::Motor *motors[], ros::NodeHandle *ros_handle){
   wheels = motors;
   nh = ros_handle;
+  wheel_count = std::sizeof(wheels) / std::sizeof(*wheels);
 
   // Get ROS parameters
   nh->param("diffSteering/wheel_separation", wheel_separation, 0.6);
@@ -46,14 +47,14 @@ void DiffSteering::velocityCallback(const geometry_msgs::TwistConstPtr& cmd){
 }
 
 void DiffSteering::turnOnMotors() {
-  for (int i = 0; i < 4; i++) {
+  for (int i = 0; i < wheel_count; i++) {
     wheels[i]->setPosition(INFINITY);
     wheels[i]->setVelocity(0.0);
   } 
 }
 
 void DiffSteering::shutDownMotors() {
-  for (int i = 0; i < 4; i++) {
+  for (int i = 0; i < wheel_count; i++) {
     wheels[i]->setVelocity(0.0);
   }
 }

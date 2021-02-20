@@ -14,6 +14,7 @@ private:
   ros::NodeHandle *nh;
   double wheel_separation;
   double wheel_radius;
+  int wheel_count;
   
   // Create Subscriber
   ros::Subscriber cmd_vel_sub;

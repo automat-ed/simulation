@@ -54,7 +54,7 @@ include_directories(
     ${catkin_INCLUDE_DIRS}
 )
 
-## Declare a C++ library
+## Declare C++ libraries
 add_library(sensors lib/sensors/src/lidar.cpp lib/sensors/src/gps.cpp lib/sensors/src/inertialUnit.cpp)
 add_library(steering lib/steering/src/diffSteering.cpp)
 target_link_libraries(sensors ${WEBOTS_LIB} ${catkin_LIBRARIES})
@@ -62,8 +62,7 @@ target_link_libraries(steering ${WEBOTS_LIB} ${catkin_LIBRARIES})
 
 ## Declare a C++ executable
 add_executable(full_controller src/full_controller.cpp)
-target_link_libraries(full_controller sensors ${WEBOTS_LIB} ${catkin_LIBRARIES})
-target_link_libraries(full_controller steering ${WEBOTS_LIB} ${catkin_LIBRARIES})
+target_link_libraries(full_controller sensors steering ${WEBOTS_LIB} ${catkin_LIBRARIES})
 
 #############
 ## Install ##

@@ -28,9 +28,9 @@ DiffSteering::~DiffSteering(){
   shutDownMotors();
 }
 
-void DiffSteering::velocityCallback(const geometry_msgs::Twist& cmd){
-  double linear_vel = cmd.linear.x;
-  double angular_vel = cmd.angular.z;
+void DiffSteering::velocityCallback(const geometry_msgs::TwistConstPtr& cmd){
+  double linear_vel = cmd->linear.x;
+  double angular_vel = cmd->angular.z;
   
   const double vel_left  = 
           (linear_vel - angular_vel * wheel_separation / 2.0)/wheel_radius;

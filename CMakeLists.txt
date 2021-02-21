@@ -97,10 +97,10 @@ install(TARGETS steering
 )
 
 ## Mark cpp header files for installation
-install(DIRECTORY lib/sensors/include/sensors/
+install(DIRECTORY lib/sensors/include
     DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
 )
-install(DIRECTORY lib/steering/include/steering/
+install(DIRECTORY lib/steering/include
     DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
 )
 

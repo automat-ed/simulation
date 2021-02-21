@@ -2,7 +2,6 @@
 #include "steering/diffSteering.hpp"
 #include "geometry_msgs/Twist.h"
 #include "webots/Motor.hpp"
-#include "webots/Keyboard.hpp"
 
 using namespace AutomatED;
 
@@ -19,14 +18,17 @@ DiffSteering::DiffSteering(webots::Motor *motors[], ros::NodeHandle *ros_handle)
   cmd_vel_sub = nh->subscribe("/cmd_vel", 1, &DiffSteering::velocityCallback, this);
 
   // Turn on motors
-  turnOnMotors();
+  for (int i = 0; i < wheel_count; i++) {
+    wheels[i]->setPosition(INFINITY);
+    wheels[i]->setVelocity(0.0);
+  } 
 
 }
 
 DiffSteering::~DiffSteering(){
   // Clean up
   cmd_vel_sub.shutdown();
-  shutDownMotors();
+  stopMotors();
 }
 
 void DiffSteering::velocityCallback(const geometry_msgs::TwistConstPtr& cmd){
@@ -46,14 +48,7 @@ void DiffSteering::velocityCallback(const geometry_msgs::TwistConstPtr& cmd){
   wheels[3]->setVelocity(vel_right);
 }
 
-void DiffSteering::turnOnMotors() {
-  for (int i = 0; i < wheel_count; i++) {
-    wheels[i]->setPosition(INFINITY);
-    wheels[i]->setVelocity(0.0);
-  } 
-}
-
-void DiffSteering::shutDownMotors() {
+void DiffSteering::stopMotors() {
   for (int i = 0; i < wheel_count; i++) {
     wheels[i]->setVelocity(0.0);
   }

@@ -20,8 +20,7 @@ private:
   ros::Subscriber cmd_vel_sub;
 
   void velocityCallback(const geometry_msgs::TwistConstPtr& cmd);
-  void turnOnMotors();
-  void shutDownMotors();
+  void stopMotors();
 };
 
 } // namespace AutomatED

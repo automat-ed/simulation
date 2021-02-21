@@ -42,7 +42,7 @@ int main(int argc, char **argv) {
     gps.publishGPSCoordinate();
     gps.publishGPSSpeed();
     imu.publishImuQuaternion();
-    gyro.publishGyroImu();
+    gyro.publishGyro();
     ros::spinOnce();
   }
 

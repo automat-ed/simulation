@@ -24,10 +24,10 @@ private:
   // ROS parameters
   std::string accelerometer_name;
   int sampling_period;
-  std::string accelerometer_data_topic;
+  std::string accelerometer_topic;
 
   // ROS publisher
-  ros::Publisher accelerometer_data_pub;
+  ros::Publisher accelerometer_pub;
 
   // Tf2
   tf2_ros::StaticTransformBroadcaster static_broadcaster;

@@ -50,18 +50,21 @@ set (
 include_directories(
     include
     lib/sensors/include
+    lib/steering/include
     $ENV{WEBOTS_HOME}/include/controller/c
     $ENV{WEBOTS_HOME}/include/controller/cpp
     ${catkin_INCLUDE_DIRS}
 )
 
-## Declare a C++ library
+## Declare C++ libraries
 add_library(sensors lib/sensors/src/lidar.cpp lib/sensors/src/gps.cpp lib/sensors/src/inertialUnit.cpp)
+add_library(steering lib/steering/src/diffSteering.cpp)
 target_link_libraries(sensors ${WEBOTS_LIB} ${catkin_LIBRARIES})
+target_link_libraries(steering ${WEBOTS_LIB} ${catkin_LIBRARIES})
 
 ## Declare a C++ executable
 add_executable(full_controller src/full_controller.cpp)
-target_link_libraries(full_controller sensors ${WEBOTS_LIB} ${catkin_LIBRARIES})
+target_link_libraries(full_controller sensors steering ${WEBOTS_LIB} ${catkin_LIBRARIES})
 
 #############
 ## Install ##
@@ -89,11 +92,20 @@ install(TARGETS sensors
     LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
     RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION}
 )
+install(TARGETS steering
+    ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+    LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+    RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION}
+)
 
 ## Mark cpp header files for installation
-install(DIRECTORY lib/sensors/include/sensors/
+install(DIRECTORY lib/sensors/include
     DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
 )
+install(DIRECTORY lib/steering/include
+    DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+)
+
 
 
 ## Mark all launch files for installation

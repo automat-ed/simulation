@@ -22,7 +22,7 @@ DEF ACKERMAN Robot {
   rotation -0.9733948845908359 6.521557633268995e-09 0.22913401897665323 6.537666074422139e-07
   children [
     Gyro {
-  children [
+    }
     Accelerometer {
     }
     InertialUnit {

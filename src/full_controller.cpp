@@ -3,6 +3,7 @@
 #include "sensors/inertialUnit.hpp"
 #include "sensors/lidar.hpp"
 #include "sensors/accelerometer.hpp"
+#include "steering/diffSteering.hpp"
 #include "webots/Motor.hpp"
 #include "webots/Supervisor.hpp"
 
@@ -20,10 +21,10 @@ int main(int argc, char **argv) {
 
   // Get webots motors
   webots::Motor *motors[4] = {
-    robot->getMotor("front_left_wheel"),
-    robot->getMotor("front_right_wheel"),
-    robot->getMotor("rear_left_wheel"),
-    robot->getMotor("rear_right_wheel")
+    supervisor->getMotor("front_left_wheel"),
+    supervisor->getMotor("front_right_wheel"),
+    supervisor->getMotor("rear_left_wheel"),
+    supervisor->getMotor("rear_right_wheel")
   };
   
 
@@ -41,7 +42,7 @@ int main(int argc, char **argv) {
     gps.publishGPSCoordinate();
     gps.publishGPSSpeed();
     imu.publishImuQuaternion();
-    accelerometer.publishAccelerometerImu();
+    accelerometer.publishAccelerometerData();
     ros::spinOnce();
   }
 

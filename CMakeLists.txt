@@ -14,6 +14,8 @@ find_package(catkin REQUIRED
     sensor_msgs
     geometry_msgs
     xmlrpcpp
+    tf2
+    tf2_ros
 )
 
 

@@ -2,10 +2,8 @@
 #include "sensors/gps.hpp"
 #include "sensors/inertialUnit.hpp"
 #include "sensors/lidar.hpp"
+#include "sensors/accelerometer.hpp"
 #include "steering/diffSteering.hpp"
-#include "webots/GPS.hpp"
-#include "webots/InertialUnit.hpp"
-#include "webots/Lidar.hpp"
 #include "webots/Motor.hpp"
 #include "webots/Supervisor.hpp"
 
@@ -23,10 +21,10 @@ int main(int argc, char **argv) {
 
   // Get webots motors
   webots::Motor *motors[4] = {
-    robot->getMotor("front_left_wheel"),
-    robot->getMotor("front_right_wheel"),
-    robot->getMotor("rear_left_wheel"),
-    robot->getMotor("rear_right_wheel")
+    supervisor->getMotor("front_left_wheel"),
+    supervisor->getMotor("front_right_wheel"),
+    supervisor->getMotor("rear_left_wheel"),
+    supervisor->getMotor("rear_right_wheel")
   };
   
 
@@ -34,6 +32,7 @@ int main(int argc, char **argv) {
   AutomatED::Lidar lidar = AutomatED::Lidar(supervisor, &nh);
   AutomatED::GPS gps = AutomatED::GPS(supervisor, &nh);
   AutomatED::InertialUnit imu = AutomatED::InertialUnit(supervisor, &nh);
+  AutomatED::Accelerometer accelerometer = AutomatED::Accelerometer(supervisor, &nh);
 
   // Instantiate steering
   AutomatED::DiffSteering diffSteering = AutomatED::DiffSteering(motors, &nh);
@@ -43,6 +42,7 @@ int main(int argc, char **argv) {
     gps.publishGPSCoordinate();
     gps.publishGPSSpeed();
     imu.publishImuQuaternion();
+    accelerometer.publishAccelerometer();
     ros::spinOnce();
   }
 

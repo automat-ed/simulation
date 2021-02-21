@@ -18,8 +18,11 @@ CardboardBox {
   translation 0.58 0.3 -1.06
 }
 DEF ACKERMAN Robot {
-  translation 0 0.116 0
+  translation -1.7976168700034643e-08 0.11620885574581999 -7.636792833134356e-08
+  rotation -0.9733948845886086 6.577308640946133e-09 0.22913401898611543 6.537666074389555e-07
   children [
+    Accelerometer {
+    }
     InertialUnit {
       name "imu"
     }
@@ -188,7 +191,7 @@ DEF ACKERMAN Robot {
     }
     DEF REAR_RIGHT_WHEEL HingeJoint {
       jointParameters HingeJointParameters {
-        position -0.26882177640052696
+        position -0.2688217763741941
         axis 0 0 1
         anchor 0.23 0 -0.3
       }
@@ -199,7 +202,7 @@ DEF ACKERMAN Robot {
       ]
       endPoint Solid {
         translation 0.23 0 -0.3
-        rotation 0 0 -1 0.2688217764005264
+        rotation 0 0 -1 0.26882177637419385
         children [
           DEF WHEEL_ROT Transform {
             rotation 1 0 0 1.5708
@@ -237,11 +240,13 @@ DEF ACKERMAN Robot {
         }
         physics Physics {
         }
+        linearVelocity -2.4211628283830996e-11 -1.303115361201801e-11 -1.0061101182581225e-13
+        angularVelocity -2.4665888948790608e-14 1.3673384214224085e-12 2.0481679529907916e-10
       }
     }
     DEF REAR_LEFT_WHEEL HingeJoint {
       jointParameters HingeJointParameters {
-        position -0.24601636923970016
+        position -0.24601636921317274
         axis 0 0 1
         anchor 0.23 0 0.3
       }
@@ -252,7 +257,7 @@ DEF ACKERMAN Robot {
       ]
       endPoint Solid {
         translation 0.23 0 0.3
-        rotation 0 0 -0.9999999999999999 0.24601636923970086
+        rotation 0 0 -1 0.24601636921317274
         children [
           DEF WHEEL_ROT Transform {
             rotation 1 0 0 1.5708
@@ -275,11 +280,13 @@ DEF ACKERMAN Robot {
         boundingObject USE WHEEL_ROT
         physics Physics {
         }
+        linearVelocity -2.4107724890904836e-11 -1.3031070269167146e-11 -1.0105504356077652e-13
+        angularVelocity -2.4678504593322463e-14 1.3673408548992458e-12 2.067001863232092e-10
       }
     }
     DEF FRONT_RIGHT_WHEEL HingeJoint {
       jointParameters HingeJointParameters {
-        position 0.0002008820969648914
+        position 0.00020088212448386838
         axis 0 0 1
         anchor -0.23 0 -0.3
       }
@@ -290,18 +297,20 @@ DEF ACKERMAN Robot {
       ]
       endPoint Solid {
         translation -0.23 0 -0.3
-        rotation 0 0 0.9999999999999999 0.0002008820959725147
+        rotation 0 0 1 0.00020088212471155835
         children [
           USE WHEEL_ROT
         ]
         boundingObject USE WHEEL_ROT
         physics Physics {
         }
+        linearVelocity -2.5189160637140254e-11 1.3033960267272429e-11 1.0101814136653581e-13
+        angularVelocity 2.5841670354368507e-14 1.3673462064533589e-12 2.167310702177252e-10
       }
     }
     DEF FRONT_LEFT_WHEEL HingeJoint {
       jointParameters HingeJointParameters {
-        position 0.3875566354437054
+        position 0.38755663546877833
         axis 0 0 1
         anchor -0.23 0 0.3
       }
@@ -312,7 +321,7 @@ DEF ACKERMAN Robot {
       ]
       endPoint Solid {
         translation -0.23 0 0.3
-        rotation 0 0 1 0.38755663544370483
+        rotation 0 0 1 0.3875566354687784
         children [
           USE WHEEL_ROT
         ]
@@ -320,6 +329,8 @@ DEF ACKERMAN Robot {
         boundingObject USE WHEEL_ROT
         physics Physics {
         }
+        linearVelocity -2.2911581557453154e-11 1.3034294859354868e-11 1.0104237973224833e-13
+        angularVelocity 2.6622966515914584e-14 1.3673310864320365e-12 1.92113531328137e-10
       }
     }
   ]
@@ -329,4 +340,6 @@ DEF ACKERMAN Robot {
   }
   controller "<extern>"
   supervisor TRUE
+  linearVelocity -2.0820729268371104e-11 -9.91458744137017e-16 -9.04185093974769e-16
+  angularVelocity 7.574610269933291e-16 1.3699258024126358e-12 -5.822294476301386e-11
 }

@@ -11,7 +11,7 @@ public:
                ros::NodeHandle *ros_handle);
   ~Accelerometer();
 
-  void publishAccelerometerImu();
+  void publishAccelerometer();
 
 private:
   // Handlers

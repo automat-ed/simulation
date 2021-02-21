@@ -4,10 +4,6 @@
 #include "sensors/lidar.hpp"
 #include "sensors/gyro.hpp"
 #include "steering/diffSteering.hpp"
-#include "webots/GPS.hpp"
-#include "webots/InertialUnit.hpp"
-#include "webots/Gyro.hpp"
-#include "webots/Lidar.hpp"
 #include "webots/Motor.hpp"
 #include "webots/Supervisor.hpp"
 
@@ -25,10 +21,10 @@ int main(int argc, char **argv) {
 
   // Get webots motors
   webots::Motor *motors[4] = {
-    robot->getMotor("front_left_wheel"),
-    robot->getMotor("front_right_wheel"),
-    robot->getMotor("rear_left_wheel"),
-    robot->getMotor("rear_right_wheel")
+    supervisor->getMotor("front_left_wheel"),
+    supervisor->getMotor("front_right_wheel"),
+    supervisor->getMotor("rear_left_wheel"),
+    supervisor->getMotor("rear_right_wheel")
   };
   
 

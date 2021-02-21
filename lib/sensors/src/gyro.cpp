@@ -17,11 +17,11 @@ Gyro::Gyro(webots::Supervisor *webots_supervisor,
   // Get ROS parameters
   nh->param<std::string>("gyro/name", gyro_name, "gyro");
   nh->param("gyro/sampling_period", sampling_period, 32);
-  nh->param<std::string>("gyro/imu_topic", gyro_imu_topic,
-                         "gyro/imu");
+  nh->param<std::string>("gyro/data_topic", gyro_data_topic,
+                         "gyro/data");
 
   // Create publishers
-  gyro_imu_pub = nh->advertise<sensor_msgs::Imu>(gyro_imu_topic, 1);
+  gyro_data_pub = nh->advertise<sensor_msgs::Imu>(gyro_data_topic, 1);
 
   // Setup IMU device
   gyro = wb->getGyro(gyro_name);
@@ -32,11 +32,11 @@ Gyro::Gyro(webots::Supervisor *webots_supervisor,
 }
 
 Gyro::~Gyro() {
-  gyro_imu_pub.shutdown();
+  gyro_data_pub.shutdown();
   gyro->disable();
 }
 
-void Gyro::publishGyroImu() {
+void Gyro::publishGyroData() {
   sensor_msgs::Imu msg;
   msg.header.stamp = ros::Time::now();
   msg.header.frame_id = gyro->getName();
@@ -58,7 +58,7 @@ void Gyro::publishGyroImu() {
   msg.linear_acceleration.z = 0.0;
   msg.linear_acceleration_covariance[0] = -1.0; // means no linear_acceleration information
 
-  gyro_imu_pub.publish(msg);
+  gyro_data_pub.publish(msg);
 }
 
 void Gyro::publishTF() {

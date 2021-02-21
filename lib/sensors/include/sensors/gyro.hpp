@@ -3,7 +3,6 @@
 #include "webots/Supervisor.hpp"
 #include "tf2_ros/static_transform_broadcaster.h"
 
-
 namespace AutomatED {
 
 class Gyro {
@@ -12,7 +11,7 @@ public:
                ros::NodeHandle *ros_handle);
   ~Gyro();
 
-  void publishGyroImu();
+  void publishGyroData();
 
 private:
   // Handlers
@@ -25,10 +24,10 @@ private:
   // ROS parameters
   std::string gyro_name;
   int sampling_period;
-  std::string gyro_imu_topic;
+  std::string gyro_data_topic;
 
   // ROS publisher
-  ros::Publisher gyro_imu_pub;
+  ros::Publisher gyro_data_pub;
 
   // Tf2
   tf2_ros::StaticTransformBroadcaster static_broadcaster;

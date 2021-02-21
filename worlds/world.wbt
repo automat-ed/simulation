@@ -24,7 +24,6 @@ DEF ACKERMAN Robot {
       name "imu"
     }
     GPS {
-      name "gps"
     }
     RobotisLds01 {
       translation 0 0.16 0
@@ -198,7 +197,7 @@ DEF ACKERMAN Robot {
           name "rear_right_wheel"
         }
       ]
-      endPoint Solid {
+      endPoint DEF REAR_RIGHT_SOLID Solid {
         translation 0.23 0 -0.3
         rotation 0 0 -1 0.2688217764005264
         children [
@@ -251,7 +250,7 @@ DEF ACKERMAN Robot {
           name "rear_left_wheel"
         }
       ]
-      endPoint Solid {
+      endPoint DEF REAR_LEFT_SOLID Solid {
         translation 0.23 0 0.3
         rotation 0 0 -0.9999999999999999 0.24601636923970086
         children [
@@ -289,7 +288,7 @@ DEF ACKERMAN Robot {
           name "front_right_wheel"
         }
       ]
-      endPoint Solid {
+      endPoint DEF FRONT_RIGHT_SOLID Solid {
         translation -0.23 0 -0.3
         rotation 0 0 0.9999999999999999 0.0002008820959725147
         children [
@@ -311,7 +310,7 @@ DEF ACKERMAN Robot {
           name "front_left_wheel"
         }
       ]
-      endPoint Solid {
+      endPoint DEF FRONT_LEFT_SOLID Solid {
         translation -0.23 0 0.3
         rotation 0 0 1 0.38755663544370483
         children [

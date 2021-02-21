@@ -2,7 +2,6 @@
 #include "webots/Motor.hpp"
 #include "webots/Supervisor.hpp"
 
-
 namespace AutomatED {
 
 class WheelOdometry {
@@ -29,6 +28,12 @@ private:
 
   // ROS publisher
   ros::Publisher wheel_odometry_pub;
+
+  // Helper functions
+  void getLocalRotationalVelocity(webots::Node *solid, double *rvel_local);
+  void transposeOrientation(const double *matrix, double *matrix_t);
+  void transformVelocity(const double *matrix, const double *vector,
+                         double *new_vec);
 };
 
-}
+} // namespace AutomatED

@@ -35,7 +35,7 @@ Accelerometer::~Accelerometer() {
   accelerometer->disable();
 }
 
-void Accelerometer::publishAccelerometerImu() {
+void Accelerometer::publishAccelerometerData() {
   sensor_msgs::Imu msg;
   msg.header.stamp = ros::Time::now();
   msg.header.frame_id = accelerometer->getName();

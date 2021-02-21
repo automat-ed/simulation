@@ -3,6 +3,7 @@
 #include "sensors/inertialUnit.hpp"
 #include "sensors/lidar.hpp"
 #include "sensors/gyro.hpp"
+#include "steering/diffSteering.hpp"
 #include "webots/GPS.hpp"
 #include "webots/InertialUnit.hpp"
 #include "webots/Gyro.hpp"
@@ -22,18 +23,31 @@ int main(int argc, char **argv) {
   // Set up Webots
   webots::Supervisor *supervisor = new webots::Supervisor();
 
+  // Get webots motors
+  webots::Motor *motors[4] = {
+    robot->getMotor("front_left_wheel"),
+    robot->getMotor("front_right_wheel"),
+    robot->getMotor("rear_left_wheel"),
+    robot->getMotor("rear_right_wheel")
+  };
+  
+
   // Instantiate sensor wrappers
   AutomatED::Lidar lidar = AutomatED::Lidar(supervisor, &nh);
   AutomatED::GPS gps = AutomatED::GPS(supervisor, &nh);
   AutomatED::InertialUnit imu = AutomatED::InertialUnit(supervisor, &nh);
   AutomatED::Gyro gyro = AutomatED::Gyro(supervisor, &nh);
 
+  // Instantiate steering
+  AutomatED::DiffSteering diffSteering = AutomatED::DiffSteering(motors, &nh);
+  
   while (supervisor->step(step_size) != -1) {
     lidar.publishLaserScan();
     gps.publishGPSCoordinate();
     gps.publishGPSSpeed();
     imu.publishImuQuaternion();
     gyro.publishGyroImu();
+    ros::spinOnce();
   }
 
   // Clean up

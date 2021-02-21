@@ -16,11 +16,11 @@ Accelerometer::Accelerometer(webots::Supervisor *webots_supervisor,
   // Get ROS parameters
   nh->param<std::string>("accelerometer/name", accelerometer_name, "accelerometer");
   nh->param("accelerometer/sampling_period", sampling_period, 32);
-  nh->param<std::string>("accelerometer/topic", accelerometer_topic,
-                         "accelerometer/");
+  nh->param<std::string>("accelerometer/pub_topic", accelerometer_pub_topic,
+                         "accelerometer/pub_topic");
 
   // Create publishers
-  accelerometer_pub = nh->advertise<sensor_msgs::Imu>(accelerometer_topic, 1);
+  accelerometer_pub = nh->advertise<sensor_msgs::Imu>(accelerometer_pub_topic, 1);
 
   // Setup accelerometer device
   accelerometer = wb->getAccelerometer(accelerometer_name);

@@ -24,7 +24,7 @@ private:
   // ROS parameters
   std::string accelerometer_name;
   int sampling_period;
-  std::string accelerometer_topic;
+  std::string accelerometer_pub_topic;
 
   // ROS publisher
   ros::Publisher accelerometer_pub;

@@ -3,6 +3,7 @@
 #include "sensors/inertialUnit.hpp"
 #include "sensors/lidar.hpp"
 #include "sensors/gyro.hpp"
+#include "sensors/accelerometer.hpp"
 #include "steering/diffSteering.hpp"
 #include "webots/Motor.hpp"
 #include "webots/Supervisor.hpp"
@@ -33,6 +34,7 @@ int main(int argc, char **argv) {
   AutomatED::GPS gps = AutomatED::GPS(supervisor, &nh);
   AutomatED::InertialUnit imu = AutomatED::InertialUnit(supervisor, &nh);
   AutomatED::Gyro gyro = AutomatED::Gyro(supervisor, &nh);
+  AutomatED::Accelerometer accelerometer = AutomatED::Accelerometer(supervisor, &nh);
 
   // Instantiate steering
   AutomatED::DiffSteering diffSteering = AutomatED::DiffSteering(motors, &nh);
@@ -43,6 +45,7 @@ int main(int argc, char **argv) {
     gps.publishGPSSpeed();
     imu.publishImuQuaternion();
     gyro.publishGyro();
+    accelerometer.publishAccelerometer();
     ros::spinOnce();
   }
 

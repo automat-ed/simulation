@@ -16,11 +16,11 @@ Accelerometer::Accelerometer(webots::Supervisor *webots_supervisor,
   // Get ROS parameters
   nh->param<std::string>("accelerometer/name", accelerometer_name, "accelerometer");
   nh->param("accelerometer/sampling_period", sampling_period, 32);
-  nh->param<std::string>("accelerometer/imu_topic", accelerometer_imu_topic,
-                         "accelerometer/imu");
+  nh->param<std::string>("accelerometer/data_topic", accelerometer_data_topic,
+                         "accelerometer/data");
 
   // Create publishers
-  accelerometer_imu_pub = nh->advertise<sensor_msgs::Imu>(accelerometer_imu_topic, 1);
+  accelerometer_data_pub = nh->advertise<sensor_msgs::Imu>(accelerometer_data_topic, 1);
 
   // Setup accelerometer device
   accelerometer = wb->getAccelerometer(accelerometer_name);
@@ -31,7 +31,7 @@ Accelerometer::Accelerometer(webots::Supervisor *webots_supervisor,
 }
 
 Accelerometer::~Accelerometer() {
-  accelerometer_imu_pub.shutdown();
+  accelerometer_data_pub.shutdown();
   accelerometer->disable();
 }
 
@@ -57,7 +57,7 @@ void Accelerometer::publishAccelerometerImu() {
   for (int i = 0; i < 9; ++i)  // means "covariance unknown"
     msg.linear_acceleration_covariance[i] = 0;
 
-  accelerometer_imu_pub.publish(msg);
+  accelerometer_data_pub.publish(msg);
 }
 
 void Accelerometer::publishTF() {

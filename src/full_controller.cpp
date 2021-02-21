@@ -3,10 +3,6 @@
 #include "sensors/inertialUnit.hpp"
 #include "sensors/lidar.hpp"
 #include "sensors/accelerometer.hpp"
-#include "webots/GPS.hpp"
-#include "webots/InertialUnit.hpp"
-#include "webots/Accelerometer.hpp"
-#include "webots/Lidar.hpp"
 #include "webots/Motor.hpp"
 #include "webots/Supervisor.hpp"
 

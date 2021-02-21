@@ -55,7 +55,7 @@ include_directories(
     ${catkin_INCLUDE_DIRS}
 )
 
-## Declare a C++ library
+## Declare C++ libraries
 add_library(sensors lib/sensors/src/lidar.cpp lib/sensors/src/gps.cpp lib/sensors/src/inertialUnit.cpp lib/sensors/src/accelerometer.cpp)
 target_link_libraries(sensors ${WEBOTS_LIB} ${catkin_LIBRARIES})
 

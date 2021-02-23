@@ -1,0 +1,50 @@
+name: Continuous Integration
+
+on: [pull_request]
+
+jobs:
+  catkin_lint:
+    name: Catkin lint
+    runs-on: ubuntu-20.04
+    container: ros:noetic
+    steps:
+      - name: Install catkin_lint (and dependencies)
+        run: sudo apt update && sudo apt install -yq git catkin-lint
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Run catkin_lint
+        run: . /opt/ros/noetic/setup.sh && catkin_lint --config ./.catkin_lint src
+
+  catkin_build:
+    name: Build workspace
+    runs-on: ubuntu-20.04
+    container: ros:noetic
+    env:
+      WEBOTS_HOME: /usr/local/webots
+      LD_LIBRARY_PATH: "${WEBOTS_HOME}/lib/controller:$PATH"
+    steps:
+      - name: Setup ROS
+        run: |
+          sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+          sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+          sudo apt update && sudo apt install -yq git python3-catkin-tools python3-pip
+          sudo pip3 install -q catkin_pkg osrf_pycommon pyyaml setuptools sphinxcontrib-programoutput
+      - name: Install webots
+        run: |
+          sudo apt update && sudo apt install -yq wget software-properties-common
+          wget -qO- https://cyberbotics.com/Cyberbotics.asc | sudo apt-key add -
+          sudo apt-add-repository 'deb https://cyberbotics.com/debian/ binary-amd64/'
+          sudo apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get -yq install keyboard-configuration
+          sudo apt-get -yq install webots
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          ssh-key: ${{ secrets.CI_SSH_PRIVATE }}
+          path: src/
+      - name: Install ROS packages
+        run: sudo rosdep install --from-paths src --ignore-src -r -y --rosdistro noetic
+      - name: Build workspace
+        run: |
+          . /opt/ros/noetic/setup.sh
+          catkin build

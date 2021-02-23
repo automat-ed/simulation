@@ -16,6 +16,7 @@ find_package(catkin REQUIRED
     xmlrpcpp
     tf2
     tf2_ros
+    webots_ros
 )
 
 
@@ -30,7 +31,7 @@ find_package(catkin REQUIRED
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-    CATKIN_DEPENDS roscpp std_msgs sensor_msgs geometry_msgs xmlrpcpp tf2 tf2_ros
+    CATKIN_DEPENDS roscpp std_msgs sensor_msgs geometry_msgs xmlrpcpp tf2 tf2_ros webots_ros
 )
 
 ###########

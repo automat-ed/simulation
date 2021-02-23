@@ -40,7 +40,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
-          ssh-key: ${{ secrets.CI_SSH_PRIVATE }}
           path: src/
       - name: Install ROS packages
         run: sudo rosdep install --from-paths src --ignore-src -r -y --rosdistro noetic

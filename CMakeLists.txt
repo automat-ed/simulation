@@ -30,7 +30,7 @@ find_package(catkin REQUIRED
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-    CATKIN_DEPENDS roscpp std_msgs sensor_msgs geometry_msgs xmlrpcpp
+    CATKIN_DEPENDS roscpp std_msgs sensor_msgs geometry_msgs xmlrpcpp tf2 tf2_ros
 )
 
 ###########
@@ -56,13 +56,8 @@ include_directories(
     ${catkin_INCLUDE_DIRS}
 )
 
-<<<<<<< HEAD
 ## Declare a C++ library
 add_library(sensors lib/sensors/src/lidar.cpp lib/sensors/src/gps.cpp lib/sensors/src/inertialUnit.cpp lib/sensors/src/accelerometer.cpp lib/sensors/src/gyro.cpp lib/sensors/src/wheelOdometry.cpp)
-=======
-## Declare C++ libraries
-add_library(sensors lib/sensors/src/lidar.cpp lib/sensors/src/gps.cpp lib/sensors/src/inertialUnit.cpp lib/sensors/src/accelerometer.cpp lib/sensors/src/gyro.cpp)
->>>>>>> main
 add_library(steering lib/steering/src/diffSteering.cpp)
 target_link_libraries(sensors ${WEBOTS_LIB} ${catkin_LIBRARIES})
 target_link_libraries(steering ${WEBOTS_LIB} ${catkin_LIBRARIES})

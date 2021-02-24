@@ -1,0 +1,28 @@
+#VRML_SIM R2021a utf8
+WorldInfo {
+  coordinateSystem "NUE"
+}
+Viewpoint {
+  orientation 1 0 0 4.71238898038469
+  position -3.853823610161037e-15 60.10150891489649 -8.22945832958824e-15
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+Floor {
+  size 50 30
+  appearance Parquetry {
+    type "light strip"
+  }
+}
+CurvedRoadSegment {
+  translation 5.49933 0.11999999999999994 -2.4781
+  rotation 0 1 0 -1.5707953071795862
+  locked FALSE
+}
+CurvedRoadSegment {
+  translation 5.51209 0.10000000000000003 -2.45852
+  name "road(1)"
+  locked FALSE
+}

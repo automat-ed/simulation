@@ -6,6 +6,7 @@
 #include "sensors/lidar.hpp"
 #include "sensors/wheelOdometry.hpp"
 #include "steering/diffSteering.hpp"
+#include "utils/KeyboardController.hpp"
 #include "webots/Motor.hpp"
 #include "webots/Supervisor.hpp"
 
@@ -17,6 +18,8 @@ int main(int argc, char **argv) {
   // Get ROS parameters
   int step_size;
   nh.param("step_size", step_size, 32);
+  bool use_keyboard_control;
+  nh.param("use_keyboard_control", use_keyboard_control, false);
 
   // Set up Webots
   webots::Supervisor *supervisor = new webots::Supervisor();
@@ -41,6 +44,10 @@ int main(int argc, char **argv) {
   // Instantiate steering
   AutomatED::DiffSteering diffSteering = AutomatED::DiffSteering(motors, &nh);
 
+  // Instaniate keyboard steering
+  AutomatED::KeyboardController keyboard =
+      AutomatED::KeyboardController(supervisor, &nh);
+
   while (supervisor->step(step_size) != -1) {
     lidar.publishLaserScan();
     gps.publishGPSCoordinate();
@@ -49,6 +56,11 @@ int main(int argc, char **argv) {
     gyro.publishGyro();
     accelerometer.publishAccelerometer();
     wheel_odometry.publishWheelOdometry();
+
+    if (use_keyboard_control) {
+      keyboard.keyLoop();
+    }
+
     ros::spinOnce();
   }
 

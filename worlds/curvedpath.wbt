@@ -19,10 +19,14 @@ Floor {
 CurvedRoadSegment {
   translation 5.49933 0.11999999999999994 -2.4781
   rotation 0 1 0 -1.5707953071795862
+  width 3
+  numberOfLanes 1
   locked FALSE
 }
 CurvedRoadSegment {
   translation 5.51209 0.10000000000000003 -2.45852
   name "road(1)"
+  width 3
+  numberOfLanes 1
   locked FALSE
 }

@@ -10,8 +10,22 @@ TexturedBackground {
 }
 TexturedBackgroundLight {
 }
-RoadIntersection {
+DEF null RoadIntersection {
   translation 0 0.1 0
+  roadsWidth 3
+  startRoadsLength [
+    6
+  ]
+  startRoadsNumberOfLanes 1
+  startRoadsEndLine [
+    ""
+  ]
+  startRoadsLine [
+    RoadLine {
+      type "none"
+    }
+  ]
+  startRoadBorderboundingObject TRUE
   locked FALSE
 }
 Floor {

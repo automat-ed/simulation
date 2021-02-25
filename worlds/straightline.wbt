@@ -3,8 +3,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation -0.5575472323507363 0.6097599349824034 0.5633239790638148 2.044757690714144
-  position 6.06839371188094 54.03872613110201 0.21186936432588244
+  orientation 1 0 0 4.71238898038469
+  position 4.556408736317517e-15 65.66477019848718 3.645126989054014e-15
 }
 TexturedBackground {
 }
@@ -12,6 +12,8 @@ TexturedBackgroundLight {
 }
 StraightRoadSegment {
   translation 0.00779767 0.09 -9.98795
+  width 3
+  numberOfLanes 1
   appearance Asphalt {
     colorOverride 0.1 0.1 1
   }
@@ -20,16 +22,22 @@ StraightRoadSegment {
 StraightRoadSegment {
   translation -0.0186877 0.09999999999999779 9.986
   name "road(1)"
+  width 3
+  numberOfLanes 1
   locked FALSE
 }
 StraightRoadSegment {
   translation 0.00666345 0.06 -19.974
   name "road(2)"
+  width 3
+  numberOfLanes 1
   locked FALSE
 }
 StraightRoadSegment {
   translation 0 0.11 0
   name "road(3)"
+  width 3
+  numberOfLanes 1
   locked FALSE
 }
 Floor {

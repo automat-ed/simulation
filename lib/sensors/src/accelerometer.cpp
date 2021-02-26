@@ -75,18 +75,9 @@ void Accelerometer::publishAccelerometer() {
   // Unset values are set to 0 by default
   msg.orientation_covariance[0] = -1.0;    // means no orientation information
   msg.angular_velocity_covariance[0] = -1; // no angular_velocity information
-
-  double x_noise = gaussianNoise(reading[0]);
-  ROS_DEBUG("Gyro x: %f, noise: %f", reading[0], x_noise);
-  msg.linear_acceleration.x = reading[0] + x_noise;
-
-  double y_noise = gaussianNoise(reading[1]);
-  ROS_DEBUG("Gyro y: %f, noise: %f", reading[1], y_noise);
-  msg.linear_acceleration.y = reading[1] + y_noise;
-
-  double z_noise = gaussianNoise(reading[2]);
-  ROS_DEBUG("Gyro z: %f, noise: %f", reading[2], z_noise);
-  msg.linear_acceleration.z = reading[2] + z_noise;
+  msg.linear_acceleration.x = reading[0] + gaussianNoise(reading[0]);
+  msg.linear_acceleration.y = reading[1] + gaussianNoise(reading[1]);
+  msg.linear_acceleration.z = reading[2] + gaussianNoise(reading[2]);
 
   for (int i = 0; i < 9; ++i) // means "covariance unknown"
     msg.linear_acceleration_covariance[i] = 0;

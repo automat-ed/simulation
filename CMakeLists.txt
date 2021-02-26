@@ -52,6 +52,7 @@ include_directories(
     include
     lib/sensors/include
     lib/steering/include
+    lib/utils/include
     $ENV{WEBOTS_HOME}/include/controller/c
     $ENV{WEBOTS_HOME}/include/controller/cpp
     ${catkin_INCLUDE_DIRS}
@@ -60,12 +61,14 @@ include_directories(
 ## Declare a C++ library
 add_library(sensors lib/sensors/src/lidar.cpp lib/sensors/src/gps.cpp lib/sensors/src/inertialUnit.cpp lib/sensors/src/accelerometer.cpp lib/sensors/src/gyro.cpp lib/sensors/src/wheelOdometry.cpp)
 add_library(steering lib/steering/src/diffSteering.cpp)
+add_library(utils lib/utils/src/KeyboardController.cpp)
 target_link_libraries(sensors ${WEBOTS_LIB} ${catkin_LIBRARIES})
 target_link_libraries(steering ${WEBOTS_LIB} ${catkin_LIBRARIES})
+target_link_libraries(utils ${WEBOTS_LIB} ${catkin_LIBRARIES})
 
 ## Declare a C++ executable
 add_executable(full_controller src/full_controller.cpp)
-target_link_libraries(full_controller sensors steering ${WEBOTS_LIB} ${catkin_LIBRARIES})
+target_link_libraries(full_controller sensors steering utils ${WEBOTS_LIB} ${catkin_LIBRARIES})
 
 #############
 ## Install ##
@@ -93,7 +96,14 @@ install(TARGETS sensors
     LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
     RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION}
 )
+
 install(TARGETS steering
+    ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+    LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+    RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION}
+)
+
+install(TARGETS utils
     ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
     LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
     RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION}
@@ -103,11 +113,14 @@ install(TARGETS steering
 install(DIRECTORY lib/sensors/include
     DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
 )
+
 install(DIRECTORY lib/steering/include
     DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
 )
 
-
+install(DIRECTORY lib/utils/include
+    DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+)
 
 ## Mark all launch files for installation
 install(DIRECTORY launch/ 

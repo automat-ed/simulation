@@ -6,6 +6,7 @@
 #include "tf2_ros/static_transform_broadcaster.h"
 #include "webots/Lidar.hpp"
 #include "webots/Supervisor.hpp"
+#include <random>
 
 using namespace AutomatED;
 
@@ -17,11 +18,16 @@ Lidar::Lidar(webots::Supervisor *webots_supervisor,
   // Get ROS parameters
   nh->param<std::string>("lidar/name", lidar_name, "RobotisLds01");
   nh->param("lidar/sampling_period", sampling_period, 32);
-  nh->param<std::string>("lidar/laser_scan_topic", laser_scan_topic,
-                         "lidar/laser_scan");
+  nh->param<std::string>("lidar/ground_truth_topic", ground_truth_topic,
+                         "/lidar/ground_truth");
+  nh->param<std::string>("lidar/noise_topic", noise_topic, "/lidar/data");
+  nh->param("lidar/noise_error", noise_error, 0.05);
+  nh->param<int>("lidar/noise_seed", noise_seed, 17);
 
   // Create publishers
-  laser_scan_pub = nh->advertise<sensor_msgs::LaserScan>(laser_scan_topic, 1);
+  ground_truth_pub =
+      nh->advertise<sensor_msgs::LaserScan>(ground_truth_topic, 1);
+  noise_pub = nh->advertise<sensor_msgs::LaserScan>(noise_topic, 1);
 
   // Setup LiDAR device
   lidar = wb->getLidar(lidar_name);
@@ -29,11 +35,15 @@ Lidar::Lidar(webots::Supervisor *webots_supervisor,
 
   // Publish static transform
   publishTF();
+
+  // Initialize generator with seed
+  gen = new std::mt19937{(long unsigned int)noise_seed};
 }
 
 Lidar::~Lidar() {
   // Clean up
-  laser_scan_pub.shutdown();
+  ground_truth_pub.shutdown();
+  noise_pub.shutdown();
   lidar->disable();
 }
 
@@ -41,26 +51,52 @@ void Lidar::publishLaserScan() {
   for (int layer = 0; layer < lidar->getNumberOfLayers(); ++layer) {
     const float *rangeImageVector = lidar->getLayerRangeImage(layer);
 
-    sensor_msgs::LaserScan laser_scan_msg;
-    laser_scan_msg.header.stamp = ros::Time::now();
-    laser_scan_msg.header.frame_id = lidar->getName();
+    // Publish ground truth
+    sensor_msgs::LaserScan gt;
+    gt.header.stamp = ros::Time::now();
+    gt.header.frame_id = lidar->getName();
 
-    laser_scan_msg.angle_min = -lidar->getFov() / 2.0;
-    laser_scan_msg.angle_max = lidar->getFov() / 2.0;
-    laser_scan_msg.angle_increment =
-        lidar->getFov() / lidar->getHorizontalResolution();
+    gt.angle_min = -lidar->getFov() / 2.0;
+    gt.angle_max = lidar->getFov() / 2.0;
+    gt.angle_increment = lidar->getFov() / lidar->getHorizontalResolution();
 
-    laser_scan_msg.scan_time = (double)lidar->getSamplingPeriod() / 1000.0;
-    laser_scan_msg.time_increment = (double)lidar->getSamplingPeriod() /
-                                    (1000.0 * lidar->getHorizontalResolution());
+    gt.scan_time = (double)lidar->getSamplingPeriod() / 1000.0;
+    gt.time_increment = (double)lidar->getSamplingPeriod() /
+                        (1000.0 * lidar->getHorizontalResolution());
 
-    laser_scan_msg.range_min = lidar->getMinRange();
-    laser_scan_msg.range_max = lidar->getMaxRange();
+    gt.range_min = lidar->getMinRange();
+    gt.range_max = lidar->getMaxRange();
     for (int i = 0; i < lidar->getHorizontalResolution(); ++i) {
-      laser_scan_msg.ranges.push_back(rangeImageVector[i]);
+      gt.ranges.push_back(rangeImageVector[i]);
     }
 
-    laser_scan_pub.publish(laser_scan_msg);
+    ground_truth_pub.publish(gt);
+
+    // Publish noisy data
+    sensor_msgs::LaserScan msg;
+    msg.header.stamp = ros::Time::now();
+    msg.header.frame_id = lidar->getName();
+
+    msg.angle_min = -lidar->getFov() / 2.0;
+    msg.angle_max = lidar->getFov() / 2.0;
+    msg.angle_increment = lidar->getFov() / lidar->getHorizontalResolution();
+
+    msg.scan_time = (double)lidar->getSamplingPeriod() / 1000.0;
+    msg.time_increment = (double)lidar->getSamplingPeriod() /
+                         (1000.0 * lidar->getHorizontalResolution());
+
+    msg.range_min = lidar->getMinRange();
+    msg.range_max = lidar->getMaxRange();
+    for (int i = 0; i < lidar->getHorizontalResolution(); ++i) {
+      if (rangeImageVector[i] == INFINITY) {
+        msg.ranges.push_back(rangeImageVector[i]);
+      } else {
+        msg.ranges.push_back(rangeImageVector[i] +
+                             gaussianNoise(rangeImageVector[i]));
+      }
+    }
+
+    noise_pub.publish(msg);
   }
 }
 
@@ -103,4 +139,9 @@ void Lidar::publishTF() {
   msg.transform.rotation.w = quat.w();
 
   static_broadcaster.sendTransform(msg);
+}
+
+double Lidar::gaussianNoise(double value) {
+  std::normal_distribution<double> d{0, noise_error * value};
+  return d(*gen);
 }

@@ -2,6 +2,7 @@
 #include "geometry_msgs/TwistStamped.h"
 #include "ros/ros.h"
 #include "webots/Supervisor.hpp"
+#include <random>
 
 using namespace AutomatED;
 
@@ -12,18 +13,29 @@ WheelOdometry::WheelOdometry(webots::Supervisor *webots_supervisor,
   nh = ros_handle;
 
   // Get ROS parameters
-  nh->param("wheel_odometry/sampling_period", sampling_period, 32);
-  nh->param<std::string>("wheel_odometry/odom_topic",
-                         wheel_odometry_twist_topic, "wheel_odom");
+  nh->param("wheel_odom/sampling_period", sampling_period, 32);
+  nh->param<std::string>("wheel_odom/ground_truth_topic", ground_truth_topic,
+                         "/wheel_odom/ground_truth");
+  nh->param<std::string>("wheel_odom/noise_topic", noise_topic,
+                         "/wheel_odom/data");
+  nh->param("wheel_odom/noise_error", noise_error, 0.05);
+  nh->param<int>("wheel_odom/noise_seed", noise_seed, 17);
   nh->param("wheel_separation", wheel_separation, 0.6);
   nh->param("wheel_radius", wheel_radius, 0.12);
 
   // Create publishers
-  wheel_odometry_pub =
-      nh->advertise<geometry_msgs::TwistStamped>(wheel_odometry_twist_topic, 1);
+  ground_truth_pub =
+      nh->advertise<geometry_msgs::TwistStamped>(ground_truth_topic, 1);
+  noise_pub = nh->advertise<geometry_msgs::TwistStamped>(noise_topic, 1);
+
+  // Initialize generator with seed
+  gen = new std::mt19937{(long unsigned int)noise_seed};
 }
 
-WheelOdometry::~WheelOdometry() { wheel_odometry_pub.shutdown(); }
+WheelOdometry::~WheelOdometry() {
+  ground_truth_pub.shutdown();
+  noise_pub.shutdown();
+}
 
 void WheelOdometry::publishWheelOdometry() {
   // Get wheels from webots
@@ -52,18 +64,21 @@ void WheelOdometry::publishWheelOdometry() {
   const double robot_rvel =
       (rvel_avg * wheel_radius - lvel_avg * wheel_radius) / wheel_separation;
 
+  // Publish ground truth
+  geometry_msgs::TwistStamped gt;
+  gt.header.stamp = ros::Time::now();
+  gt.header.frame_id = "base_link";
+  gt.twist.linear.x = robot_vel;
+  gt.twist.angular.z = robot_rvel;
+  ground_truth_pub.publish(gt);
+
+  // Publish noisy data
   geometry_msgs::TwistStamped msg;
   msg.header.stamp = ros::Time::now();
   msg.header.frame_id = "base_link";
-  msg.twist.linear.x = robot_vel;
-  msg.twist.linear.y = 0;
-  msg.twist.linear.z = 0;
-  msg.twist.angular.x = 0;
-  msg.twist.angular.y = 0;
-  msg.twist.angular.z = robot_rvel;
-
-  // Publish message
-  wheel_odometry_pub.publish(msg);
+  msg.twist.linear.x = robot_vel + gaussianNoise(robot_vel);
+  msg.twist.angular.z = robot_rvel + gaussianNoise(robot_rvel);
+  noise_pub.publish(msg);
 }
 
 void WheelOdometry::getLocalRotationalVelocity(webots::Node *solid,
@@ -97,4 +112,9 @@ void WheelOdometry::transformVelocity(const double *matrix,
                (matrix[5] * vector[2]);
   new_vec[2] = (matrix[6] * vector[3]) + (matrix[7] * vector[4]) +
                (matrix[8] * vector[5]);
+}
+
+double WheelOdometry::gaussianNoise(double value) {
+  std::normal_distribution<double> d{0, noise_error * value};
+  return d(*gen);
 }

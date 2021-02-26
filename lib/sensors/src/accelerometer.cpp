@@ -5,22 +5,29 @@
 #include "tf2_ros/static_transform_broadcaster.h"
 #include "webots/Accelerometer.hpp"
 #include "webots/Supervisor.hpp"
+#include <random>
 
 using namespace AutomatED;
 
 Accelerometer::Accelerometer(webots::Supervisor *webots_supervisor,
-                           ros::NodeHandle *ros_handle) {
+                             ros::NodeHandle *ros_handle) {
   wb = webots_supervisor;
   nh = ros_handle;
 
   // Get ROS parameters
-  nh->param<std::string>("accelerometer/name", accelerometer_name, "accelerometer");
+  nh->param<std::string>("accelerometer/name", accelerometer_name,
+                         "accelerometer");
   nh->param("accelerometer/sampling_period", sampling_period, 32);
-  nh->param<std::string>("accelerometer/pub_topic", accelerometer_pub_topic,
-                         "accelerometer/pub_topic");
+  nh->param<std::string>("accelerometer/ground_truth_topic", ground_truth_topic,
+                         "/accelerometer/ground_truth");
+  nh->param<std::string>("accelerometer/noise_topic", noise_topic,
+                         "/accelerometer/data");
+  nh->param("accelerometer/noise_error", noise_error, 0.05);
+  nh->param<int>("accelerometer/noise_seed", noise_seed, 17);
 
   // Create publishers
-  accelerometer_pub = nh->advertise<sensor_msgs::Imu>(accelerometer_pub_topic, 1);
+  ground_truth_pub = nh->advertise<sensor_msgs::Imu>(ground_truth_topic, 1);
+  noise_pub = nh->advertise<sensor_msgs::Imu>(noise_topic, 1);
 
   // Setup accelerometer device
   accelerometer = wb->getAccelerometer(accelerometer_name);
@@ -28,36 +35,54 @@ Accelerometer::Accelerometer(webots::Supervisor *webots_supervisor,
 
   // Publish tf
   publishTF();
+
+  // Initialize generator with seed
+  gen = new std::mt19937{(long unsigned int)noise_seed};
 }
 
 Accelerometer::~Accelerometer() {
-  accelerometer_pub.shutdown();
+  noise_pub.shutdown();
+  ground_truth_pub.shutdown();
   accelerometer->disable();
 }
 
 void Accelerometer::publishAccelerometer() {
+  // Read from sensor
+  const double *reading = accelerometer->getValues();
+
+  // Publish ground truth
+  sensor_msgs::Imu gt;
+  gt.header.stamp = ros::Time::now();
+  gt.header.frame_id = accelerometer->getName();
+
+  // Unset values are set to 0 by default
+  gt.orientation_covariance[0] = -1.0; // means no orientation information
+  gt.linear_acceleration.x = reading[0];
+  gt.linear_acceleration.y = reading[1];
+  gt.linear_acceleration.z = reading[2];
+  gt.angular_velocity_covariance[0] = -1; // no angular_velocity information
+
+  for (int i = 0; i < 9; ++i) // means "covariance unknown"
+    gt.linear_acceleration_covariance[i] = 0;
+
+  ground_truth_pub.publish(gt);
+
+  // Publish noisy data
   sensor_msgs::Imu msg;
   msg.header.stamp = ros::Time::now();
   msg.header.frame_id = accelerometer->getName();
 
-  msg.orientation.x = 0.0;
-  msg.orientation.y = 0.0;
-  msg.orientation.z = 0.0;
-  msg.orientation.w = 0.0;
-  msg.orientation_covariance[0] = -1.0;  // means no orientation information
-
-  msg.angular_velocity.x = 0.0;
-  msg.angular_velocity.y = 0.0;
-  msg.angular_velocity.z = 0.0;
+  // Unset values are set to 0 by default
+  msg.orientation_covariance[0] = -1.0;    // means no orientation information
   msg.angular_velocity_covariance[0] = -1; // no angular_velocity information
+  msg.linear_acceleration.x = reading[0] + gaussianNoise(reading[0]);
+  msg.linear_acceleration.y = reading[1] + gaussianNoise(reading[1]);
+  msg.linear_acceleration.z = reading[2] + gaussianNoise(reading[2]);
 
-  msg.linear_acceleration.x = accelerometer->getValues()[0];
-  msg.linear_acceleration.y = accelerometer->getValues()[1];
-  msg.linear_acceleration.z = accelerometer->getValues()[2];
-  for (int i = 0; i < 9; ++i)  // means "covariance unknown"
+  for (int i = 0; i < 9; ++i) // means "covariance unknown"
     msg.linear_acceleration_covariance[i] = 0;
 
-  accelerometer_pub.publish(msg);
+  noise_pub.publish(msg);
 }
 
 void Accelerometer::publishTF() {
@@ -65,12 +90,16 @@ void Accelerometer::publishTF() {
   webots::Node *accelerometer_node = wb->getFromDevice(accelerometer);
 
   // Get accelerometer translation
-  webots::Field *accelerometer_translation_field = accelerometer_node->getField("translation");
-  const double *accelerometer_translation = accelerometer_translation_field->getSFVec3f();
+  webots::Field *accelerometer_translation_field =
+      accelerometer_node->getField("translation");
+  const double *accelerometer_translation =
+      accelerometer_translation_field->getSFVec3f();
 
   // Get accelerometer rotation
-  webots::Field *accelerometer_rotation_field = accelerometer_node->getField("rotation");
-  const double *accelerometer_rotation = accelerometer_rotation_field->getSFRotation();
+  webots::Field *accelerometer_rotation_field =
+      accelerometer_node->getField("rotation");
+  const double *accelerometer_rotation =
+      accelerometer_rotation_field->getSFRotation();
 
   // Create transform msg
   geometry_msgs::TransformStamped msg;
@@ -99,4 +128,9 @@ void Accelerometer::publishTF() {
   msg.transform.rotation.w = quat.w();
 
   static_broadcaster.sendTransform(msg);
+}
+
+double Accelerometer::gaussianNoise(double value) {
+  std::normal_distribution<double> d{0, noise_error * value};
+  return d(*gen);
 }

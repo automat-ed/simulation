@@ -1,27 +1,29 @@
 #include "sensors/gyro.hpp"
-#include "webots/Gyro.hpp"
 #include "sensor_msgs/Imu.h"
-#include "webots/Supervisor.hpp"
 #include "tf2/LinearMath/Quaternion.h"
 #include "tf2_ros/static_transform_broadcaster.h"
-
-
+#include "webots/Gyro.hpp"
+#include "webots/Supervisor.hpp"
+#include <random>
 
 using namespace AutomatED;
 
-Gyro::Gyro(webots::Supervisor *webots_supervisor,
-                           ros::NodeHandle *ros_handle) {
+Gyro::Gyro(webots::Supervisor *webots_supervisor, ros::NodeHandle *ros_handle) {
   wb = webots_supervisor;
   nh = ros_handle;
 
   // Get ROS parameters
   nh->param<std::string>("gyro/name", gyro_name, "gyro");
   nh->param("gyro/sampling_period", sampling_period, 32);
-  nh->param<std::string>("gyro/pub_topic", gyro_pub_topic,
-                         "gyro/data");
+  nh->param<std::string>("gyro/ground_truth_topic", ground_truth_topic,
+                         "/gyro/ground_truth");
+  nh->param<std::string>("gyro/noise_topic", noise_topic, "/gyro/data");
+  nh->param("gyro/noise_error", noise_error, 0.05);
+  nh->param<int>("gyro/noise_seed", noise_seed, 17);
 
   // Create publishers
-  gyro_pub = nh->advertise<sensor_msgs::Imu>(gyro_pub_topic, 1);
+  ground_truth_pub = nh->advertise<sensor_msgs::Imu>(ground_truth_topic, 1);
+  noise_pub = nh->advertise<sensor_msgs::Imu>(noise_topic, 1);
 
   // Setup IMU device
   gyro = wb->getGyro(gyro_name);
@@ -29,36 +31,48 @@ Gyro::Gyro(webots::Supervisor *webots_supervisor,
 
   // Publish tf
   publishTF();
+
+  // Initialize generator with seed
+  gen = new std::mt19937{(long unsigned int)noise_seed};
 }
 
 Gyro::~Gyro() {
-  gyro_pub.shutdown();
+  noise_pub.shutdown();
+  ground_truth_pub.shutdown();
   gyro->disable();
 }
 
 void Gyro::publishGyro() {
+  // Get data from Gyro
+  const double *reading = gyro->getValues();
+
+  // Publish ground truth
+  sensor_msgs::Imu gt;
+  gt.header.stamp = ros::Time::now();
+  gt.header.frame_id = gyro->getName();
+
+  // Unset values are set to 0 by default
+  gt.orientation_covariance[0] = -1.0; // means no orientation information
+  gt.angular_velocity.x = reading[0];
+  gt.angular_velocity.y = reading[1];
+  gt.angular_velocity.z = reading[2];
+  gt.linear_acceleration_covariance[0] = -1.0; // means no information
+
+  ground_truth_pub.publish(gt);
+
+  // Publish noisy data
   sensor_msgs::Imu msg;
   msg.header.stamp = ros::Time::now();
   msg.header.frame_id = gyro->getName();
 
-  msg.orientation.x = 0.0;
-  msg.orientation.y = 0.0;
-  msg.orientation.z = 0.0;
-  msg.orientation.w = 0.0;
+  // Unset values are set to 0 by default
   msg.orientation_covariance[0] = -1.0; // means no orientation information
+  msg.angular_velocity.x = reading[0] + gaussianNoise(reading[0]);
+  msg.angular_velocity.y = reading[1] + gaussianNoise(reading[1]);
+  msg.angular_velocity.z = reading[2] + gaussianNoise(reading[2]);
+  msg.linear_acceleration_covariance[0] = -1.0; // means no information
 
-  msg.angular_velocity.x = gyro->getValues()[0];
-  msg.angular_velocity.y = gyro->getValues()[1];
-  msg.angular_velocity.z = gyro->getValues()[2];
-  for (int i = 0; i < 9; ++i)  // means "covariance unknown"
-    msg.angular_velocity_covariance[i] = 0;
-
-  msg.linear_acceleration.x = 0.0;
-  msg.linear_acceleration.y = 0.0;
-  msg.linear_acceleration.z = 0.0;
-  msg.linear_acceleration_covariance[0] = -1.0; // means no linear_acceleration information
-
-  gyro_pub.publish(msg);
+  noise_pub.publish(msg);
 }
 
 void Gyro::publishTF() {
@@ -100,4 +114,9 @@ void Gyro::publishTF() {
   msg.transform.rotation.w = quat.w();
 
   static_broadcaster.sendTransform(msg);
+}
+
+double Gyro::gaussianNoise(double value) {
+  std::normal_distribution<double> d{0, noise_error * value};
+  return d(*gen);
 }

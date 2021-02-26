@@ -26,7 +26,7 @@ GPS::GPS(webots::Supervisor *webots_supervisor, ros::NodeHandle *ros_handle) {
                          "/gps/ground_truth/speed");
   nh->param<std::string>("gps/speed_topic", speed_topic, "/gps/speed");
   nh->param("gps/noise_error", noise_error, 0.05);
-  nh->param("accelerometer/noise_seed", noise_seed, 17);
+  nh->param("gps/noise_seed", noise_seed, 17);
 
   // Create publishers
   gt_coordinate_pub =

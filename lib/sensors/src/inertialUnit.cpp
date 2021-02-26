@@ -21,8 +21,8 @@ InertialUnit::InertialUnit(webots::Supervisor *webots_supervisor,
   nh->param<std::string>("imu/ground_truth_topic", ground_truth_topic,
                          "/imu/ground_truth");
   nh->param<std::string>("imu/noise_topic", noise_topic, "/imu/data");
-  nh->param("accelerometer/noise_error", noise_error, 0.05);
-  nh->param<int>("accelerometer/noise_seed", noise_seed, 17);
+  nh->param("imu/noise_error", noise_error, 0.05);
+  nh->param<int>("imu/noise_seed", noise_seed, 17);
 
   // Create publishers
   ground_truth_pub = nh->advertise<sensor_msgs::Imu>(ground_truth_topic, 1);

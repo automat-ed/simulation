@@ -7,6 +7,7 @@
 #include "tf2/LinearMath/Quaternion.h"
 #include "webots/Supervisor.hpp"
 #include "webots_ros/Float64Stamped.h"
+#include <random>
 
 using namespace AutomatED;
 
@@ -17,14 +18,22 @@ GPS::GPS(webots::Supervisor *webots_supervisor, ros::NodeHandle *ros_handle) {
   // Get ROS parameters
   nh->param<std::string>("gps/name", gps_name, "gps");
   nh->param("gps/sampling_period", sampling_period, 32);
-  nh->param<std::string>("gps/coordinate_topic", gps_coordinate_topic,
-                         "gps/coordinates");
-  nh->param<std::string>("gps/speed_topic", gps_speed_topic, "gps/speed");
+  nh->param<std::string>("gps/gt_coordinate_topic", gt_coordinate_topic,
+                         "/gps/ground_truth/coordinates");
+  nh->param<std::string>("gps/coordinate_topic", coordinate_topic,
+                         "/gps/coordinates");
+  nh->param<std::string>("gps/gt_speed_topic", gt_speed_topic,
+                         "/gps/ground_truth/speed");
+  nh->param<std::string>("gps/speed_topic", speed_topic, "/gps/speed");
+  nh->param("gps/noise_error", noise_error, 0.05);
+  nh->param("accelerometer/noise_seed", noise_seed, 17);
 
   // Create publishers
-  gps_coordinate_pub =
-      nh->advertise<sensor_msgs::NavSatFix>(gps_coordinate_topic, 1);
-  gps_speed_pub = nh->advertise<webots_ros::Float64Stamped>(gps_speed_topic, 1);
+  gt_coordinate_pub =
+      nh->advertise<sensor_msgs::NavSatFix>(gt_coordinate_topic, 1);
+  coordinate_pub = nh->advertise<sensor_msgs::NavSatFix>(coordinate_topic, 1);
+  gt_speed_pub = nh->advertise<webots_ros::Float64Stamped>(gt_speed_topic, 1);
+  speed_pub = nh->advertise<webots_ros::Float64Stamped>(speed_topic, 1);
 
   // Setup GPS device
   gps = wb->getGPS(gps_name);
@@ -32,32 +41,62 @@ GPS::GPS(webots::Supervisor *webots_supervisor, ros::NodeHandle *ros_handle) {
 
   // Publish static transform
   publishTF();
+
+  // Initialize generator with seed
+  gen = new std::mt19937{(long unsigned int)noise_seed};
 }
 
 GPS::~GPS() {
-  gps_coordinate_pub.shutdown();
-  gps_speed_pub.shutdown();
+  gt_coordinate_pub.shutdown();
+  coordinate_pub.shutdown();
+  gt_speed_pub.shutdown();
+  speed_pub.shutdown();
   gps->disable();
 }
 
 void GPS::publishGPSCoordinate() {
-  sensor_msgs::NavSatFix gps_value_msg;
-  gps_value_msg.header.stamp = ros::Time::now();
-  gps_value_msg.header.frame_id = gps->getName();
-  gps_value_msg.latitude = gps->getValues()[0];
-  gps_value_msg.longitude = gps->getValues()[2];
-  gps_value_msg.altitude = gps->getValues()[1];
-  gps_value_msg.position_covariance_type =
+  // Get Coordinate reading from GPS
+  const double *reading = gps->getValues();
+
+  // Publish ground truth
+  sensor_msgs::NavSatFix gt;
+  gt.header.stamp = ros::Time::now();
+  gt.header.frame_id = gps->getName();
+  gt.latitude = reading[0];
+  gt.longitude = reading[2];
+  gt.altitude = reading[1];
+  gt.position_covariance_type = sensor_msgs::NavSatFix::COVARIANCE_TYPE_UNKNOWN;
+  gt.status.service = sensor_msgs::NavSatStatus::SERVICE_GPS;
+  gt_coordinate_pub.publish(gt);
+
+  // Publish data with noise
+  sensor_msgs::NavSatFix msg;
+  msg.header.stamp = ros::Time::now();
+  msg.header.frame_id = gps->getName();
+  msg.latitude = reading[0] + gaussianNoise(reading[0]);
+  msg.longitude = reading[2] + gaussianNoise(reading[2]);
+  msg.altitude = reading[1] + gaussianNoise(reading[1]);
+  msg.position_covariance_type =
       sensor_msgs::NavSatFix::COVARIANCE_TYPE_UNKNOWN;
-  gps_value_msg.status.service = sensor_msgs::NavSatStatus::SERVICE_GPS;
-  gps_coordinate_pub.publish(gps_value_msg);
+  msg.status.service = sensor_msgs::NavSatStatus::SERVICE_GPS;
+  coordinate_pub.publish(msg);
 }
 
 void GPS::publishGPSSpeed() {
-  webots_ros::Float64Stamped speed_value_msg;
-  speed_value_msg.header.stamp = ros::Time::now();
-  speed_value_msg.data = gps->getSpeed();
-  gps_speed_pub.publish(speed_value_msg);
+  // Get speed data from GPS
+  const double reading = gps->getSpeed();
+
+  // Publish ground truth
+  webots_ros::Float64Stamped gt;
+  gt.header.stamp = ros::Time::now();
+  gt.data = reading;
+  gt_speed_pub.publish(gt);
+
+  // Publish data with noise
+  webots_ros::Float64Stamped msg;
+  msg.header.stamp = ros::Time::now();
+  msg.data = reading + gaussianNoise(reading);
+  speed_pub.publish(msg);
 }
 
 void GPS::publishTF() {
@@ -99,4 +138,9 @@ void GPS::publishTF() {
   msg.transform.rotation.w = quat.w();
 
   static_broadcaster.sendTransform(msg);
+}
+
+double GPS::gaussianNoise(double value) {
+  std::normal_distribution<double> d{0, noise_error * value};
+  return d(*gen);
 }

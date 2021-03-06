@@ -22,10 +22,14 @@ WheelOdometry::WheelOdometry(webots::Supervisor *webots_supervisor,
                          "/wheel_odom/data");
   nh->param("wheel_separation", wheel_separation, 0.6);
   nh->param("wheel_radius", wheel_radius, 0.12);
-  nh->param("wheel_odom/noise_mean", noise_mean, 0.0);
-  nh->param("wheel_odom/noise_std", noise_std, 0.017);
-  nh->param("wheel_odom/bias_mean", bias_mean, 0.1);
-  nh->param("wheel_odom/bias_std", bias_std, 0.001);
+  nh->param("wheel_odom/linear_mean", linear_mean, 0.0);
+  nh->param("wheel_odom/linear_std", linear_std, 0.017);
+  nh->param("wheel_odom/linear_bias_mean", linear_bias_mean, 0.1);
+  nh->param("wheel_odom/linear_bias_std", linear_bias_std, 0.001);
+  nh->param("wheel_odom/angular_mean", angular_mean, 0.0);
+  nh->param("wheel_odom/angular_std", angular_std, 0.0002);
+  nh->param("wheel_odom/angular_bias_mean", angular_bias_mean, 0.0000075);
+  nh->param("wheel_odom/angular_bias_std", angular_bias_std, 0.0000008);
   nh->param<int>("wheel_odom/noise_seed", noise_seed, 17);
 
   // Create publishers
@@ -37,8 +41,10 @@ WheelOdometry::WheelOdometry(webots::Supervisor *webots_supervisor,
   gen = new std::mt19937{(long unsigned int)noise_seed};
 
   // Sample bias
-  std::normal_distribution<double> d{bias_mean, bias_std};
-  bias = d(*gen);
+  std::normal_distribution<double> dl{linear_bias_mean, linear_bias_std};
+  linear_bias = dl(*gen);
+  std::normal_distribution<double> da{angular_bias_mean, angular_bias_std};
+  angular_bias = da(*gen);
 }
 
 WheelOdometry::~WheelOdometry()
@@ -87,10 +93,10 @@ void WheelOdometry::publishWheelOdometry()
   geometry_msgs::TwistWithCovarianceStamped msg;
   msg.header.stamp = ros::Time::now();
   msg.header.frame_id = frame_id;
-  msg.twist.twist.linear.x = robot_vel + bias + gaussianNoise();
-  msg.twist.twist.angular.z = robot_rvel + bias + gaussianNoise();
-  msg.twist.covariance[0] = std::pow(bias + noise_mean + noise_std, 2);
-  msg.twist.covariance[35] = std::pow(bias + noise_mean + noise_std, 2);
+  msg.twist.twist.linear.x = robot_vel + linear_bias + linearGaussianNoise();
+  msg.twist.twist.angular.z = robot_rvel + angular_bias + angularGaussianNoise();
+  msg.twist.covariance[0] = std::pow(linear_bias + linear_mean + linear_std, 2);
+  msg.twist.covariance[35] = std::pow(angular_bias + angular_mean + angular_std, 2);
   noise_pub.publish(msg);
 }
 
@@ -130,8 +136,14 @@ void WheelOdometry::transformVelocity(const double *matrix,
                (matrix[8] * vector[5]);
 }
 
-double WheelOdometry::gaussianNoise()
+double WheelOdometry::linearGaussianNoise()
 {
-  std::normal_distribution<double> d{noise_mean, noise_std};
+  std::normal_distribution<double> d{linear_mean, linear_std};
+  return d(*gen);
+}
+
+double WheelOdometry::angularGaussianNoise()
+{
+  std::normal_distribution<double> d{angular_mean, angular_std};
   return d(*gen);
 }

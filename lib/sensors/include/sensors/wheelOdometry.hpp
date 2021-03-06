@@ -30,10 +30,14 @@ namespace AutomatED
     std::string noise_topic;
     double wheel_separation;
     double wheel_radius;
-    double noise_mean;
-    double noise_std;
-    double bias_mean;
-    double bias_std;
+    double linear_mean;
+    double linear_std;
+    double linear_bias_mean;
+    double linear_bias_std;
+    double angular_mean;
+    double angular_std;
+    double angular_bias_mean;
+    double angular_bias_std;
     int noise_seed;
 
     // ROS publisher
@@ -42,8 +46,10 @@ namespace AutomatED
 
     // Noise
     std::mt19937 *gen;
-    double gaussianNoise();
-    double bias;
+    double linearGaussianNoise();
+    double angularGaussianNoise();
+    double linear_bias;
+    double angular_bias;
 
     // Helper functions
     void getLocalRotationalVelocity(webots::Node *solid, double *rvel_local);

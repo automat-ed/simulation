@@ -24,8 +24,8 @@ InertialUnit::InertialUnit(webots::Supervisor *webots_supervisor,
                          "/imu/ground_truth");
   nh->param<std::string>("imu/noise_topic", noise_topic, "/imu/data");
   nh->param("imu/noise_mean", noise_mean, 0.0);
-  nh->param("imu/noise_std", noise_std, 0.017);
-  nh->param("imu/bias_mean", bias_mean, 0.1);
+  nh->param("imu/noise_std", noise_std, 0.02);
+  nh->param("imu/bias_mean", bias_mean, 0.005);
   nh->param("imu/bias_std", bias_std, 0.001);
   nh->param<int>("imu/noise_seed", noise_seed, 17);
 

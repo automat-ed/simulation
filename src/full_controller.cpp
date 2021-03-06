@@ -10,7 +10,8 @@
 #include "webots/Motor.hpp"
 #include "webots/Supervisor.hpp"
 
-int main(int argc, char **argv) {
+int main(int argc, char **argv)
+{
   // Set up ROS node
   ros::init(argc, argv, "full_controller");
   ros::NodeHandle nh("~");
@@ -48,16 +49,17 @@ int main(int argc, char **argv) {
   AutomatED::KeyboardController keyboard =
       AutomatED::KeyboardController(supervisor, &nh);
 
-  while (supervisor->step(step_size) != -1) {
+  while (supervisor->step(step_size) != -1)
+  {
     lidar.publishLaserScan();
     gps.publishGPSCoordinate();
-    gps.publishGPSSpeed();
     imu.publishImuQuaternion();
     gyro.publishGyro();
     accelerometer.publishAccelerometer();
     wheel_odometry.publishWheelOdometry();
 
-    if (use_keyboard_control) {
+    if (use_keyboard_control)
+    {
       keyboard.keyLoop();
     }
 

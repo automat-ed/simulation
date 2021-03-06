@@ -1,0 +1,96 @@
+#VRML_SIM R2021a utf8
+WorldInfo {
+  coordinateSystem "NUE"
+}
+Viewpoint {
+  orientation -0.579528488692162 -0.7834055965285862 -0.2245493311543557 0.9186296041604121
+  position -40.3881740960111 39.9642802601104 90.88740605006996
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+StraightRoadSegment {
+  translation 0 0.11 10
+  name "road(1)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+}
+StraightRoadSegment {
+  translation 0 0.11 20
+  name "road(6)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+}
+StraightRoadSegment {
+  translation 0 0.11 30
+  name "road(8)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+}
+StraightRoadSegment {
+  translation 0 0.11 40
+  name "road(9)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+}
+StraightRoadSegment {
+  translation 0 0.11 -20
+  name "road(2)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+}
+StraightRoadSegment {
+  translation 0 0.11 -30
+  name "road(5)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+}
+StraightRoadSegment {
+  translation 0 0.11 -40
+  name "road(7)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+}
+StraightRoadSegment {
+  translation 0 0.11 -50
+  name "road(11)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+}
+Solid {
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.3 0.4 0
+        roughness 1
+        metalness 0
+      }
+      geometry Plane {
+        size 30 110
+      }
+    }
+  ]
+}
+StraightRoadSegment {
+  translation 0 0.11 -10
+  name "road(3)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+}
+StraightRoadSegment {
+  translation 0 0.11 0
+  name "road(4)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+}

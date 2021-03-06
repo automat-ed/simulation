@@ -1,0 +1,204 @@
+#VRML_SIM R2021a utf8
+WorldInfo {
+  coordinateSystem "NUE"
+}
+Viewpoint {
+  orientation 0.9309067421470015 -0.28648941798319494 -0.22657548589577453 4.8746988518188035
+  position 58.49438108267489 239.70338214116325 40.38624279049664
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+StraightRoadSegment {
+  translation -20 0.11 30
+  rotation 0 1 0 1.5707996938995747
+  name "road(1)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+}
+StraightRoadSegment {
+  translation -20 0.11 -36
+  rotation 0 1 0 1.5707996938995747
+  name "road(16)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+}
+StraightRoadSegment {
+  translation 0 0.11 -36
+  rotation 0 1 0 1.5707996938995747
+  name "road(17)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+}
+StraightRoadSegment {
+  translation 10 0.11 -36
+  rotation 0 1 0 1.5707996938995747
+  name "road(19)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+}
+StraightRoadSegment {
+  translation -10 0.11 -36
+  rotation 0 1 0 1.5707996938995747
+  name "road(18)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+}
+StraightRoadSegment {
+  translation 10 0.11 30
+  rotation 0 1 0 1.5707996938995747
+  name "road(6)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+}
+StraightRoadSegment {
+  translation -10 0.11 30
+  rotation 0 1 0 1.5707996938995747
+  name "road(8)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+}
+StraightRoadSegment {
+  translation 0 0.11 30
+  rotation 0 1 0 1.5707996938995747
+  name "road(9)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+}
+StraightRoadSegment {
+  translation -23 0.11 -13
+  name "road(2)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+}
+StraightRoadSegment {
+  translation -23 0.11 -23
+  name "road(22)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+}
+StraightRoadSegment {
+  translation -23 0.11 -33
+  name "road(23)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+}
+StraightRoadSegment {
+  translation 23 0.11 17
+  name "road(5)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+}
+StraightRoadSegment {
+  translation 23.0346 0.11 7
+  name "road(7)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+}
+StraightRoadSegment {
+  translation 23 0.11 -3
+  name "road(11)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+}
+Solid {
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.3 0.4 0
+        roughness 1
+        metalness 0
+      }
+      geometry Plane {
+        size 55 90
+      }
+    }
+  ]
+}
+StraightRoadSegment {
+  translation -23 0.11 -3
+  name "road(3)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+}
+StraightRoadSegment {
+  translation -23 0.11 7
+  name "road(4)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+}
+StraightRoadSegment {
+  translation 23 0.11 -13
+  name "road(12)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+}
+StraightRoadSegment {
+  translation 23 0.11 -23
+  name "road(20)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+}
+StraightRoadSegment {
+  translation 23 0.11 -33
+  name "road(21)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+}
+StraightRoadSegment {
+  translation -23 0.11 17
+  name "road(13)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+}
+CurvedRoadSegment {
+  translation 20 0.11 27
+  width 3
+  numberOfLanes 1
+  curvatureRadius 3
+}
+CurvedRoadSegment {
+  translation 20 0.11 -33
+  rotation 0 1 0 1.5707996938995747
+  name "road(14)"
+  width 3
+  numberOfLanes 1
+  curvatureRadius 3
+}
+CurvedRoadSegment {
+  translation -20 0.11 27
+  rotation 0 1 0 -1.5707996938995747
+  name "road(10)"
+  width 3
+  numberOfLanes 1
+  curvatureRadius 3
+}
+CurvedRoadSegment {
+  translation -20 0.11 -33
+  rotation 0 1 0 -3.141592653589793
+  name "road(15)"
+  width 3
+  numberOfLanes 1
+  curvatureRadius 3
+}

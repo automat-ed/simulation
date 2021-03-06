@@ -25,7 +25,7 @@ GPS::GPS(webots::Supervisor *webots_supervisor, ros::NodeHandle *ros_handle)
   nh->param<std::string>("gps/coordinate_topic", coordinate_topic,
                          "/gps/coordinates");
   nh->param("gps/noise_mean", noise_mean, 0.0);
-  nh->param("gps/noise_std", noise_std, 0.017);
+  nh->param("gps/noise_std", noise_std, 0.1);
   nh->param("gps/bias_mean", bias_mean, 0.1);
   nh->param("gps/bias_std", bias_std, 0.001);
   nh->param("gps/noise_seed", noise_seed, 17);
@@ -69,7 +69,7 @@ void GPS::publishGPSCoordinate()
   gt.latitude = reading[0];
   gt.longitude = reading[2];
   gt.altitude = reading[1];
-  gt.position_covariance_type = sensor_msgs::NavSatFix::COVARIANCE_TYPE_UNKNOWN;
+  gt.position_covariance_type = sensor_msgs::NavSatFix::COVARIANCE_TYPE_DIAGONAL_KNOWN;
   gt.status.service = sensor_msgs::NavSatStatus::SERVICE_GPS;
   gt_coordinate_pub.publish(gt);
 

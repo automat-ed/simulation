@@ -19,6 +19,7 @@ Lidar::Lidar(webots::Supervisor *webots_supervisor,
 
   // Get ROS parameters
   nh->param<std::string>("lidar/name", lidar_name, "RobotisLds01");
+  nh->param<std::string>("lidar/name", frame_id, "lidar");
   nh->param("lidar/sampling_period", sampling_period, 32);
   nh->param<std::string>("lidar/ground_truth_topic", ground_truth_topic,
                          "/lidar/ground_truth");
@@ -60,7 +61,7 @@ void Lidar::publishLaserScan()
     // Publish ground truth
     sensor_msgs::LaserScan gt;
     gt.header.stamp = ros::Time::now();
-    gt.header.frame_id = lidar->getName();
+    gt.header.frame_id = frame_id;
 
     gt.angle_min = -lidar->getFov() / 2.0;
     gt.angle_max = lidar->getFov() / 2.0;
@@ -82,7 +83,7 @@ void Lidar::publishLaserScan()
     // Publish noisy data
     sensor_msgs::LaserScan msg;
     msg.header.stamp = ros::Time::now();
-    msg.header.frame_id = lidar->getName();
+    msg.header.frame_id = frame_id;
 
     msg.angle_min = -lidar->getFov() / 2.0;
     msg.angle_max = lidar->getFov() / 2.0;
@@ -102,8 +103,7 @@ void Lidar::publishLaserScan()
       }
       else
       {
-        double noisy_range = rangeImageVector[i] +
-                             gaussianNoise(rangeImageVector[i]);
+        double noisy_range = rangeImageVector[i] + gaussianNoise();
         // Make sure value is between `range_min` and `range_max`
         noisy_range = std::max((double)msg.range_min, std::min(noisy_range, (double)msg.range_max));
         msg.ranges.push_back(noisy_range);
@@ -131,7 +131,7 @@ void Lidar::publishTF()
   geometry_msgs::TransformStamped msg;
   msg.header.stamp = ros::Time::now();
   msg.header.frame_id = "base_link";
-  msg.child_frame_id = lidar->getName();
+  msg.child_frame_id = frame_id;
 
   // Translate from Webots to ROS coordinates
   msg.transform.translation.x = lidar_translation[0];
@@ -156,7 +156,7 @@ void Lidar::publishTF()
   static_broadcaster.sendTransform(msg);
 }
 
-double Lidar::gaussianNoise(double value)
+double Lidar::gaussianNoise()
 {
   std::normal_distribution<double> d{noise_mean, noise_std};
   return d(*gen);

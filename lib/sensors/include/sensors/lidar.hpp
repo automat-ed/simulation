@@ -25,6 +25,7 @@ namespace AutomatED
 
     // ROS parameters
     std::string lidar_name;
+    std::string frame_id;
     int sampling_period;
     std::string ground_truth_topic;
     std::string noise_topic;
@@ -42,7 +43,7 @@ namespace AutomatED
 
     // Noise
     std::mt19937 *gen;
-    double gaussianNoise(double value);
+    double gaussianNoise();
   };
 
 } // namespace AutomatED

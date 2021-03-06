@@ -4,42 +4,45 @@
 #include "webots/Supervisor.hpp"
 #include <random>
 
-namespace AutomatED {
+namespace AutomatED
+{
 
-class Lidar {
-public:
-  Lidar(webots::Supervisor *webots_supervisor, ros::NodeHandle *ros_handle);
-  ~Lidar();
+  class Lidar
+  {
+  public:
+    Lidar(webots::Supervisor *webots_supervisor, ros::NodeHandle *ros_handle);
+    ~Lidar();
 
-  void publishLaserScan();
+    void publishLaserScan();
 
-private:
-  // Handlers
-  webots::Supervisor *wb;
-  ros::NodeHandle *nh;
+  private:
+    // Handlers
+    webots::Supervisor *wb;
+    ros::NodeHandle *nh;
 
-  // Webots devices
-  webots::Lidar *lidar;
+    // Webots devices
+    webots::Lidar *lidar;
 
-  // ROS parameters
-  int sampling_period;
-  std::string ground_truth_topic;
-  std::string noise_topic;
-  double noise_error;
-  int noise_seed;
-  std::string lidar_name;
+    // ROS parameters
+    std::string lidar_name;
+    int sampling_period;
+    std::string ground_truth_topic;
+    std::string noise_topic;
+    double noise_mean;
+    double noise_std;
+    int noise_seed;
 
-  // ROS publisher
-  ros::Publisher ground_truth_pub;
-  ros::Publisher noise_pub;
+    // ROS publisher
+    ros::Publisher ground_truth_pub;
+    ros::Publisher noise_pub;
 
-  // Tf2
-  tf2_ros::StaticTransformBroadcaster static_broadcaster;
-  void publishTF();
+    // Tf2
+    tf2_ros::StaticTransformBroadcaster static_broadcaster;
+    void publishTF();
 
-  // Noise
-  std::mt19937 *gen;
-  double gaussianNoise(double value);
-};
+    // Noise
+    std::mt19937 *gen;
+    double gaussianNoise(double value);
+  };
 
 } // namespace AutomatED

@@ -15,14 +15,10 @@ Accelerometer::Accelerometer(webots::Supervisor *webots_supervisor,
   wb = webots_supervisor;
   nh = ros_handle;
 
-  // Setup accelerometer device
-  accelerometer = wb->getAccelerometer(accelerometer_name);
-  accelerometer->enable(sampling_period);
-
   // Get ROS parameters
   nh->param<std::string>("accelerometer/name", accelerometer_name,
                          "accelerometer");
-  nh->param<std::string>("accelerometer/frame_id", frame_id, accelerometer->getName());
+  nh->param<std::string>("accelerometer/frame_id", frame_id, "accelerometer");
   nh->param("accelerometer/sampling_period", sampling_period, 32);
   nh->param<std::string>("accelerometer/ground_truth_topic", ground_truth_topic,
                          "/accelerometer/ground_truth");
@@ -37,6 +33,10 @@ Accelerometer::Accelerometer(webots::Supervisor *webots_supervisor,
   // Create publishers
   ground_truth_pub = nh->advertise<sensor_msgs::Imu>(ground_truth_topic, 1);
   noise_pub = nh->advertise<sensor_msgs::Imu>(noise_topic, 1);
+
+  // Setup accelerometer device
+  accelerometer = wb->getAccelerometer(accelerometer_name);
+  accelerometer->enable(sampling_period);
 
   // Publish tf
   publishTF();

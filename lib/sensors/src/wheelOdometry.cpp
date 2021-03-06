@@ -14,7 +14,7 @@ WheelOdometry::WheelOdometry(webots::Supervisor *webots_supervisor,
   nh = ros_handle;
 
   // Get ROS parameters
-  nh->param<std::string>("wheel_odom/fram_id", frame_id, "base_link");
+  nh->param<std::string>("wheel_odom/frame_id", frame_id, "base_link");
   nh->param("wheel_odom/sampling_period", sampling_period, 32);
   nh->param<std::string>("wheel_odom/ground_truth_topic", ground_truth_topic,
                          "/wheel_odom/ground_truth");

@@ -1,2 +1,4 @@
 worlds/*.wbproj
 .vscode
+.Gritter.cache
+.robot.cache

@@ -1,6 +1,7 @@
 #include "ros/ros.h"
 #include "webots/Motor.hpp"
 #include "webots/Supervisor.hpp"
+#include <random>
 
 namespace AutomatED {
 
@@ -22,12 +23,20 @@ private:
 
   // ROS parameters
   int sampling_period;
-  std::string wheel_odometry_twist_topic;
+  std::string ground_truth_topic;
+  std::string noise_topic;
+  double noise_error;
+  int noise_seed;
   double wheel_separation;
   double wheel_radius;
 
   // ROS publisher
-  ros::Publisher wheel_odometry_pub;
+  ros::Publisher ground_truth_pub;
+  ros::Publisher noise_pub;
+
+  // Noise
+  std::mt19937 *gen;
+  double gaussianNoise(double value);
 
   // Helper functions
   void getLocalRotationalVelocity(webots::Node *solid, double *rvel_local);

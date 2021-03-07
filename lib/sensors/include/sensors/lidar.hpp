@@ -2,6 +2,7 @@
 #include "tf2_ros/static_transform_broadcaster.h"
 #include "webots/Lidar.hpp"
 #include "webots/Supervisor.hpp"
+#include <random>
 
 namespace AutomatED {
 
@@ -22,15 +23,23 @@ private:
 
   // ROS parameters
   int sampling_period;
-  std::string laser_scan_topic;
+  std::string ground_truth_topic;
+  std::string noise_topic;
+  double noise_error;
+  int noise_seed;
   std::string lidar_name;
 
   // ROS publisher
-  ros::Publisher laser_scan_pub;
+  ros::Publisher ground_truth_pub;
+  ros::Publisher noise_pub;
 
   // Tf2
   tf2_ros::StaticTransformBroadcaster static_broadcaster;
   void publishTF();
+
+  // Noise
+  std::mt19937 *gen;
+  double gaussianNoise(double value);
 };
 
 } // namespace AutomatED

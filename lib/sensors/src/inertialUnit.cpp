@@ -6,6 +6,7 @@
 #include "tf2_ros/static_transform_broadcaster.h"
 #include "webots/InertialUnit.hpp"
 #include "webots/Supervisor.hpp"
+#include <random>
 
 using namespace AutomatED;
 
@@ -17,11 +18,15 @@ InertialUnit::InertialUnit(webots::Supervisor *webots_supervisor,
   // Get ROS parameters
   nh->param<std::string>("imu/name", imu_name, "imu");
   nh->param("imu/sampling_period", sampling_period, 32);
-  nh->param<std::string>("imu/quaternion_topic", imu_quaternion_topic,
-                         "imu/quaternion");
+  nh->param<std::string>("imu/ground_truth_topic", ground_truth_topic,
+                         "/imu/ground_truth");
+  nh->param<std::string>("imu/noise_topic", noise_topic, "/imu/data");
+  nh->param("imu/noise_error", noise_error, 0.05);
+  nh->param<int>("imu/noise_seed", noise_seed, 17);
 
   // Create publishers
-  imu_quaternion_pub = nh->advertise<sensor_msgs::Imu>(imu_quaternion_topic, 1);
+  ground_truth_pub = nh->advertise<sensor_msgs::Imu>(ground_truth_topic, 1);
+  noise_pub = nh->advertise<sensor_msgs::Imu>(noise_topic, 1);
 
   // Setup IMU device
   imu = wb->getInertialUnit(imu_name);
@@ -29,41 +34,49 @@ InertialUnit::InertialUnit(webots::Supervisor *webots_supervisor,
 
   // Publish tf
   publishTF();
+
+  // Initialize generator with seed
+  gen = new std::mt19937{(long unsigned int)noise_seed};
 }
 
 InertialUnit::~InertialUnit() {
-  imu_quaternion_pub.shutdown();
+  ground_truth_pub.shutdown();
+  noise_pub.shutdown();
   imu->disable();
 }
 
 void InertialUnit::publishImuQuaternion() {
-  sensor_msgs::Imu imu_msg;
-  imu_msg.header.stamp = ros::Time::now();
-  imu_msg.header.frame_id = imu->getName();
+  // Get sensor reading
+  const double *reading = imu->getQuaternion();
 
-  tf2::Quaternion orientation(imu->getQuaternion()[0], imu->getQuaternion()[1],
-                              imu->getQuaternion()[2], imu->getQuaternion()[3]);
+  // Calculate quaternion
+  tf2::Quaternion orientation(reading[0], reading[1], reading[2], reading[3]);
   tf2::Quaternion orientationRosFix(0.5, 0.5, 0.5, 0.5);
   orientation = orientation * orientationRosFix;
 
-  imu_msg.orientation.x = orientation.getX();
-  imu_msg.orientation.y = orientation.getY();
-  imu_msg.orientation.z = orientation.getZ();
-  imu_msg.orientation.w = orientation.getW();
-  for (int i = 0; i < 9; ++i) // unknown covariance
-    imu_msg.orientation_covariance[i] = 0;
-  imu_msg.angular_velocity.x = 0.0;
-  imu_msg.angular_velocity.y = 0.0;
-  imu_msg.angular_velocity.z = 0.0;
-  imu_msg.angular_velocity_covariance[0] =
-      -1; // no angular_velocity information
-  imu_msg.linear_acceleration.x = 0.0;
-  imu_msg.linear_acceleration.y = 0.0;
-  imu_msg.linear_acceleration.z = 0.0;
-  imu_msg.linear_acceleration_covariance[0] =
-      -1.0; // no linear_acceleration information
+  // Publish ground truth
+  sensor_msgs::Imu gt;
+  gt.header.stamp = ros::Time::now();
+  gt.header.frame_id = imu->getName();
+  gt.orientation.x = orientation.getX();
+  gt.orientation.y = orientation.getY();
+  gt.orientation.z = orientation.getZ();
+  gt.orientation.w = orientation.getW();
+  gt.angular_velocity_covariance[0] = -1;      // no information
+  gt.linear_acceleration_covariance[0] = -1.0; // no information
+  ground_truth_pub.publish(gt);
 
-  imu_quaternion_pub.publish(imu_msg);
+  // Publish noisy data
+  sensor_msgs::Imu msg;
+  msg.header.stamp = ros::Time::now();
+  msg.header.frame_id = imu->getName();
+  msg.orientation.x = orientation.getX() + gaussianNoise(orientation.getX());
+  msg.orientation.y = orientation.getY() + gaussianNoise(orientation.getY());
+  msg.orientation.z = orientation.getZ() + gaussianNoise(orientation.getZ());
+  msg.orientation.w = orientation.getW() + gaussianNoise(orientation.getW());
+  msg.angular_velocity_covariance[0] = -1;      // no information
+  msg.linear_acceleration_covariance[0] = -1.0; // no information
+  noise_pub.publish(msg);
 }
 
 void InertialUnit::publishTF() {
@@ -105,4 +118,9 @@ void InertialUnit::publishTF() {
   msg.transform.rotation.w = quat.w();
 
   static_broadcaster.sendTransform(msg);
+}
+
+double InertialUnit::gaussianNoise(double value) {
+  std::normal_distribution<double> d{0, noise_error * value};
+  return d(*gen);
 }

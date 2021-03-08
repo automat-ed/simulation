@@ -11,17 +11,22 @@
 using namespace AutomatED;
 
 InertialUnit::InertialUnit(webots::Supervisor *webots_supervisor,
-                           ros::NodeHandle *ros_handle) {
+                           ros::NodeHandle *ros_handle)
+{
   wb = webots_supervisor;
   nh = ros_handle;
 
   // Get ROS parameters
   nh->param<std::string>("imu/name", imu_name, "imu");
+  nh->param<std::string>("imu/frame_id", frame_id, "imu");
   nh->param("imu/sampling_period", sampling_period, 32);
   nh->param<std::string>("imu/ground_truth_topic", ground_truth_topic,
                          "/imu/ground_truth");
   nh->param<std::string>("imu/noise_topic", noise_topic, "/imu/data");
-  nh->param("imu/noise_error", noise_error, 0.05);
+  nh->param("imu/noise_mean", noise_mean, 0.0);
+  nh->param("imu/noise_std", noise_std, 0.02);
+  nh->param("imu/bias_mean", bias_mean, 0.005);
+  nh->param("imu/bias_std", bias_std, 0.001);
   nh->param<int>("imu/noise_seed", noise_seed, 17);
 
   // Create publishers
@@ -37,15 +42,21 @@ InertialUnit::InertialUnit(webots::Supervisor *webots_supervisor,
 
   // Initialize generator with seed
   gen = new std::mt19937{(long unsigned int)noise_seed};
+
+  // Sample bias
+  std::normal_distribution<double> d{bias_mean, bias_std};
+  bias = d(*gen);
 }
 
-InertialUnit::~InertialUnit() {
+InertialUnit::~InertialUnit()
+{
   ground_truth_pub.shutdown();
   noise_pub.shutdown();
   imu->disable();
 }
 
-void InertialUnit::publishImuQuaternion() {
+void InertialUnit::publishImuQuaternion()
+{
   // Get sensor reading
   const double *reading = imu->getQuaternion();
 
@@ -57,7 +68,7 @@ void InertialUnit::publishImuQuaternion() {
   // Publish ground truth
   sensor_msgs::Imu gt;
   gt.header.stamp = ros::Time::now();
-  gt.header.frame_id = imu->getName();
+  gt.header.frame_id = frame_id;
   gt.orientation.x = orientation.getX();
   gt.orientation.y = orientation.getY();
   gt.orientation.z = orientation.getZ();
@@ -69,17 +80,23 @@ void InertialUnit::publishImuQuaternion() {
   // Publish noisy data
   sensor_msgs::Imu msg;
   msg.header.stamp = ros::Time::now();
-  msg.header.frame_id = imu->getName();
-  msg.orientation.x = orientation.getX() + gaussianNoise(orientation.getX());
-  msg.orientation.y = orientation.getY() + gaussianNoise(orientation.getY());
-  msg.orientation.z = orientation.getZ() + gaussianNoise(orientation.getZ());
-  msg.orientation.w = orientation.getW() + gaussianNoise(orientation.getW());
+  msg.header.frame_id = frame_id;
   msg.angular_velocity_covariance[0] = -1;      // no information
   msg.linear_acceleration_covariance[0] = -1.0; // no information
+  msg.orientation.x = orientation.getX() + bias + gaussianNoise();
+  msg.orientation.y = orientation.getY() + bias + gaussianNoise();
+  msg.orientation.z = orientation.getZ() + bias + gaussianNoise();
+  msg.orientation.w = orientation.getW() + bias + gaussianNoise();
+  // Populate variance along the diagonal
+  msg.orientation_covariance[0] = std::pow(bias + noise_mean + noise_std, 2);
+  msg.orientation_covariance[4] = std::pow(bias + noise_mean + noise_std, 2);
+  msg.orientation_covariance[8] = std::pow(bias + noise_mean + noise_std, 2);
+
   noise_pub.publish(msg);
 }
 
-void InertialUnit::publishTF() {
+void InertialUnit::publishTF()
+{
   // Get imu node
   webots::Node *imu_node = wb->getFromDevice(imu);
 
@@ -95,7 +112,7 @@ void InertialUnit::publishTF() {
   geometry_msgs::TransformStamped msg;
   msg.header.stamp = ros::Time::now();
   msg.header.frame_id = "base_link";
-  msg.child_frame_id = imu->getName();
+  msg.child_frame_id = frame_id;
 
   // Translate from Webots to ROS coordinates
   msg.transform.translation.x = imu_translation[0];
@@ -120,7 +137,8 @@ void InertialUnit::publishTF() {
   static_broadcaster.sendTransform(msg);
 }
 
-double InertialUnit::gaussianNoise(double value) {
-  std::normal_distribution<double> d{0, noise_error * value};
+double InertialUnit::gaussianNoise()
+{
+  std::normal_distribution<double> d{noise_mean, noise_std};
   return d(*gen);
 }

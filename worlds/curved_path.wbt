@@ -3,8 +3,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation -0.5973345883260519 0.6835510035133286 0.4194632465249699 1.5977455723200866
-  position 17.73097559892911 13.852046806690787 50.088049929028024
+  orientation -0.9975388412005999 -0.062016891528195436 -0.032713383520270735 0.9728315267131853
+  position 9.963696843069629 2.6247056393485653 50.779345763043025
 }
 TexturedBackground {
 }
@@ -15,7 +15,9 @@ StraightRoadSegment {
   name "road(9)"
   width 3
   numberOfLanes 1
-  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
 }
 StraightRoadSegment {
   translation 8.05604 0.11 -39.4918
@@ -24,6 +26,9 @@ StraightRoadSegment {
   width 3
   numberOfLanes 1
   locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
 }
 StraightRoadSegment {
   translation 10.6399 0.11 -29.8715
@@ -32,6 +37,9 @@ StraightRoadSegment {
   width 3
   numberOfLanes 1
   locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
 }
 Solid {
   children [
@@ -54,6 +62,9 @@ StraightRoadSegment {
   width 3
   numberOfLanes 1
   locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
 }
 StraightRoadSegment {
   translation 12.8221 0.11 -14.4908
@@ -62,6 +73,9 @@ StraightRoadSegment {
   width 3
   numberOfLanes 1
   locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
 }
 CurvedRoadSegment {
   translation 0 0.11 20
@@ -69,6 +83,9 @@ CurvedRoadSegment {
   width 3
   numberOfLanes 1
   totalAngle 1.572
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
 }
 CurvedRoadSegment {
   translation 0 0.11 40
@@ -77,6 +94,9 @@ CurvedRoadSegment {
   width 3
   numberOfLanes 1
   totalAngle 1.572
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
 }
 CurvedRoadSegment {
   translation 0 0.11 20
@@ -85,6 +105,9 @@ CurvedRoadSegment {
   width 3
   numberOfLanes 1
   totalAngle 0.8
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
 }
 CurvedRoadSegment {
   translation 0 0.11 20
@@ -93,6 +116,9 @@ CurvedRoadSegment {
   width 3
   numberOfLanes 1
   totalAngle 0.3
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
 }
 CurvedRoadSegment {
   translation 0 0.11 20
@@ -101,6 +127,9 @@ CurvedRoadSegment {
   width 3
   numberOfLanes 1
   totalAngle 0.3
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
 }
 CurvedRoadSegment {
   translation -3.8 0.11 0.34
@@ -109,6 +138,9 @@ CurvedRoadSegment {
   width 3
   numberOfLanes 1
   totalAngle 0.5
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
 }
 CurvedRoadSegment {
   translation -3.9 0.11 0.44
@@ -117,6 +149,9 @@ CurvedRoadSegment {
   width 3
   numberOfLanes 1
   totalAngle 0.5
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
 }
 CurvedRoadSegment {
   translation 3.5 0.11 -18.1
@@ -125,6 +160,9 @@ CurvedRoadSegment {
   width 3
   numberOfLanes 1
   totalAngle 0.4
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
 }
 CurvedRoadSegment {
   translation 3.5 0.11 -17.8
@@ -133,6 +171,9 @@ CurvedRoadSegment {
   width 3
   numberOfLanes 1
   totalAngle 0.2
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
 }
 StreetSmart {
   translation 9.9984 0.24 49.1719

@@ -4,7 +4,7 @@ WorldInfo {
 }
 Viewpoint {
   orientation 0.9309067421470015 -0.28648941798319494 -0.22657548589577453 4.8746988518188035
-  position 58.49438108267489 239.70338214116325 40.38624279049664
+  position 22.53802424000455 66.71832963996275 30.21249138850842
 }
 TexturedBackground {
 }
@@ -129,6 +129,9 @@ Solid {
       }
     }
   ]
+}
+StreetSmart {
+  translation -1.32867 0.23 30.0897
 }
 StraightRoadSegment {
   translation -23 0.11 -3

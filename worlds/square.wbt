@@ -17,6 +17,9 @@ StraightRoadSegment {
   width 3
   numberOfLanes 1
   locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
 }
 StraightRoadSegment {
   translation -20 0.11 -16
@@ -25,6 +28,9 @@ StraightRoadSegment {
   width 3
   numberOfLanes 1
   locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
 }
 StraightRoadSegment {
   translation 0 0.11 -16
@@ -33,6 +39,9 @@ StraightRoadSegment {
   width 3
   numberOfLanes 1
   locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
 }
 StraightRoadSegment {
   translation 10 0.11 -16
@@ -41,6 +50,9 @@ StraightRoadSegment {
   width 3
   numberOfLanes 1
   locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
 }
 StraightRoadSegment {
   translation -10 0.11 -15.9813
@@ -49,6 +61,9 @@ StraightRoadSegment {
   width 3
   numberOfLanes 1
   locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
 }
 StraightRoadSegment {
   translation 10 0.11 30
@@ -57,6 +72,9 @@ StraightRoadSegment {
   width 3
   numberOfLanes 1
   locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
 }
 StraightRoadSegment {
   translation -10 0.11 30
@@ -65,6 +83,9 @@ StraightRoadSegment {
   width 3
   numberOfLanes 1
   locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
 }
 StraightRoadSegment {
   translation 0 0.11 30
@@ -73,6 +94,9 @@ StraightRoadSegment {
   width 3
   numberOfLanes 1
   locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
 }
 StraightRoadSegment {
   translation -23 0.11 -13
@@ -80,6 +104,9 @@ StraightRoadSegment {
   width 3
   numberOfLanes 1
   locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
 }
 StraightRoadSegment {
   translation 23 0.11 17
@@ -87,6 +114,9 @@ StraightRoadSegment {
   width 3
   numberOfLanes 1
   locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
 }
 StraightRoadSegment {
   translation 23.0346 0.11 7
@@ -94,6 +124,9 @@ StraightRoadSegment {
   width 3
   numberOfLanes 1
   locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
 }
 StraightRoadSegment {
   translation 23 0.11 -3
@@ -101,6 +134,9 @@ StraightRoadSegment {
   width 3
   numberOfLanes 1
   locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
 }
 Solid {
   children [
@@ -122,6 +158,9 @@ StraightRoadSegment {
   width 3
   numberOfLanes 1
   locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
 }
 StraightRoadSegment {
   translation -23 0.11 7
@@ -129,6 +168,9 @@ StraightRoadSegment {
   width 3
   numberOfLanes 1
   locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
 }
 StraightRoadSegment {
   translation 23 0.11 -13
@@ -136,6 +178,9 @@ StraightRoadSegment {
   width 3
   numberOfLanes 1
   locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
 }
 StraightRoadSegment {
   translation -23 0.11 17
@@ -143,12 +188,18 @@ StraightRoadSegment {
   width 3
   numberOfLanes 1
   locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
 }
 CurvedRoadSegment {
   translation 20 0.11 27
   width 3
   numberOfLanes 1
   curvatureRadius 3
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
 }
 CurvedRoadSegment {
   translation 20 0.11 -13
@@ -157,6 +208,9 @@ CurvedRoadSegment {
   width 3
   numberOfLanes 1
   curvatureRadius 3
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
 }
 CurvedRoadSegment {
   translation -20 0.11 27
@@ -165,6 +219,9 @@ CurvedRoadSegment {
   width 3
   numberOfLanes 1
   curvatureRadius 3
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
 }
 CurvedRoadSegment {
   translation -20 0.11 -13
@@ -173,6 +230,9 @@ CurvedRoadSegment {
   width 3
   numberOfLanes 1
   curvatureRadius 3
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
 }
 StreetSmart {
   translation 0.884936 0.23 29.9651

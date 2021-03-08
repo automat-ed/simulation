@@ -1,7 +1,7 @@
 PROTO StreetSmart [
   field SFVec3f    translation  0 0 0
   field SFRotation rotation     0 0 0 0
-  field SFFloat    mass     10
+  field SFFloat    mass         10
 ]
 {
   Robot {
@@ -9,16 +9,16 @@ PROTO StreetSmart [
   rotation IS rotation
   children [
     Gyro {
-	  name "gyro"
-	}
+      name "gyro"
+    }
     Accelerometer {
-	  name "accelerometer"
+      name "accelerometer"
     }
     InertialUnit {
       name "imu"
     }
     GPS {
-	  name "gps"
+      name "gps"
     }
     RobotisLds01 {
       translation 0 0.16 0
@@ -41,11 +41,10 @@ PROTO StreetSmart [
     }
     DEF FRONT_AXEL Transform {
       translation -0.23 0 0
-      rotation 1 0 0 1.5707996938995747
+      rotation 1 0 0 1.5708
       children [
         Shape {
-          appearance PBRAppearance {
-          }
+          appearance PBRAppearance {}
           geometry Cylinder {
             height 0.6
             radius 0.01
@@ -55,11 +54,10 @@ PROTO StreetSmart [
     }
     DEF REAR_AXEL Transform {
       translation 0.23 0 0
-      rotation 1 0 0 1.5707996938995747
+      rotation 1 0 0 1.5708
       children [
         Shape {
-          appearance PBRAppearance {
-          }
+          appearance PBRAppearance {}
           geometry Cylinder {
             height 0.6
             radius 0.01
@@ -183,7 +181,7 @@ PROTO StreetSmart [
     }
     DEF REAR_RIGHT_WHEEL HingeJoint {
       jointParameters HingeJointParameters {
-        position -0.2688217763741941
+        position 0
         axis 0 0 1
         anchor 0.23 0 -0.3
       }
@@ -236,7 +234,7 @@ PROTO StreetSmart [
     }
     DEF REAR_LEFT_WHEEL HingeJoint {
       jointParameters HingeJointParameters {
-        position -0.24601636921317277
+        position 0
         axis 0 0 1
         anchor 0.23 0 0.3
       }
@@ -247,7 +245,7 @@ PROTO StreetSmart [
       ]
       endPoint DEF REAR_LEFT_SOLID Solid {
         translation 0.23 0 0.3
-        rotation 0 0 -0.9999999999999999 0
+        rotation 0 0 -1 0
         children [
           USE WHEEL_ROT
         ]
@@ -259,7 +257,7 @@ PROTO StreetSmart [
     }
     DEF FRONT_RIGHT_WHEEL HingeJoint {
       jointParameters HingeJointParameters {
-        position 0.00020088212448389419
+        position 0
         axis 0 0 1
         anchor -0.23 0 -0.3
       }
@@ -281,7 +279,7 @@ PROTO StreetSmart [
     }
     DEF FRONT_LEFT_WHEEL HingeJoint {
       jointParameters HingeJointParameters {
-        position 0.38755663546877833
+        position 0
         axis 0 0 1
         anchor -0.23 0 0.3
       }

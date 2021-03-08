@@ -2,13 +2,14 @@
 #include "tf2_ros/static_transform_broadcaster.h"
 #include "webots/Accelerometer.hpp"
 #include "webots/Supervisor.hpp"
+#include <random>
 
 namespace AutomatED {
 
 class Accelerometer {
 public:
   Accelerometer(webots::Supervisor *webots_supervisor,
-               ros::NodeHandle *ros_handle);
+                ros::NodeHandle *ros_handle);
   ~Accelerometer();
 
   void publishAccelerometer();
@@ -24,14 +25,22 @@ private:
   // ROS parameters
   std::string accelerometer_name;
   int sampling_period;
-  std::string accelerometer_pub_topic;
+  std::string ground_truth_topic;
+  std::string noise_topic;
+  double noise_error;
+  int noise_seed;
 
   // ROS publisher
-  ros::Publisher accelerometer_pub;
+  ros::Publisher ground_truth_pub;
+  ros::Publisher noise_pub;
 
   // Tf2
   tf2_ros::StaticTransformBroadcaster static_broadcaster;
   void publishTF();
+
+  // Noise
+  std::mt19937 *gen;
+  double gaussianNoise(double value);
 };
 
 } // namespace AutomatED

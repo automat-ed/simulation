@@ -37,4 +37,7 @@ if options.noGui == 'true':
     command.append('--no-sandbox')
     command.append('--minimize')
 
-subprocess.call(command)
+try:
+    subprocess.call(command)
+except KeyboardInterrupt:
+    pass

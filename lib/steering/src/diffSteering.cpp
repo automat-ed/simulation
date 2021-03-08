@@ -12,6 +12,8 @@ DiffSteering::DiffSteering(std::vector<webots::Motor *> motors,
   wheels = motors;
   nh = ros_handle;
   wheel_count = wheels.size();
+  linear_vel = 0;
+  angular_vel = 0;
 
   // Get ROS parameters
   nh->param<std::string>("wheel_odom/frame_id", frame_id, "base_link");

@@ -1,7 +1,7 @@
-PROTO Gritter [
-  field SFVec3f    translation  -1.797616874196362e-08 0.11620885574581999 -7.636792844954531e-08
-  field SFRotation rotation     -0.9733948845908359 6.521557633268995e-09 0.22913401897665323 6.537666074422139e-07
-  field SFFloat    mass     1
+PROTO StreetSmart [
+  field SFVec3f    translation  0 0 0
+  field SFRotation rotation     0 0 0 0
+  field SFFloat    mass     10
 ]
 {
   Robot {
@@ -9,13 +9,16 @@ PROTO Gritter [
   rotation IS rotation
   children [
     Gyro {
-    }
+	  name "gyro"
+	}
     Accelerometer {
+	  name "accelerometer"
     }
     InertialUnit {
       name "imu"
     }
     GPS {
+	  name "gps"
     }
     RobotisLds01 {
       translation 0 0.16 0
@@ -191,7 +194,7 @@ PROTO Gritter [
       ]
       endPoint DEF REAR_RIGHT_SOLID Solid {
         translation 0.23 0 -0.3
-        rotation 0 0 -1 0.26882177637419385
+        rotation 0 0 -1 0
         children [
           DEF WHEEL_ROT Transform {
             rotation 1 0 0 1.5708
@@ -210,7 +213,7 @@ PROTO Gritter [
             ]
           }
         ]
-        name "rear right wheel"
+        name ""
         boundingObject DEF WHEEL_ROT Transform {
           rotation 1 0 0 1.5708
           children [
@@ -244,26 +247,11 @@ PROTO Gritter [
       ]
       endPoint DEF REAR_LEFT_SOLID Solid {
         translation 0.23 0 0.3
-        rotation 0 0 -0.9999999999999999 0.24601636921317274
+        rotation 0 0 -0.9999999999999999 0
         children [
-          DEF WHEEL_ROT Transform {
-            rotation 1 0 0 1.5708
-            children [
-              Shape {
-                appearance PBRAppearance {
-                  baseColor 0.8 0.8 0.8
-                  roughness 1
-                  metalness 0
-                }
-                geometry DEF WHEEL_CYL Cylinder {
-                  height 0.06
-                  radius 0.12
-                }
-              }
-            ]
-          }
+          USE WHEEL_ROT
         ]
-        name "rear left wheel"
+        name ""
         boundingObject USE WHEEL_ROT
         physics Physics {
         }
@@ -282,7 +270,7 @@ PROTO Gritter [
       ]
       endPoint DEF FRONT_RIGHT_SOLID Solid {
         translation -0.23 0 -0.3
-        rotation 0 0 1 0.00020088212471155835
+        rotation 0 0 1 0
         children [
           USE WHEEL_ROT
         ]
@@ -304,18 +292,18 @@ PROTO Gritter [
       ]
       endPoint DEF FRONT_LEFT_SOLID Solid {
         translation -0.23 0 0.3
-        rotation 0 0 1 0.3875566354687784
+        rotation 0 0 1 0
         children [
           USE WHEEL_ROT
         ]
-        name "solid(1)"
+        name ""
         boundingObject USE WHEEL_ROT
         physics Physics {
         }
       }
     }
   ]
-  name "ackerman"
+  name "StreetSmart"
   boundingObject USE BODY
   physics Physics {
     density -1
@@ -323,7 +311,7 @@ PROTO Gritter [
   }
   controller "<extern>"
   supervisor TRUE
-  linearVelocity -2.0820921667719307e-11 -9.355342157889781e-16 -9.68198923785366e-16
-  angularVelocity -1.623675065514744e-18 1.3705589456515402e-12 -5.822371572987426e-11
+  linearVelocity 0 0 0
+  angularVelocity 0 0 0
  }
 }

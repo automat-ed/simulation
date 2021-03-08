@@ -4,6 +4,7 @@
 #include "sensors/gyro.hpp"
 #include "sensors/inertialUnit.hpp"
 #include "sensors/lidar.hpp"
+#include "sensors/wheelOdometry.hpp"
 #include "steering/diffSteering.hpp"
 #include "utils/KeyboardController.hpp"
 #include "webots/Motor.hpp"
@@ -11,8 +12,6 @@
 
 int main(int argc, char **argv)
 {
-  ROS_INFO("Initializing full_controller...");
-
   // Set up ROS node
   ros::init(argc, argv, "full_controller");
   ros::NodeHandle nh("~");
@@ -40,6 +39,8 @@ int main(int argc, char **argv)
   AutomatED::Gyro gyro = AutomatED::Gyro(supervisor, &nh);
   AutomatED::Accelerometer accelerometer =
       AutomatED::Accelerometer(supervisor, &nh);
+  AutomatED::WheelOdometry wheel_odometry =
+      AutomatED::WheelOdometry(supervisor, &nh);
 
   // Instantiate steering
   AutomatED::DiffSteering diffSteering = AutomatED::DiffSteering(motors, &nh);
@@ -55,7 +56,7 @@ int main(int argc, char **argv)
     imu.publishImuQuaternion();
     gyro.publishGyro();
     accelerometer.publishAccelerometer();
-    diffSteering.publish();
+    wheel_odometry.publishWheelOdometry();
 
     if (use_keyboard_control)
     {

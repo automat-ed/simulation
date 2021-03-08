@@ -1,28 +1,28 @@
 PROTO StreetSmart [
-  field SFVec3f    translation  0 0 0
-  field SFRotation rotation     0 0 0 0
-  field SFFloat    mass         10
+  field SFVec3f    translation   0 0 0
+  field SFRotation rotation      0 0 0 0
+  field SFFloat    mass          10
+  field SFString   controller    "<extern>"
+  field SFBool     supervisor    TRUE
+  field MFNode     sensors       [
+    Gyro {name "gyro"}
+    Accelerometer {name "accelerometer"}
+    InertialUnit {name "imu"}
+    GPS {name "gps"}
+    RobotisLds01 {
+      translation 0 0.16 0
+      name "RobotisLds01"
+    }
+  ]
 ]
 {
   Robot {
   translation IS translation
   rotation IS rotation
   children [
-    Gyro {
-      name "gyro"
-    }
-    Accelerometer {
-      name "accelerometer"
-    }
-    InertialUnit {
-      name "imu"
-    }
-    GPS {
-      name "gps"
-    }
-    RobotisLds01 {
-      translation 0 0.16 0
-      name "RobotisLds01"
+    Transform {
+      translation 0 0 0
+      children IS sensors
     }
     DEF BODY Transform {
       translation 0 0.04 0
@@ -308,8 +308,8 @@ PROTO StreetSmart [
     density -1
     mass IS mass
   }
-  controller "<extern>"
-  supervisor TRUE
+  controller IS controller
+  supervisor IS supervisor
   linearVelocity 0 0 0
   angularVelocity 0 0 0
  }

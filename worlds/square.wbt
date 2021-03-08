@@ -1,0 +1,239 @@
+#VRML_SIM R2021a utf8
+WorldInfo {
+  coordinateSystem "NUE"
+}
+Viewpoint {
+  orientation 0.8241432530809494 -0.5656974858396937 -0.027825400550569736 6.163959687501386
+  position 1.005348021572965 0.4979530764216802 32.61544946995368
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+StraightRoadSegment {
+  translation -20 0.11 30
+  rotation 0 1 0 1.5707996938995747
+  name "road(1)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+StraightRoadSegment {
+  translation -20 0.11 -16
+  rotation 0 1 0 1.5707996938995747
+  name "road(16)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+StraightRoadSegment {
+  translation 0 0.11 -16
+  rotation 0 1 0 1.5707996938995747
+  name "road(17)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+StraightRoadSegment {
+  translation 10 0.11 -16
+  rotation 0 1 0 1.5707996938995747
+  name "road(19)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+StraightRoadSegment {
+  translation -10 0.11 -15.9813
+  rotation 0 1 0 1.5707996938995747
+  name "road(18)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+StraightRoadSegment {
+  translation 10 0.11 30
+  rotation 0 1 0 1.5707996938995747
+  name "road(6)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+StraightRoadSegment {
+  translation -10 0.11 30
+  rotation 0 1 0 1.5707996938995747
+  name "road(8)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+StraightRoadSegment {
+  translation 0 0.11 30
+  rotation 0 1 0 1.5707996938995747
+  name "road(9)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+StraightRoadSegment {
+  translation -23 0.11 -13
+  name "road(2)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+StraightRoadSegment {
+  translation 23 0.11 17
+  name "road(5)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+StraightRoadSegment {
+  translation 23.0346 0.11 7
+  name "road(7)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+StraightRoadSegment {
+  translation 23 0.11 -3
+  name "road(11)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+Solid {
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.3 0.4 0
+        roughness 1
+        metalness 0
+      }
+      geometry Plane {
+        size 55 70
+      }
+    }
+  ]
+}
+StraightRoadSegment {
+  translation -23 0.11 -3
+  name "road(3)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+StraightRoadSegment {
+  translation -23 0.11 7
+  name "road(4)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+StraightRoadSegment {
+  translation 23 0.11 -13
+  name "road(12)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+StraightRoadSegment {
+  translation -23 0.11 17
+  name "road(13)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+CurvedRoadSegment {
+  translation 20 0.11 27
+  width 3
+  numberOfLanes 1
+  curvatureRadius 3
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+CurvedRoadSegment {
+  translation 20 0.11 -13
+  rotation 0 1 0 1.5707996938995747
+  name "road(14)"
+  width 3
+  numberOfLanes 1
+  curvatureRadius 3
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+CurvedRoadSegment {
+  translation -20 0.11 27
+  rotation 0 1 0 -1.5707996938995747
+  name "road(10)"
+  width 3
+  numberOfLanes 1
+  curvatureRadius 3
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+CurvedRoadSegment {
+  translation -20 0.11 -13
+  rotation 0 1 0 -3.141592653589793
+  name "road(15)"
+  width 3
+  numberOfLanes 1
+  curvatureRadius 3
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+StreetSmart {
+  translation 0.884936 0.23 29.9651
+}

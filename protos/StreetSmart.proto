@@ -211,7 +211,7 @@ PROTO StreetSmart [
             ]
           }
         ]
-        name ""
+        name "rear right solid"
         boundingObject DEF WHEEL_ROT Transform {
           rotation 1 0 0 1.5708
           children [
@@ -249,7 +249,7 @@ PROTO StreetSmart [
         children [
           USE WHEEL_ROT
         ]
-        name ""
+        name "rear left solid"
         boundingObject USE WHEEL_ROT
         physics Physics {
         }
@@ -272,6 +272,7 @@ PROTO StreetSmart [
         children [
           USE WHEEL_ROT
         ]
+        name "front right solid"
         boundingObject USE WHEEL_ROT
         physics Physics {
         }
@@ -294,7 +295,7 @@ PROTO StreetSmart [
         children [
           USE WHEEL_ROT
         ]
-        name ""
+        name "front left solid"
         boundingObject USE WHEEL_ROT
         physics Physics {
         }

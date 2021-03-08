@@ -8,17 +8,22 @@
 
 using namespace AutomatED;
 
-Gyro::Gyro(webots::Supervisor *webots_supervisor, ros::NodeHandle *ros_handle) {
+Gyro::Gyro(webots::Supervisor *webots_supervisor, ros::NodeHandle *ros_handle)
+{
   wb = webots_supervisor;
   nh = ros_handle;
 
   // Get ROS parameters
   nh->param<std::string>("gyro/name", gyro_name, "gyro");
+  nh->param<std::string>("gyro/frame_id", frame_id, "gyro");
   nh->param("gyro/sampling_period", sampling_period, 32);
   nh->param<std::string>("gyro/ground_truth_topic", ground_truth_topic,
                          "/gyro/ground_truth");
   nh->param<std::string>("gyro/noise_topic", noise_topic, "/gyro/data");
-  nh->param("gyro/noise_error", noise_error, 0.05);
+  nh->param("gyro/noise_mean", noise_mean, 0.0);
+  nh->param("gyro/noise_std", noise_std, 0.0002);
+  nh->param("gyro/bias_mean", bias_mean, 0.0000075);
+  nh->param("gyro/bias_std", bias_std, 0.0000008);
   nh->param<int>("gyro/noise_seed", noise_seed, 17);
 
   // Create publishers
@@ -34,22 +39,28 @@ Gyro::Gyro(webots::Supervisor *webots_supervisor, ros::NodeHandle *ros_handle) {
 
   // Initialize generator with seed
   gen = new std::mt19937{(long unsigned int)noise_seed};
+
+  // Sample bias
+  std::normal_distribution<double> d{bias_mean, bias_std};
+  bias = d(*gen);
 }
 
-Gyro::~Gyro() {
+Gyro::~Gyro()
+{
   noise_pub.shutdown();
   ground_truth_pub.shutdown();
   gyro->disable();
 }
 
-void Gyro::publishGyro() {
+void Gyro::publishGyro()
+{
   // Get data from Gyro
   const double *reading = gyro->getValues();
 
   // Publish ground truth
   sensor_msgs::Imu gt;
   gt.header.stamp = ros::Time::now();
-  gt.header.frame_id = gyro->getName();
+  gt.header.frame_id = frame_id;
 
   // Unset values are set to 0 by default
   gt.orientation_covariance[0] = -1.0; // means no orientation information
@@ -63,19 +74,24 @@ void Gyro::publishGyro() {
   // Publish noisy data
   sensor_msgs::Imu msg;
   msg.header.stamp = ros::Time::now();
-  msg.header.frame_id = gyro->getName();
+  msg.header.frame_id = frame_id;
 
   // Unset values are set to 0 by default
-  msg.orientation_covariance[0] = -1.0; // means no orientation information
-  msg.angular_velocity.x = reading[0] + gaussianNoise(reading[0]);
-  msg.angular_velocity.y = reading[1] + gaussianNoise(reading[1]);
-  msg.angular_velocity.z = reading[2] + gaussianNoise(reading[2]);
-  msg.linear_acceleration_covariance[0] = -1.0; // means no information
+  msg.orientation_covariance[0] = -1.0;         // means no orientation information
+  msg.linear_acceleration_covariance[0] = -1.0; // means no lin acc information
+  msg.angular_velocity.x = reading[0] + bias + gaussianNoise();
+  msg.angular_velocity.y = reading[1] + bias + gaussianNoise();
+  msg.angular_velocity.z = reading[2] + bias + gaussianNoise();
+  // Populate variance along the diagonal
+  msg.angular_velocity_covariance[0] = std::pow(bias + noise_mean + noise_std, 2);
+  msg.angular_velocity_covariance[4] = std::pow(bias + noise_mean + noise_std, 2);
+  msg.angular_velocity_covariance[8] = std::pow(bias + noise_mean + noise_std, 2);
 
   noise_pub.publish(msg);
 }
 
-void Gyro::publishTF() {
+void Gyro::publishTF()
+{
   // Get gyro node
   webots::Node *gyro_node = wb->getFromDevice(gyro);
 
@@ -91,7 +107,7 @@ void Gyro::publishTF() {
   geometry_msgs::TransformStamped msg;
   msg.header.stamp = ros::Time::now();
   msg.header.frame_id = "base_link";
-  msg.child_frame_id = gyro->getName();
+  msg.child_frame_id = frame_id;
 
   // Translate from Webots to ROS coordinates
   msg.transform.translation.x = gyro_translation[0];
@@ -116,7 +132,8 @@ void Gyro::publishTF() {
   static_broadcaster.sendTransform(msg);
 }
 
-double Gyro::gaussianNoise(double value) {
-  std::normal_distribution<double> d{0, noise_error * value};
+double Gyro::gaussianNoise()
+{
+  std::normal_distribution<double> d{noise_mean, noise_std};
   return d(*gen);
 }

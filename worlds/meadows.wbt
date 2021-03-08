@@ -38,6 +38,7 @@ Crossroad {
   translation -153.702014 0.01 -169.620825
   name "crossroad(1)"
   id "1088880979"
+  boundingObject TRUE
   shape [
     -0.78542 0 -4.294836
     -2.781589 0 3.365303
@@ -57,6 +58,7 @@ Crossroad {
   translation -198.509193 0.01 29.266246
   name "crossroad(2)"
   id "14348246"
+  boundingObject TRUE
   shape [
     -2.471067 0 -4.705723
     -4.352201 0 3.050959
@@ -75,6 +77,7 @@ Crossroad {
   translation -138.562669 0.01 -202.246897
   name "crossroad(3)"
   id "1664928041"
+  boundingObject TRUE
   shape [
     -2.401792 0 -4.741455
     -7.053836 0 -4.387195
@@ -97,6 +100,7 @@ Crossroad {
   translation 102.227486 0.01 40.792636
   name "crossroad(4)"
   id "1703278758"
+  boundingObject TRUE
   shape [
     1.724732 0 -7.006269
     -1.775245 0 -6.99364
@@ -121,6 +125,7 @@ Crossroad {
   translation 64.498499 0.01 247.415725
   name "crossroad(5)"
   id "2002349789"
+  boundingObject TRUE
   shape [
     3.414675 0 -2.887905
     -0.472227 0 -1.943451
@@ -142,6 +147,7 @@ Crossroad {
   translation 46.876466 0.01 248.791912
   name "crossroad(6)"
   id "21285986"
+  boundingObject TRUE
   shape [
     -1.213255 0 -4.194104
     -4.258894 0 -0.961416
@@ -164,6 +170,7 @@ Crossroad {
   translation 57.682358 0.01 249.171083
   name "crossroad(7)"
   id "21286052"
+  boundingObject TRUE
   shape [
     -1.491296 0 -4.216164
     -2.985755 0 -1.669906
@@ -186,6 +193,7 @@ Crossroad {
   translation 94.546254 0.01 240.114606
   name "crossroad(8)"
   id "21286078"
+  boundingObject TRUE
   shape [
     3.316045 0 -3.000641
     -4.359129 0 -0.998997
@@ -205,6 +213,7 @@ Crossroad {
   translation 105.973982 0.01 236.928994
   name "crossroad(9)"
   id "21286079"
+  boundingObject TRUE
   shape []
   connectedRoadIDs [
     "22906432"
@@ -215,6 +224,7 @@ Crossroad {
   translation 100.473626 0.01 140.056397
   name "crossroad(10)"
   id "21286094"
+  boundingObject TRUE
   shape [
     -0.47652 0 -4.446676
     -4.388915 0 -0.858733
@@ -235,6 +245,7 @@ Crossroad {
   translation 71.792861 0.01 148.010155
   name "crossroad(11)"
   id "21286096"
+  boundingObject TRUE
   shape []
   connectedRoadIDs [
     "42350816_1"
@@ -245,6 +256,7 @@ Crossroad {
   translation -107.995308 0.01 -148.81039
   name "crossroad(12)"
   id "21527099"
+  boundingObject TRUE
   shape [
     2.319157 0 -3.409033
     -0.220189 0 -2.003501
@@ -264,6 +276,7 @@ Crossroad {
   translation -17.553634 0.01 261.209078
   name "crossroad(13)"
   id "21582790"
+  boundingObject TRUE
   shape [
     0.485771 0 -4.338955
     -7.214281 0 -0.129009
@@ -286,6 +299,7 @@ Crossroad {
   translation 45.347342 0.01 262.679162
   name "crossroad(14)"
   id "2265831086"
+  boundingObject TRUE
   shape [
     -0.973348 0 -7.149482
     -1.864353 0 0.765954
@@ -305,6 +319,7 @@ Crossroad {
   translation 50.2291 0.01 223.310572
   name "crossroad(15)"
   id "2265831088"
+  boundingObject TRUE
   shape [
     -1.587454 0 -1.24197
     -1.731699 0 -0.252428
@@ -326,6 +341,7 @@ Crossroad {
   translation 101.683777 0.01 -115.597683
   name "crossroad(16)"
   id "2265831090"
+  boundingObject TRUE
   shape [
     1.232708 0 -4.188428
     -2.239467 0 -3.747971
@@ -345,6 +361,7 @@ Crossroad {
   translation 136.720627 0.01 185.614323
   name "crossroad(17)"
   id "2330939505"
+  boundingObject TRUE
   shape [
     1.421007 0 -1.429419
     -1.952934 0 -0.498547
@@ -363,6 +380,7 @@ Crossroad {
   translation 145.197275 0.01 183.070399
   name "crossroad(18)"
   id "2330939508"
+  boundingObject TRUE
   shape [
     1.4212 0 -1.429228
     -1.952867 0 -0.49881
@@ -381,6 +399,7 @@ Crossroad {
   translation 54.743905 0.01 249.250537
   name "crossroad(19)"
   id "2352405259"
+  boundingObject TRUE
   shape [
     1.038199 0 -4.24083
     -2.409963 0 -3.640684
@@ -403,6 +422,7 @@ Crossroad {
   translation 86.013921 0.01 39.929522
   name "crossroad(20)"
   id "2352406228"
+  boundingObject TRUE
   shape [
     0.245588 0 -4.062288
     -1.242714 0 -3.875327
@@ -423,6 +443,7 @@ Crossroad {
   translation 83.944904 0.01 23.459118
   name "crossroad(21)"
   id "2352406229"
+  boundingObject TRUE
   shape [
     0.409848 0 -1.973455
     -1.908284 0 0.648808
@@ -443,6 +464,7 @@ Crossroad {
   translation 66.72284 0.01 93.523944
   name "crossroad(22)"
   id "2352406230"
+  boundingObject TRUE
   shape [
     -1.097366 0 -1.690647
     -6.689658 0 2.703882
@@ -465,6 +487,7 @@ Crossroad {
   translation -118.374672 0.01 -197.861148
   name "crossroad(23)"
   id "2420021093"
+  boundingObject TRUE
   shape [
     -3.481198 0 -2.807358
     -4.334605 0 1.100544
@@ -483,6 +506,7 @@ Crossroad {
   translation -60.053835 0.01 524.86812
   name "crossroad(24)"
   id "277538440"
+  boundingObject TRUE
   shape [
     -0.172322 0 -1.741495
     -1.06833 0 -1.709143
@@ -504,6 +528,7 @@ Crossroad {
   translation -158.721666 0.01 500.963353
   name "Dick Vet Corner"
   id "277538441"
+  boundingObject TRUE
   shape [
     -0.4632 0 -7.200552
     -3.797201 0 -6.135451
@@ -526,6 +551,7 @@ Crossroad {
   translation 155.677934 0.01 221.037134
   name "crossroad(25)"
   id "289788179"
+  boundingObject TRUE
   shape [
     0.62287 0 -4.321404
     -2.751018 0 -3.390339
@@ -545,6 +571,7 @@ Crossroad {
   translation 78.756329 0.01 -292.807427
   name "crossroad(26)"
   id "297059422"
+  boundingObject TRUE
   shape [
     1.663291 0 -1.138404
     -1.825219 0 -0.85503
@@ -564,6 +591,7 @@ Crossroad {
   translation -142.112487 0.01 -162.966987
   name "crossroad(27)"
   id "3231711792"
+  boundingObject TRUE
   shape [
     -0.844567 0 -3.928354
     -2.72285 0 3.413003
@@ -583,6 +611,7 @@ Crossroad {
   translation -141.256737 0.01 -166.481308
   name "crossroad(28)"
   id "3231711793"
+  boundingObject TRUE
   shape [
     -0.76071 0 -4.299281
     -3.508218 0 -2.599021
@@ -603,6 +632,7 @@ Crossroad {
   translation 147.146154 0.01 223.399843
   name "crossroad(29)"
   id "331465400"
+  boundingObject TRUE
   shape [
     0.622672 0 -4.321433
     -2.751173 0 -3.390213
@@ -625,6 +655,7 @@ Crossroad {
   translation 137.370801 0.01 187.983337
   name "crossroad(30)"
   id "331465401"
+  boundingObject TRUE
   shape []
   connectedRoadIDs [
     "222806504_2"
@@ -635,6 +666,7 @@ Crossroad {
   translation 83.438295 0.01 122.314483
   name "crossroad(31)"
   id "3357829816"
+  boundingObject TRUE
   shape [
     -0.508347 0 -7.021687
     -2.001274 0 -6.932345
@@ -659,6 +691,7 @@ Crossroad {
   translation -147.385241 0.01 -167.885269
   name "crossroad(32)"
   id "343361356"
+  boundingObject TRUE
   shape [
     -2.395281 0 -4.744748
     -3.393427 0 -2.747208
@@ -681,6 +714,7 @@ Crossroad {
   translation 130.992199 0.01 131.59562
   name "crossroad(33)"
   id "37952596"
+  boundingObject TRUE
   shape [
     3.320663 0 -2.99553
     -0.534079 0 -1.927371
@@ -701,6 +735,7 @@ Crossroad {
   translation 155.180518 0.01 252.48428
   name "crossroad(34)"
   id "37952705"
+  boundingObject TRUE
   shape [
     0.621743 0 -4.321566
     -2.751902 0 -3.389622
@@ -721,6 +756,7 @@ Crossroad {
   translation 85.700404 0.01 56.705627
   name "crossroad(35)"
   id "3817996516"
+  boundingObject TRUE
   shape [
     -0.619074 0 -7.012792
     -4.762629 0 5.420319
@@ -742,6 +778,7 @@ Crossroad {
   translation -216.743546 0.01 307.10453
   name "crossroad(36)"
   id "42093330"
+  boundingObject TRUE
   shape [
     3.899385 0 -6.071021
     -2.081974 0 -3.837693
@@ -764,6 +801,7 @@ Crossroad {
   translation -210.050787 0.01 305.692191
   name "crossroad(37)"
   id "444372413"
+  boundingObject TRUE
   shape [
     1.071738 0 -4.232479
     -2.381068 0 -3.659647
@@ -786,6 +824,7 @@ Crossroad {
   translation -210.751652 0.01 301.467655
   name "crossroad(38)"
   id "444372417"
+  boundingObject TRUE
   shape [
     1.677313 0 -4.03102
     -1.822113 0 -3.96767
@@ -808,6 +847,7 @@ Crossroad {
   translation -182.049003 0.01 29.486747
   name "crossroad(39)"
   id "444372419"
+  boundingObject TRUE
   shape [
     -0.752472 0 -4.300731
     -3.958817 0 -3.054139
@@ -830,6 +870,7 @@ Crossroad {
   translation 62.609491 0.01 209.534162
   name "crossroad(40)"
   id "5699842425"
+  boundingObject TRUE
   shape [
     -1.491265 0 -4.216175
     -1.984723 0 -0.246729
@@ -850,6 +891,7 @@ Crossroad {
   translation 74.335984 0.01 206.992769
   name "crossroad(41)"
   id "5699842426"
+  boundingObject TRUE
   shape []
   connectedRoadIDs [
     "598961161"
@@ -860,6 +902,7 @@ Crossroad {
   translation -121.512474 0.01 -154.688762
   name "crossroad(42)"
   id "659218124"
+  boundingObject TRUE
   shape [
     -2.945275 0 -3.22302
     -4.690648 0 0.294907
@@ -879,6 +922,7 @@ Crossroad {
   translation -132.901091 0.01 -201.031601
   name "crossroad(43)"
   id "6609905066"
+  boundingObject TRUE
   shape [
     -0.73367 0 -4.303978
     -3.49116 0 -2.79496
@@ -901,6 +945,7 @@ Crossroad {
   translation -148.948455 0.01 -189.783381
   name "crossroad(44)"
   id "6609905070"
+  boundingObject TRUE
   shape [
     -0.369653 0 -7.20596
     -4.53799 0 -5.999657
@@ -923,6 +968,7 @@ Crossroad {
   translation -146.430306 0.01 -202.618915
   name "crossroad(45)"
   id "6609905071"
+  boundingObject TRUE
   shape [
     -0.789248 0 -4.294134
     -4.436229 0 -3.74711
@@ -943,6 +989,7 @@ Crossroad {
   translation -144.211059 0.01 -212.069721
   name "crossroad(46)"
   id "6609905074"
+  boundingObject TRUE
   shape [
     -0.882122 0 -1.812281
     -4.363066 0 0.161729
@@ -962,6 +1009,7 @@ Crossroad {
   translation -174.902881 0.01 -205.553954
   name "crossroad(47)"
   id "6609905077"
+  boundingObject TRUE
   shape []
   connectedRoadIDs [
     "30882495"
@@ -972,6 +1020,7 @@ Crossroad {
   translation -162.032725 0.01 503.047098
   name "crossroad(48)"
   id "6621480986"
+  boundingObject TRUE
   shape [
     -0.117983 0 -4.364468
     -3.285453 0 -2.875465
@@ -993,6 +1042,7 @@ Crossroad {
   translation -190.696441 0.01 29.369094
   name "crossroad(49)"
   id "6621481016"
+  boundingObject TRUE
   shape [
     -0.729832 0 -4.304631
     -3.960165 0 -3.052392
@@ -1015,6 +1065,7 @@ Crossroad {
   translation 70.02933 0.01 149.847918
   name "crossroad(50)"
   id "668666084"
+  boundingObject TRUE
   shape [
     0.320473 0 -3.222532
     -1.443058 0 -1.384769
@@ -1035,6 +1086,7 @@ Crossroad {
   translation -104.882317 0.01 -151.587513
   name "crossroad(51)"
   id "6719039566"
+  boundingObject TRUE
   shape [
     1.525778 0 -4.090783
     -1.96885 0 -3.896938
@@ -1055,6 +1107,7 @@ Crossroad {
   translation 73.323916 0.01 161.955645
   name "crossroad(52)"
   id "7255501128"
+  boundingObject TRUE
   shape []
   connectedRoadIDs [
     "52663850"
@@ -1065,6 +1118,7 @@ Crossroad {
   translation 93.133578 0.01 142.091206
   name "crossroad(53)"
   id "73567966"
+  boundingObject TRUE
   shape [
     -0.174113 0 -4.362589
     -3.322168 0 -2.832966
@@ -1088,6 +1142,9 @@ Road {
   width 4
   numberOfLanes 1
   speedLimit 8.9408
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -1111,6 +1168,9 @@ Road {
   width 4
   numberOfLanes 1
   speedLimit 8.9408
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -1134,6 +1194,9 @@ Road {
   width 4
   numberOfLanes 1
   speedLimit 8.9408
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -1168,6 +1231,9 @@ Road {
   width 4
   numberOfLanes 1
   speedLimit 8.9408
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -1191,6 +1257,9 @@ Road {
   startJunction "1703278758"
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -1218,6 +1287,9 @@ Road {
   width 4
   numberOfLanes 1
   speedLimit 8.9408
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -1241,6 +1313,9 @@ Road {
   width 4
   numberOfLanes 1
   speedLimit 8.9408
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -1267,6 +1342,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0, 5.842576 0 -7.697865, 19.264323 0 -23.207299, 27.280074 0 -55.466118, 38.13946 0 -105.231651, 42.704003 0 -121.328111, 47.034759 0 -137.38148, 52.13377 0 -157.411568, 55.543896 0 -166.740151, 59.407402 0 -175.036769, 68.791983 0 -191.350364, 82.79636 0 -215.727138, 87.247412 0 -230.917925, 89.97063 0 -241.278999, 91.993736 0 -251.998119, 93.226226 0 -258.709368, 93.531626 0 -260.407488, 96.913266 0 -263.64582, 99.269633 0 -266.418632, 100.993942 0 -269.999041, 103.303397 0 -275.795198, 103.852109 0 -280.809402, 103.93425 0 -286.124777, 99.940527 0 -294.456419, 104.63811 0 -333.163717, 105.276651 0 -338.427505, 105.470515 0 -340.032244, 106.039529 0 -344.346792
@@ -1284,6 +1362,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -1304,6 +1385,9 @@ Road {
   id "132858610"
   startJunction "1664928041"
   speedLimit 8.9408
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines [
     RoadLine {
       type "continuous"
@@ -1353,6 +1437,9 @@ Road {
   lines []
   rightBorder FALSE
   leftBorder FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   wayPoints [
     0 0 0
     -0.570103 0 -22.261833
@@ -1374,6 +1461,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -1398,6 +1488,9 @@ Road {
   width 1.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -1432,6 +1525,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -1465,6 +1561,9 @@ Road {
   lines []
   rightBorder FALSE
   leftBorder FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   wayPoints [
     0 0 0
     7.817246 0 -1.694171
@@ -1492,6 +1591,9 @@ Road {
   lines []
   rightBorder FALSE
   leftBorder FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   wayPoints [
     0 0 0
     4.422308 0 18.588214
@@ -1511,6 +1613,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -1525,6 +1630,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -1543,6 +1651,9 @@ Road {
   lines []
   rightBorder FALSE
   leftBorder FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   wayPoints [
     0 0 0
     18.512076 0 68.007967
@@ -1558,6 +1669,9 @@ Road {
   id "227749740_1"
   endJunction "14348246"
   speedLimit 8.9408
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines [
     RoadLine {
       type "continuous"
@@ -1587,6 +1701,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -1617,6 +1734,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -1648,6 +1768,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -1679,6 +1802,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -1706,6 +1832,9 @@ Road {
   width 4
   numberOfLanes 1
   speedLimit 8.9408
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -1735,6 +1864,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -1762,6 +1894,9 @@ Road {
   width 2
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -1794,6 +1929,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -1824,6 +1962,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -1853,6 +1994,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -1877,6 +2021,9 @@ Road {
   width 4
   numberOfLanes 1
   speedLimit 8.9408
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -1907,6 +2054,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -1943,6 +2093,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -1978,6 +2131,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -2010,6 +2166,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -2043,6 +2202,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -2066,6 +2228,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -2092,6 +2257,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -2123,6 +2291,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -2157,6 +2328,9 @@ Road {
   lines []
   rightBorder FALSE
   leftBorder FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   wayPoints [
     0 0 0
     4.011257 0 0.875595
@@ -2182,6 +2356,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -2225,6 +2402,9 @@ Road {
   endJunction "6609905071"
   width 8
   speedLimit 8.9408
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines [
     RoadLine {
       type "continuous"
@@ -2296,6 +2476,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -2332,6 +2515,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -2368,6 +2554,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -2398,6 +2587,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -2429,6 +2621,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -2459,6 +2654,9 @@ Road {
   width 1.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -2489,6 +2687,9 @@ Road {
   width 6
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -2519,6 +2720,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -2548,6 +2752,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -2571,6 +2778,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -2601,6 +2811,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -2627,6 +2840,9 @@ Road {
   width 4
   numberOfLanes 1
   speedLimit 8.9408
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -2657,6 +2873,9 @@ Road {
   width 4
   numberOfLanes 1
   speedLimit 8.9408
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -2686,6 +2905,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -2768,6 +2990,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -2795,6 +3020,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -2823,6 +3051,9 @@ Road {
   startJunction "14348246"
   endJunction "343361356"
   speedLimit 8.9408
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines [
     RoadLine {
       type "continuous"
@@ -2866,6 +3097,9 @@ Road {
   startJunction "343361356"
   endJunction "1664928041"
   speedLimit 8.9408
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines [
     RoadLine {
       type "continuous"
@@ -2907,6 +3141,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -2931,6 +3168,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -2967,6 +3207,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -2998,6 +3241,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -3028,6 +3274,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -3058,6 +3307,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -3098,6 +3350,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -3134,6 +3389,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -3167,6 +3425,9 @@ Road {
   width 4
   numberOfLanes 1
   speedLimit 8.9408
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -3193,6 +3454,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -3224,6 +3488,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -3257,6 +3524,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -3290,6 +3560,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -3320,6 +3593,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -3351,6 +3627,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -3381,6 +3660,9 @@ Road {
   width 1.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -3411,6 +3693,9 @@ Road {
   width 1.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -3441,6 +3726,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -3482,6 +3770,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -3515,6 +3806,9 @@ Road {
   width 6
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -3545,6 +3839,9 @@ Road {
   width 6
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -3578,6 +3875,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -3607,6 +3907,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -3634,6 +3937,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -3666,6 +3972,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -3691,6 +4000,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0
@@ -3725,6 +4037,9 @@ Road {
   width 3.5
   numberOfLanes 1
   speedLimit 26.822333
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
   lines []
   wayPoints [
     0 0 0

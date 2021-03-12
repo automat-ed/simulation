@@ -77,8 +77,7 @@ void Gyro::publishGyro()
   msg.header.frame_id = frame_id;
 
   // Unset values are set to 0 by default
-  msg.orientation_covariance[0] = -1.0;         // means no orientation information
-  msg.linear_acceleration_covariance[0] = -1.0; // means no lin acc information
+  msg.orientation_covariance[0] = -1.0; // means no orientation information
   msg.angular_velocity.x = reading[0] + bias + gaussianNoise();
   msg.angular_velocity.y = reading[1] + bias + gaussianNoise();
   msg.angular_velocity.z = reading[2] + bias + gaussianNoise();
@@ -86,6 +85,7 @@ void Gyro::publishGyro()
   msg.angular_velocity_covariance[0] = std::pow(bias + noise_mean + noise_std, 2);
   msg.angular_velocity_covariance[4] = std::pow(bias + noise_mean + noise_std, 2);
   msg.angular_velocity_covariance[8] = std::pow(bias + noise_mean + noise_std, 2);
+  msg.linear_acceleration_covariance[0] = -1.0; // means no lin acc information
 
   noise_pub.publish(msg);
 }
@@ -99,9 +99,20 @@ void Gyro::publishTF()
   webots::Field *gyro_translation_field = gyro_node->getField("translation");
   const double *gyro_translation = gyro_translation_field->getSFVec3f();
 
+  ROS_DEBUG("Gyro translation: [%f, %f, %f]",
+            gyro_translation[0],
+            gyro_translation[1],
+            gyro_translation[2]);
+
   // Get gyro rotation
   webots::Field *gyro_rotation_field = gyro_node->getField("rotation");
   const double *gyro_rotation = gyro_rotation_field->getSFRotation();
+
+  ROS_DEBUG("Gyro rotation: [%f, %f, %f, %f]",
+            gyro_rotation[0],
+            gyro_rotation[1],
+            gyro_rotation[2],
+            gyro_rotation[3]);
 
   // Create transform msg
   geometry_msgs::TransformStamped msg;
@@ -109,21 +120,21 @@ void Gyro::publishTF()
   msg.header.frame_id = "base_link";
   msg.child_frame_id = frame_id;
 
-  // Translate from Webots to ROS coordinates
+  // Translate from ROS to Webots coordinates
   msg.transform.translation.x = gyro_translation[0];
   msg.transform.translation.y = -1 * gyro_translation[2];
   msg.transform.translation.z = gyro_translation[1];
 
   tf2::Quaternion rot;
-  rot[0] = gyro_rotation[1];
-  rot[1] = gyro_rotation[2];
-  rot[2] = gyro_rotation[3];
-  rot[3] = gyro_rotation[0];
+  rot.setRotation({gyro_rotation[0],
+                   gyro_rotation[1],
+                   gyro_rotation[2]}, gyro_rotation[3]);
 
-  tf2::Quaternion webots_to_ros;
-  webots_to_ros.setRPY(-1.5707, 0, 0);
+  tf2::Quaternion ros_to_webots;
+  ros_to_webots.setRPY(1.5707, 0, 0);
 
-  tf2::Quaternion quat = webots_to_ros * rot;
+  tf2::Quaternion quat = ros_to_webots * rot;
+  quat.normalize();
   msg.transform.rotation.x = quat.x();
   msg.transform.rotation.y = quat.y();
   msg.transform.rotation.z = quat.z();

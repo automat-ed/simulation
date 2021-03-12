@@ -54,7 +54,7 @@ Lidar::~Lidar()
 
 void Lidar::publishLaserScan()
 {
-  for (int layer = 0; layer < lidar->getNumberOfLayers(); ++layer)
+  for (int layer = 0; layer < lidar->getNumberOfLayers(); layer++)
   {
     const float *rangeImageVector = lidar->getLayerRangeImage(layer);
 
@@ -73,7 +73,7 @@ void Lidar::publishLaserScan()
 
     gt.range_min = lidar->getMinRange();
     gt.range_max = lidar->getMaxRange();
-    for (int i = 0; i < lidar->getHorizontalResolution(); ++i)
+    for (int i = 0; i < lidar->getHorizontalResolution(); i++)
     {
       gt.ranges.push_back(rangeImageVector[i]);
     }
@@ -95,7 +95,7 @@ void Lidar::publishLaserScan()
 
     msg.range_min = lidar->getMinRange();
     msg.range_max = lidar->getMaxRange();
-    for (int i = 0; i < lidar->getHorizontalResolution(); ++i)
+    for (int i = 0; i < lidar->getHorizontalResolution(); i++)
     {
       if (rangeImageVector[i] == INFINITY)
       {
@@ -123,9 +123,20 @@ void Lidar::publishTF()
   webots::Field *lidar_translation_field = lidar_node->getField("translation");
   const double *lidar_translation = lidar_translation_field->getSFVec3f();
 
+  ROS_DEBUG("Lidar translation: [%f, %f, %f]",
+           lidar_translation[0],
+           lidar_translation[1],
+           lidar_translation[2]);
+
   // Get lidar rotation
   webots::Field *lidar_rotation_field = lidar_node->getField("rotation");
   const double *lidar_rotation = lidar_rotation_field->getSFRotation();
+
+  ROS_DEBUG("Lidar rotation: [%f, %f, %f, %f]",
+           lidar_rotation[0],
+           lidar_rotation[1],
+           lidar_rotation[2],
+           lidar_rotation[3]);
 
   // Create transform msg
   geometry_msgs::TransformStamped msg;
@@ -139,15 +150,14 @@ void Lidar::publishTF()
   msg.transform.translation.z = lidar_translation[1];
 
   tf2::Quaternion rot;
-  rot[0] = lidar_rotation[1];
-  rot[1] = lidar_rotation[2];
-  rot[2] = lidar_rotation[3];
-  rot[3] = lidar_rotation[0];
+  rot.setRotation({lidar_rotation[0],
+                   lidar_rotation[1],
+                   lidar_rotation[2]}, lidar_rotation[3]);
 
-  tf2::Quaternion webots_to_ros;
-  webots_to_ros.setRPY(-1.5707, 0, 0);
+  tf2::Quaternion ros_to_webots;
+  ros_to_webots.setRPY(1.5707, 0, 0);
 
-  tf2::Quaternion quat = webots_to_ros * rot;
+  tf2::Quaternion quat = ros_to_webots * rot;
   msg.transform.rotation.x = quat.x();
   msg.transform.rotation.y = quat.y();
   msg.transform.rotation.z = quat.z();

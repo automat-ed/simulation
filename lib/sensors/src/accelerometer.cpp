@@ -68,12 +68,12 @@ void Accelerometer::publishAccelerometer()
 
   // Unset values are set to 0 by default
   gt.orientation_covariance[0] = -1.0; // means no orientation information
+  gt.angular_velocity_covariance[0] = -1.0; // no angular_velocity information
   gt.linear_acceleration.x = reading[0];
   gt.linear_acceleration.y = reading[1];
   gt.linear_acceleration.z = reading[2];
-  gt.angular_velocity_covariance[0] = -1; // no angular_velocity information
 
-  for (int i = 0; i < 9; ++i) // means "covariance unknown"
+  for (int i = 0; i < 9; i++) // means "covariance unknown"
     gt.linear_acceleration_covariance[i] = 0;
 
   ground_truth_pub.publish(gt);
@@ -109,11 +109,22 @@ void Accelerometer::publishTF()
   const double *accelerometer_translation =
       accelerometer_translation_field->getSFVec3f();
 
+  ROS_DEBUG("Accelerometer translation: [%f, %f, %f]",
+            accelerometer_translation[0],
+            accelerometer_translation[1],
+            accelerometer_translation[2]);
+
   // Get accelerometer rotation
   webots::Field *accelerometer_rotation_field =
       accelerometer_node->getField("rotation");
   const double *accelerometer_rotation =
       accelerometer_rotation_field->getSFRotation();
+
+  ROS_DEBUG("Accelerometer rotation: [%f, %f, %f, %f]",
+            accelerometer_rotation[0],
+            accelerometer_rotation[1],
+            accelerometer_rotation[2],
+            accelerometer_rotation[3]);
 
   // Create transform msg
   geometry_msgs::TransformStamped msg;
@@ -127,15 +138,15 @@ void Accelerometer::publishTF()
   msg.transform.translation.z = accelerometer_translation[1];
 
   tf2::Quaternion rot;
-  rot[0] = accelerometer_rotation[1];
-  rot[1] = accelerometer_rotation[2];
-  rot[2] = accelerometer_rotation[3];
-  rot[3] = accelerometer_rotation[0];
+  rot.setRotation({accelerometer_rotation[0],
+                   accelerometer_rotation[1],
+                   accelerometer_rotation[2]}, accelerometer_rotation[3]);
 
-  tf2::Quaternion webots_to_ros;
-  webots_to_ros.setRPY(-1.5707, 0, 0);
+  tf2::Quaternion ros_to_webots;
+  ros_to_webots.setRPY(1.5707, 0, 0);
 
-  tf2::Quaternion quat = webots_to_ros * rot;
+  tf2::Quaternion quat = ros_to_webots * rot;
+  quat.normalize();
   msg.transform.rotation.x = quat.x();
   msg.transform.rotation.y = quat.y();
   msg.transform.rotation.z = quat.z();

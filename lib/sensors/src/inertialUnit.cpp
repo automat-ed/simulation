@@ -131,7 +131,7 @@ void InertialUnit::publishTF()
                    imu_rotation[2]}, imu_rotation[3]);
 
   tf2::Quaternion ros_to_webots;
-  ros_to_webots.setRPY(1.5707, 0, 0);
+  ros_to_webots.setRPY(1.5708, 0, 0);
 
   tf2::Quaternion quat = ros_to_webots * rot;
   quat.normalize();

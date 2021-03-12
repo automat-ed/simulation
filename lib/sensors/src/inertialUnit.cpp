@@ -60,19 +60,14 @@ void InertialUnit::publishImuQuaternion()
   // Get sensor reading
   const double *reading = imu->getQuaternion();
 
-  // Calculate quaternion
-  tf2::Quaternion orientation(reading[0], reading[1], reading[2], reading[3]);
-  tf2::Quaternion orientationRosFix(0.5, 0.5, 0.5, 0.5);
-  orientation = orientation * orientationRosFix;
-
   // Publish ground truth
   sensor_msgs::Imu gt;
   gt.header.stamp = ros::Time::now();
   gt.header.frame_id = frame_id;
-  gt.orientation.x = orientation.getX();
-  gt.orientation.y = orientation.getY();
-  gt.orientation.z = orientation.getZ();
-  gt.orientation.w = orientation.getW();
+  gt.orientation.x = reading[0];
+  gt.orientation.y = reading[1];
+  gt.orientation.z = reading[2];
+  gt.orientation.w = reading[3];
   gt.angular_velocity_covariance[0] = -1;      // no information
   gt.linear_acceleration_covariance[0] = -1.0; // no information
   ground_truth_pub.publish(gt);
@@ -81,16 +76,16 @@ void InertialUnit::publishImuQuaternion()
   sensor_msgs::Imu msg;
   msg.header.stamp = ros::Time::now();
   msg.header.frame_id = frame_id;
-  msg.angular_velocity_covariance[0] = -1;      // no information
-  msg.linear_acceleration_covariance[0] = -1.0; // no information
-  msg.orientation.x = orientation.getX() + bias + gaussianNoise();
-  msg.orientation.y = orientation.getY() + bias + gaussianNoise();
-  msg.orientation.z = orientation.getZ() + bias + gaussianNoise();
-  msg.orientation.w = orientation.getW() + bias + gaussianNoise();
+  msg.orientation.x = reading[0] + bias + gaussianNoise();
+  msg.orientation.y = reading[1] + bias + gaussianNoise();
+  msg.orientation.z = reading[2] + bias + gaussianNoise();
+  msg.orientation.w = reading[3] + bias + gaussianNoise();
   // Populate variance along the diagonal
   msg.orientation_covariance[0] = std::pow(bias + noise_mean + noise_std, 2);
   msg.orientation_covariance[4] = std::pow(bias + noise_mean + noise_std, 2);
   msg.orientation_covariance[8] = std::pow(bias + noise_mean + noise_std, 2);
+  msg.angular_velocity_covariance[0] = -1;      // no information
+  msg.linear_acceleration_covariance[0] = -1.0; // no information
 
   noise_pub.publish(msg);
 }
@@ -114,21 +109,21 @@ void InertialUnit::publishTF()
   msg.header.frame_id = "base_link";
   msg.child_frame_id = frame_id;
 
-  // Translate from Webots to ROS coordinates
+  // Translate from ROS to Webots coordinates
   msg.transform.translation.x = imu_translation[0];
   msg.transform.translation.y = -1 * imu_translation[2];
   msg.transform.translation.z = imu_translation[1];
 
   tf2::Quaternion rot;
-  rot[0] = imu_rotation[1];
-  rot[1] = imu_rotation[2];
-  rot[2] = imu_rotation[3];
-  rot[3] = imu_rotation[0];
+  rot.setRotation({imu_rotation[0],
+                   imu_rotation[1],
+                   imu_rotation[2]}, imu_rotation[3]);
 
-  tf2::Quaternion webots_to_ros;
-  webots_to_ros.setRPY(-1.5707, 0, 0);
+  tf2::Quaternion ros_to_webots;
+  ros_to_webots.setRPY(1.5707, 0, 0);
 
-  tf2::Quaternion quat = webots_to_ros * rot;
+  tf2::Quaternion quat = ros_to_webots * rot;
+  quat.normalize();
   msg.transform.rotation.x = quat.x();
   msg.transform.rotation.y = quat.y();
   msg.transform.rotation.z = quat.z();

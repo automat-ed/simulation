@@ -132,7 +132,7 @@ void Accelerometer::publishTF()
   msg.header.frame_id = "base_link";
   msg.child_frame_id = frame_id;
 
-  // Translate from Webots to ROS coordinates
+  // Translate from ROS to Webots coordinates
   msg.transform.translation.x = accelerometer_translation[0];
   msg.transform.translation.y = -1 * accelerometer_translation[2];
   msg.transform.translation.z = accelerometer_translation[1];

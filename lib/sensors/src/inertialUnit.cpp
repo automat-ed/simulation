@@ -99,9 +99,20 @@ void InertialUnit::publishTF()
   webots::Field *imu_translation_field = imu_node->getField("translation");
   const double *imu_translation = imu_translation_field->getSFVec3f();
 
+  ROS_DEBUG("IMU translation: [%f, %f, %f]",
+            imu_translation[0],
+            imu_translation[1],
+            imu_translation[2]);
+
   // Get imu rotation
   webots::Field *imu_rotation_field = imu_node->getField("rotation");
   const double *imu_rotation = imu_rotation_field->getSFRotation();
+
+  ROS_DEBUG("IMU rotation: [%f, %f, %f, %f]",
+            imu_rotation[0],
+            imu_rotation[1],
+            imu_rotation[2],
+            imu_rotation[3]);
 
   // Create transform msg
   geometry_msgs::TransformStamped msg;

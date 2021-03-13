@@ -45,9 +45,11 @@ int main(int argc, char **argv)
   AutomatED::DiffSteering diffSteering = AutomatED::DiffSteering(motors, &nh);
 
   // Instaniate keyboard steering
-  AutomatED::KeyboardController keyboard =
-      AutomatED::KeyboardController(supervisor, &nh);
-
+  AutomatED::KeyboardController *keyboard;
+  if (use_keyboard_control) {
+    keyboard = new AutomatED::KeyboardController(supervisor, &nh);
+  }
+  
   while (supervisor->step(step_size) != -1)
   {
     lidar.publishLaserScan();
@@ -59,7 +61,7 @@ int main(int argc, char **argv)
 
     if (use_keyboard_control)
     {
-      keyboard.keyLoop();
+      keyboard->keyLoop();
     }
 
     ros::spinOnce();

@@ -62,9 +62,9 @@ DiffSteering::DiffSteering(std::vector<webots::Motor *> motors,
 DiffSteering::~DiffSteering()
 {
   // Clean up
-  cmd_vel_sub.shutdown();
   ground_truth_pub.shutdown();
   noise_pub.shutdown();
+  cmd_vel_sub.shutdown();
   stopMotors();
 }
 

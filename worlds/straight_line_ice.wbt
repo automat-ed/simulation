@@ -1,0 +1,156 @@
+#VRML_SIM R2021a utf8
+WorldInfo {
+  coordinateSystem "NUE"
+  contactProperties [
+    ContactProperties {
+      material2 "ice"
+      coulombFriction [
+        0.02
+      ]
+      softCFM 1e-05
+    }
+  ]
+}
+Viewpoint {
+  orientation -0.9986869493544274 -0.0030067997311263852 0.051140359252983617 0.7201392898306259
+  position 0.20704547766214892 32.730931656594265 84.37951676653472
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+StraightRoadSegment {
+  translation 0 0.11 10
+  name "road(1)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+StraightRoadSegment {
+  translation 0 0.11 20
+  name "road(6)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+StraightRoadSegment {
+  translation 0 0.11 30
+  name "road(8)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+StraightRoadSegment {
+  translation 0 0.11 40
+  name "road(9)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+StraightRoadSegment {
+  translation 0 0.11 -20
+  name "road(2)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+StraightRoadSegment {
+  translation 0 0.11 -30
+  name "road(5)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+StraightRoadSegment {
+  translation 0 0.11 -40
+  name "road(7)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+StraightRoadSegment {
+  translation 0 0.11 -50
+  name "road(11)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+Solid {
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.3 0.4 0
+        roughness 1
+        metalness 0
+      }
+      geometry Plane {
+        size 30 110
+      }
+    }
+  ]
+}
+StraightRoadSegment {
+  translation 0 0.11 -10
+  name "road(3)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+StraightRoadSegment {
+  translation 0 0.11 0
+  name "road(4)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+StreetSmart {
+  translation -0.00701334 0.23 47.8687
+  rotation 0 1 0 1.5707996938995747
+}
+Solid {
+  translation 0 0.11 44
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.7 0.9 1
+        metalness 0
+      }
+      geometry DEF PATCH Cylinder {
+        height 0.01
+      }
+    }
+  ]
+  name "ice"
+  contactMaterial "ice"
+  boundingObject USE PATCH
+}

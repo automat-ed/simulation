@@ -1,0 +1,303 @@
+<?xml version="1.0"?>
+<robot name="StreetSmart" xmlns:xacro="http://ros.org/wiki/xacro">
+  <link name="base_link">
+    <visual>
+      <origin xyz="0 0.04 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.65 0.2 0.5"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0.04 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.65 0.2 0.5"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="front_left_wheel" type="continuous">
+    <parent link="base_link"/>
+    <child link="front left solid"/>
+    <axis xyz="0 0 -1"/>
+    <limit effort="10" velocity="10"/>
+    <origin xyz="0.23 0 -0.3" rpy="0 0 0"/>
+  </joint>
+  <link name="front left solid">
+    <visual>
+      <origin xyz="0 0 0" rpy="-3.141589 0 0"/>
+      <geometry>
+        <cylinder radius="0.12" length="0.06"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="-3.141589 0 0"/>
+      <geometry>
+        <cylinder radius="0.12" length="0.06"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="front_right_wheel" type="continuous">
+    <parent link="base_link"/>
+    <child link="front right solid"/>
+    <axis xyz="0 0 -1"/>
+    <limit effort="10" velocity="10"/>
+    <origin xyz="0.23 0 0.3" rpy="0 0 0"/>
+  </joint>
+  <link name="front right solid">
+    <visual>
+      <origin xyz="0 0 0" rpy="-3.141589 0 0"/>
+      <geometry>
+        <cylinder radius="0.12" length="0.06"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="-3.141589 0 0"/>
+      <geometry>
+        <cylinder radius="0.12" length="0.06"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="rear_left_wheel" type="continuous">
+    <parent link="base_link"/>
+    <child link="rear left solid"/>
+    <axis xyz="0 0 -1"/>
+    <limit effort="10" velocity="10"/>
+    <origin xyz="-0.23 0 -0.3" rpy="0 0 0"/>
+  </joint>
+  <link name="rear left solid">
+    <visual>
+      <origin xyz="0 0 0" rpy="-3.141589 0 0"/>
+      <geometry>
+        <cylinder radius="0.12" length="0.06"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="-3.141589 0 0"/>
+      <geometry>
+        <cylinder radius="0.12" length="0.06"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="rear_right_wheel" type="continuous">
+    <parent link="base_link"/>
+    <child link="rear right solid"/>
+    <axis xyz="0 0 -1"/>
+    <limit effort="10" velocity="10"/>
+    <origin xyz="-0.23 0 0.3" rpy="0 0 0"/>
+  </joint>
+  <link name="rear right solid">
+    <visual>
+      <origin xyz="0 0 0" rpy="-3.141589 0 0"/>
+      <geometry>
+        <cylinder radius="0.12" length="0.06"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="-3.141589 0 0"/>
+      <geometry>
+        <cylinder radius="0.12" length="0.06"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="rear_left_led">
+  </link>
+  <joint name="base_link_rear_left_led_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="rear_left_led"/>
+    <origin xyz="-0.33 0 -0.18" rpy="0 0 0"/>
+  </joint>
+  <link name="rear_right_led">
+  </link>
+  <joint name="base_link_rear_right_led_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="rear_right_led"/>
+    <origin xyz="-0.33 0 0.18" rpy="0 0 0"/>
+  </joint>
+  <link name="front_left_led">
+  </link>
+  <joint name="base_link_front_left_led_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="front_left_led"/>
+    <origin xyz="0.33 0 -0.18" rpy="0 0 0"/>
+  </joint>
+  <link name="front_right_led">
+  </link>
+  <joint name="base_link_front_right_led_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="front_right_led"/>
+    <origin xyz="0.33 0 0.18" rpy="0 0 0"/>
+  </joint>
+  <link name="RobotisLds01">
+    <visual>
+      <origin xyz="0 -0.014 -0.014" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.07 0.01 0.1"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.014 -0.014" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.07 0.01 0.1"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5707963 0 0"/>
+      <geometry>
+        <cylinder radius="0.032" length="0.021"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="1.5707963 0 0"/>
+      <geometry>
+        <cylinder radius="0.032" length="0.021"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="base_link_RobotisLds01_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="RobotisLds01"/>
+    <origin xyz="0 0.16 0" rpy="0 0 0"/>
+  </joint>
+  <link name="screw3_1722">
+    <visual>
+      <origin xyz="0 0 0.01" rpy="3.1415927 0 0"/>
+      <geometry>
+        <cylinder radius="0.0015" length="0.02"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.01" rpy="3.1415927 0 0"/>
+      <geometry>
+        <cylinder radius="0.0015" length="0.02"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 -0.0015" rpy="-4.2146848e-08 0 0"/>
+      <geometry>
+        <cylinder radius="0.0025" length="0.003"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.0015" rpy="-4.2146848e-08 0 0"/>
+      <geometry>
+        <cylinder radius="0.0025" length="0.003"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="RobotisLds01_screw3_1722_joint" type="fixed">
+    <parent link="RobotisLds01"/>
+    <child link="screw3_1722"/>
+    <origin xyz="-0.0245 -0.0105 -0.035" rpy="1.5708 0 0"/>
+  </joint>
+  <link name="screw2_1675">
+    <visual>
+      <origin xyz="0 0 0.01" rpy="3.1415927 0 0"/>
+      <geometry>
+        <cylinder radius="0.0015" length="0.02"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.01" rpy="3.1415927 0 0"/>
+      <geometry>
+        <cylinder radius="0.0015" length="0.02"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 -0.0015" rpy="-4.2146848e-08 0 0"/>
+      <geometry>
+        <cylinder radius="0.0025" length="0.003"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.0015" rpy="-4.2146848e-08 0 0"/>
+      <geometry>
+        <cylinder radius="0.0025" length="0.003"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="RobotisLds01_screw2_1675_joint" type="fixed">
+    <parent link="RobotisLds01"/>
+    <child link="screw2_1675"/>
+    <origin xyz="-0.0245 -0.0105 -0.035" rpy="1.5708 0 0"/>
+  </joint>
+  <link name="screw1_1628">
+    <visual>
+      <origin xyz="0 0 0.01" rpy="3.1415927 0 0"/>
+      <geometry>
+        <cylinder radius="0.0015" length="0.02"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.01" rpy="3.1415927 0 0"/>
+      <geometry>
+        <cylinder radius="0.0015" length="0.02"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 -0.0015" rpy="-4.2146848e-08 0 0"/>
+      <geometry>
+        <cylinder radius="0.0025" length="0.003"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.0015" rpy="-4.2146848e-08 0 0"/>
+      <geometry>
+        <cylinder radius="0.0025" length="0.003"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="RobotisLds01_screw1_1628_joint" type="fixed">
+    <parent link="RobotisLds01"/>
+    <child link="screw1_1628"/>
+    <origin xyz="-0.0245 -0.0105 -0.035" rpy="1.5708 0 0"/>
+  </joint>
+  <link name="screw0_1581">
+    <visual>
+      <origin xyz="0 0 0.01" rpy="3.1415927 0 0"/>
+      <geometry>
+        <cylinder radius="0.0015" length="0.02"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.01" rpy="3.1415927 0 0"/>
+      <geometry>
+        <cylinder radius="0.0015" length="0.02"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 -0.0015" rpy="-4.2146848e-08 0 0"/>
+      <geometry>
+        <cylinder radius="0.0025" length="0.003"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.0015" rpy="-4.2146848e-08 0 0"/>
+      <geometry>
+        <cylinder radius="0.0025" length="0.003"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="RobotisLds01_screw0_1581_joint" type="fixed">
+    <parent link="RobotisLds01"/>
+    <child link="screw0_1581"/>
+    <origin xyz="-0.0245 -0.0105 -0.035" rpy="1.5708 0 0"/>
+  </joint>
+  <joint name="RobotisLds01_secondary_motor" type="continuous">
+    <parent link="RobotisLds01"/>
+    <child link="solid_1557"/>
+    <axis xyz="0 -3.6732051e-06 1"/>
+    <limit effort="10" velocity="150"/>
+    <origin xyz="-0.046 0 0" rpy="1.5707927 -1.5707929 3.1415927"/>
+  </joint>
+  <link name="solid_1557">
+  </link>
+  <joint name="RobotisLds01_main_motor" type="continuous">
+    <parent link="RobotisLds01"/>
+    <child link="solid(1)_1542"/>
+    <axis xyz="0 -3.6732051e-06 1"/>
+    <limit effort="10" velocity="40"/>
+    <origin xyz="-1.5488682e-07 0.046000037 -0.009999831" rpy="1.5707927 -1.5707929 3.1415927"/>
+  </joint>
+  <link name="solid(1)_1542">
+  </link>
+</robot>
+

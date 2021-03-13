@@ -1,5 +1,6 @@
 #VRML_SIM R2021a utf8
 WorldInfo {
+  basicTimeStep 8
   coordinateSystem "NUE"
   contactProperties [
     ContactProperties {
@@ -13,7 +14,7 @@ WorldInfo {
 }
 Viewpoint {
   orientation -0.9986869493544274 -0.0030067997311263852 0.051140359252983617 0.7201392898306259
-  position 0.20704547766214892 32.730931656594265 84.37951676653472
+  position 0.24174299583711978 8.835839230374845 56.68835326085103
 }
 TexturedBackground {
 }
@@ -138,7 +139,7 @@ StreetSmart {
   rotation 0 1 0 1.5707996938995747
 }
 Solid {
-  translation 0 0.1 44
+  translation 0 0.1101 44
   children [
     Shape {
       appearance PBRAppearance {
@@ -146,11 +147,13 @@ Solid {
         metalness 0
       }
       geometry DEF PATCH Cylinder {
-        height 0.03
+        height 1e-05
       }
     }
   ]
   name "ice"
   contactMaterial "ice"
-  boundingObject USE PATCH
+  boundingObject Cylinder {
+    height 1e-05
+  }
 }

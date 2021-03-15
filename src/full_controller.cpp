@@ -57,7 +57,6 @@ int main(int argc, char **argv)
     imu.publishImuQuaternion();
     gyro.publishGyro();
     accelerometer.publishAccelerometer();
-    diffSteering.publish();
 
     if (use_keyboard_control)
     {

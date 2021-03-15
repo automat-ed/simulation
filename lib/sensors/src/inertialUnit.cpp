@@ -58,87 +58,48 @@ InertialUnit::~InertialUnit()
 void InertialUnit::publishImuQuaternion()
 {
   // Get sensor reading
-  const double *reading = imu->getQuaternion();
+  const double *reading = imu->getRollPitchYaw();
+
+  // Extract data
+  double webots_yaw = reading[2];
+
+  // Shift reading to get 0 when facing East
+  webots_yaw += 1.5708;
+
+  // Convert to Quaternion
+  tf2::Quaternion quaternion;
+  quaternion.setRPY(0, 0, webots_yaw);
+  quaternion.normalize();
 
   // Publish ground truth
   sensor_msgs::Imu gt;
   gt.header.stamp = ros::Time::now();
   gt.header.frame_id = frame_id;
-  gt.orientation.x = reading[0];
-  gt.orientation.y = reading[1];
-  gt.orientation.z = reading[2];
-  gt.orientation.w = reading[3];
+  gt.orientation.x = quaternion.getX();
+  gt.orientation.y = quaternion.getY();
+  gt.orientation.z = quaternion.getZ();
+  gt.orientation.w = quaternion.getW();
   gt.angular_velocity_covariance[0] = -1;      // no information
   gt.linear_acceleration_covariance[0] = -1.0; // no information
   ground_truth_pub.publish(gt);
-
-  // Publish noisy data
-  sensor_msgs::Imu msg;
-  msg.header.stamp = ros::Time::now();
-  msg.header.frame_id = frame_id;
-  msg.orientation.x = reading[0] + bias + gaussianNoise();
-  msg.orientation.y = reading[1] + bias + gaussianNoise();
-  msg.orientation.z = reading[2] + bias + gaussianNoise();
-  msg.orientation.w = reading[3] + bias + gaussianNoise();
-  // Populate variance along the diagonal
-  msg.orientation_covariance[0] = std::pow(bias + noise_mean + noise_std, 2);
-  msg.orientation_covariance[4] = std::pow(bias + noise_mean + noise_std, 2);
-  msg.orientation_covariance[8] = std::pow(bias + noise_mean + noise_std, 2);
-  msg.angular_velocity_covariance[0] = -1;      // no information
-  msg.linear_acceleration_covariance[0] = -1.0; // no information
-
-  noise_pub.publish(msg);
 }
 
 void InertialUnit::publishTF()
 {
-  // Get imu node
-  webots::Node *imu_node = wb->getFromDevice(imu);
-
-  // Get imu translation
-  webots::Field *imu_translation_field = imu_node->getField("translation");
-  const double *imu_translation = imu_translation_field->getSFVec3f();
-
-  ROS_DEBUG("IMU translation: [%f, %f, %f]",
-            imu_translation[0],
-            imu_translation[1],
-            imu_translation[2]);
-
-  // Get imu rotation
-  webots::Field *imu_rotation_field = imu_node->getField("rotation");
-  const double *imu_rotation = imu_rotation_field->getSFRotation();
-
-  ROS_DEBUG("IMU rotation: [%f, %f, %f, %f]",
-            imu_rotation[0],
-            imu_rotation[1],
-            imu_rotation[2],
-            imu_rotation[3]);
-
   // Create transform msg
   geometry_msgs::TransformStamped msg;
   msg.header.stamp = ros::Time::now();
   msg.header.frame_id = "base_link";
   msg.child_frame_id = frame_id;
 
-  // Translate from ROS to Webots coordinates
-  msg.transform.translation.x = imu_translation[0];
-  msg.transform.translation.y = -1 * imu_translation[2];
-  msg.transform.translation.z = imu_translation[1];
+  msg.transform.translation.x = 0;
+  msg.transform.translation.y = 0;
+  msg.transform.translation.z = 0;
 
-  tf2::Quaternion rot;
-  rot.setRotation({imu_rotation[0],
-                   imu_rotation[1],
-                   imu_rotation[2]}, imu_rotation[3]);
-
-  tf2::Quaternion ros_to_webots;
-  ros_to_webots.setRPY(1.5708, 0, 0);
-
-  tf2::Quaternion quat = ros_to_webots * rot;
-  quat.normalize();
-  msg.transform.rotation.x = quat.x();
-  msg.transform.rotation.y = quat.y();
-  msg.transform.rotation.z = quat.z();
-  msg.transform.rotation.w = quat.w();
+  msg.transform.rotation.x = 0;
+  msg.transform.rotation.y = 0;
+  msg.transform.rotation.z = 0;
+  msg.transform.rotation.w = 1;
 
   static_broadcaster.sendTransform(msg);
 }

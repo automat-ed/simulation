@@ -190,7 +190,7 @@ PROTO StreetSmart [
           name "rear_right_wheel"
         }
         PositionSensor {
-          name rr_odom
+          name "rr_odom"
           noise 0   
           resolution -1
         }
@@ -248,7 +248,7 @@ PROTO StreetSmart [
           name "rear_left_wheel"
         }
         PositionSensor {
-          name rl_odom
+          name "rl_odom"
           noise 0   
           resolution -1
         }
@@ -276,7 +276,7 @@ PROTO StreetSmart [
           name "front_right_wheel"
         }
         PositionSensor {
-          name fr_odom
+          name "fr_odom"
           noise 0   
           resolution -1
         }
@@ -304,7 +304,7 @@ PROTO StreetSmart [
           name "front_left_wheel"
         }
         PositionSensor {
-          name fl_odom
+          name "fl_odom"
           noise 0   
           resolution -1
         }

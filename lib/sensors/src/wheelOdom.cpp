@@ -86,7 +86,7 @@ void WheelOdom::publishWheelOdom()
     double dr = r_pos - prev_r_pos;
     double dl = l_pos - prev_l_pos;
 
-    // Calculate linear velocity from positions
+    // Calculate linear velocity from change in angle
     double robot_vel = calcLinearVelocity(dr, dl, curr_time);
 
     // Publish ground truth (which is still kinda noisy)
@@ -110,7 +110,7 @@ void WheelOdom::publishWheelOdom()
     double noisy_dr = noisy_r_pos - prev_noisy_r_pos;
     double noisy_dl = noisy_l_pos - prev_noisy_l_pos;
 
-    // Calculate linear velocity from positions
+    // Calculate linear velocity from change in angle
     double noisy_robot_vel = calcLinearVelocity(noisy_dr, noisy_dl, curr_time);
 
     // Publish noisy data (which even more noisy than gt)

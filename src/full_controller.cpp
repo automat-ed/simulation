@@ -34,12 +34,6 @@ int main(int argc, char **argv)
       supervisor->getMotor("rear_left_wheel"),
       supervisor->getMotor("rear_right_wheel")};
 
-  // Turn on LEDs
-  supervisor->getLED("front_left_led")->set(1);
-  supervisor->getLED("front_right_led")->set(1);
-  supervisor->getLED("rear_left_led")->set(1);
-  supervisor->getLED("rear_right_led")->set(1);
-
   // Instantiate sensor wrappers
   AutomatED::Lidar lidar = AutomatED::Lidar(supervisor, &nh);
   AutomatED::GPS gps = AutomatED::GPS(supervisor, &nh);
@@ -53,10 +47,17 @@ int main(int argc, char **argv)
 
   // Instaniate keyboard steering
   AutomatED::KeyboardController *keyboard;
-  if (use_keyboard_control) {
+  if (use_keyboard_control)
+  {
     keyboard = new AutomatED::KeyboardController(supervisor, &nh);
   }
-  
+
+  // Turn on LEDs
+  supervisor->getLED("front_left_led")->set(1);
+  supervisor->getLED("front_right_led")->set(1);
+  supervisor->getLED("rear_left_led")->set(1);
+  supervisor->getLED("rear_right_led")->set(1);
+
   while (supervisor->step(step_size) != -1)
   {
     lidar.publishLaserScan();

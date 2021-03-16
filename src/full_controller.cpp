@@ -4,6 +4,7 @@
 #include "sensors/gyro.hpp"
 #include "sensors/inertialUnit.hpp"
 #include "sensors/lidar.hpp"
+#include "sensors/wheelOdom.hpp"
 #include "steering/diffSteering.hpp"
 #include "utils/KeyboardController.hpp"
 #include "webots/Motor.hpp"
@@ -41,6 +42,7 @@ int main(int argc, char **argv)
   AutomatED::Gyro gyro = AutomatED::Gyro(supervisor, &nh);
   AutomatED::Accelerometer accelerometer =
       AutomatED::Accelerometer(supervisor, &nh);
+  AutomatED::WheelOdom wheel_odom(supervisor, &nh);
 
   // Instantiate steering
   AutomatED::DiffSteering diffSteering = AutomatED::DiffSteering(motors, &nh);
@@ -65,7 +67,7 @@ int main(int argc, char **argv)
     imu.publishImuQuaternion();
     gyro.publishGyro();
     accelerometer.publishAccelerometer();
-    diffSteering.publish();
+    wheel_odom.publishWheelOdom();
 
     if (use_keyboard_control)
     {

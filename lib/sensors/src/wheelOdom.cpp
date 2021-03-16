@@ -47,6 +47,8 @@ WheelOdom::WheelOdom(webots::Supervisor *webots_supervisor, ros::NodeHandle *ros
     // Initalize position values
     prev_r_pos = 0;
     prev_l_pos = 0;
+    prev_noisy_r_pos = 0;
+    prev_noisy_l_pos = 0;
     prev_time = ros::Time::now();
 
     // Initialize generator with seed

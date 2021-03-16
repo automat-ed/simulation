@@ -77,8 +77,8 @@ void WheelOdom::publishWheelOdom()
     double fl_pos = fl_odom->getValue();
 
     // Take average of each side
-    double r_pos = (rr_pos + rl_pos) / 2;
-    double l_pos = (fr_pos + fl_pos) / 2;
+    double r_pos = (rr_pos + fr_pos) / 2;
+    double l_pos = (rl_pos + fl_pos) / 2;
 
     // Calculate linear velocity from positions
     double robot_vel = calcLinearVelocity(r_pos, l_pos, curr_time);
@@ -97,8 +97,8 @@ void WheelOdom::publishWheelOdom()
     double noisy_fl_pos = fl_pos + gaussianNoise();
 
     // Take average of each side
-    double noisy_r_pos = (noisy_rr_pos + noisy_rl_pos) / 2;
-    double noisy_l_pos = (noisy_fr_pos + noisy_fl_pos) / 2;
+    double noisy_r_pos = (noisy_rr_pos + noisy_fr_pos) / 2;
+    double noisy_l_pos = (noisy_rl_pos + noisy_fl_pos) / 2;
 
     // Calculate linear velocity from positions
     double noisy_robot_vel = calcLinearVelocity(noisy_r_pos, noisy_l_pos, curr_time);
@@ -108,6 +108,7 @@ void WheelOdom::publishWheelOdom()
     msg.header.stamp = ros::Time::now();
     msg.header.frame_id = "base_link";
     msg.twist.twist.linear.x = noisy_robot_vel;
+    msg.twist.covariance[0] = std::pow(noise_mean + noise_std, 2);
     noise_pub.publish(msg);
 
     // Save current state for next time
@@ -126,7 +127,7 @@ double WheelOdom::calcLinearVelocity(double r_pos, double l_pos, ros::Time curr_
     double r_vel = r_avel * wheel_radius;
     double l_vel = l_avel * wheel_radius;
 
-    // Calculate linear and rotational velocity of robot
+    // Calculate linear velocity of robot
     return (l_vel + r_vel) / 2;
 }
 

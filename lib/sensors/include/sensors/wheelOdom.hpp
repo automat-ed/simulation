@@ -29,6 +29,8 @@ namespace AutomatED
         // Wheel position
         double prev_r_pos;
         double prev_l_pos;
+        double prev_noisy_r_pos;
+        double prev_noisy_l_pos;
         ros::Time prev_time;
 
         // ROS parameters
@@ -55,7 +57,7 @@ namespace AutomatED
         double gaussianNoise();
 
         // Helpers
-        double calcLinearVelocity(double r_pos, double l_pos, ros::Time curr_time);
+        double calcLinearVelocity(double dr, double dl, ros::Time curr_time);
     };
 
 } // namespace AutomatED

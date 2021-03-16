@@ -80,8 +80,12 @@ void WheelOdom::publishWheelOdom()
     double r_pos = (rr_pos + fr_pos) / 2;
     double l_pos = (rl_pos + fl_pos) / 2;
 
+    // Calculate change in angle
+    double dr = r_pos - prev_r_pos;
+    double dl = l_pos - prev_l_pos;
+
     // Calculate linear velocity from positions
-    double robot_vel = calcLinearVelocity(r_pos, l_pos, curr_time);
+    double robot_vel = calcLinearVelocity(dr, dl, curr_time);
 
     // Publish ground truth (which is still kinda noisy)
     geometry_msgs::TwistWithCovarianceStamped gt;
@@ -100,8 +104,12 @@ void WheelOdom::publishWheelOdom()
     double noisy_r_pos = (noisy_rr_pos + noisy_fr_pos) / 2;
     double noisy_l_pos = (noisy_rl_pos + noisy_fl_pos) / 2;
 
+    // Calculate change in angle
+    double noisy_dr = noisy_r_pos - prev_noisy_r_pos;
+    double noisy_dl = noisy_l_pos - prev_noisy_l_pos;
+
     // Calculate linear velocity from positions
-    double noisy_robot_vel = calcLinearVelocity(noisy_r_pos, noisy_l_pos, curr_time);
+    double noisy_robot_vel = calcLinearVelocity(noisy_dr, noisy_dl, curr_time);
 
     // Publish noisy data (which even more noisy than gt)
     geometry_msgs::TwistWithCovarianceStamped msg;
@@ -112,16 +120,18 @@ void WheelOdom::publishWheelOdom()
     noise_pub.publish(msg);
 
     // Save current state for next time
-    prev_l_pos = l_pos;
     prev_r_pos = r_pos;
+    prev_l_pos = l_pos;
+    prev_noisy_r_pos = noisy_r_pos;
+    prev_noisy_l_pos = noisy_l_pos;
     prev_time = curr_time;
 }
 
-double WheelOdom::calcLinearVelocity(double r_pos, double l_pos, ros::Time curr_time)
+double WheelOdom::calcLinearVelocity(double dr, double dl, ros::Time curr_time)
 {
     // Calculate average angular velocity between two consecutive time stamps
-    double r_avel = (r_pos - prev_r_pos) / (curr_time - prev_time).toSec();
-    double l_avel = (l_pos - prev_l_pos) / (curr_time - prev_time).toSec();
+    double r_avel = dr / (curr_time - prev_time).toSec();
+    double l_avel = dl / (curr_time - prev_time).toSec();
 
     // Convert to linear velocity
     double r_vel = r_avel * wheel_radius;

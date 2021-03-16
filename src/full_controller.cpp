@@ -42,7 +42,7 @@ int main(int argc, char **argv)
   AutomatED::Gyro gyro = AutomatED::Gyro(supervisor, &nh);
   AutomatED::Accelerometer accelerometer =
       AutomatED::Accelerometer(supervisor, &nh);
-  AutomatED::WheelOdom wheel_odom(supervisor, &nh);
+  AutomatED::WheelOdom wheel_odom = AutomatED::WheelOdom(supervisor, &nh);
 
   // Instantiate steering
   AutomatED::DiffSteering diffSteering = AutomatED::DiffSteering(motors, &nh);

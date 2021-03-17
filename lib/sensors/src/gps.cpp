@@ -25,9 +25,7 @@ GPS::GPS(webots::Supervisor *webots_supervisor, ros::NodeHandle *ros_handle)
   nh->param<std::string>("gps/coordinate_topic", coordinate_topic,
                          "/gps/coordinates");
   nh->param("gps/noise_mean", noise_mean, 0.0);
-  nh->param("gps/noise_std", noise_std, 0.1);
-  nh->param("gps/bias_mean", bias_mean, 0.1);
-  nh->param("gps/bias_std", bias_std, 0.001);
+  nh->param("gps/noise_std", noise_std, 0.15);
   nh->param("gps/noise_seed", noise_seed, 17);
 
   // Create publishers
@@ -44,10 +42,6 @@ GPS::GPS(webots::Supervisor *webots_supervisor, ros::NodeHandle *ros_handle)
 
   // Initialize generator with seed
   gen = new std::mt19937{(long unsigned int)noise_seed};
-
-  // Sample bias
-  std::normal_distribution<double> d{bias_mean, bias_std};
-  bias = d(*gen);
 }
 
 GPS::~GPS()
@@ -62,9 +56,12 @@ void GPS::publishGPSCoordinate()
   // Get Coordinate reading from GPS
   const double *reading = gps->getValues();
 
+  // Get time
+  ros::Time current_time = ros::Time::now();
+
   // Publish ground truth
   sensor_msgs::NavSatFix gt;
-  gt.header.stamp = ros::Time::now();
+  gt.header.stamp = current_time;
   gt.header.frame_id = frame_id;
   gt.latitude = reading[0];
   gt.longitude = reading[1];
@@ -72,6 +69,22 @@ void GPS::publishGPSCoordinate()
   gt.position_covariance_type = sensor_msgs::NavSatFix::COVARIANCE_TYPE_DIAGONAL_KNOWN;
   gt.status.service = sensor_msgs::NavSatStatus::SERVICE_GPS;
   gt_coordinate_pub.publish(gt);
+
+  // Publish data with noise
+  sensor_msgs::NavSatFix msg;
+  msg.header.stamp = current_time;
+  msg.header.frame_id = frame_id;
+  msg.latitude = reading[0] + gaussianNoise();
+  msg.longitude = reading[1] + gaussianNoise();
+  msg.altitude = reading[2] + gaussianNoise();
+  msg.position_covariance_type =
+      sensor_msgs::NavSatFix::COVARIANCE_TYPE_DIAGONAL_KNOWN;
+  // Populate variance along the diagonal
+  msg.position_covariance[0] = std::pow(noise_mean + noise_std, 2);
+  msg.position_covariance[4] = std::pow(noise_mean + noise_std, 2);
+  msg.position_covariance[8] = std::pow(noise_mean + noise_std, 2);
+  msg.status.service = sensor_msgs::NavSatStatus::SERVICE_GPS;
+  coordinate_pub.publish(msg);
 }
 
 void GPS::publishTF()

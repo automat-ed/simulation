@@ -32,8 +32,6 @@ namespace AutomatED
     std::string noise_topic;
     double noise_mean;
     double noise_std;
-    double bias_mean;
-    double bias_std;
     int noise_seed;
 
     // ROS publisher
@@ -47,7 +45,6 @@ namespace AutomatED
     // Noise
     std::mt19937 *gen;
     double gaussianNoise();
-    double bias;
   };
 
 } // namespace AutomatED

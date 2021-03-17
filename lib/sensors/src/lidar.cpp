@@ -19,7 +19,7 @@ Lidar::Lidar(webots::Supervisor *webots_supervisor,
 
   // Get ROS parameters
   nh->param<std::string>("lidar/name", lidar_name, "RobotisLds01");
-  nh->param<std::string>("lidar/name", frame_id, "lidar");
+  nh->param<std::string>("lidar/frame_id", frame_id, "lidar");
   nh->param("lidar/sampling_period", sampling_period, 32);
   nh->param<std::string>("lidar/ground_truth_topic", ground_truth_topic,
                          "/lidar/ground_truth");
@@ -116,52 +116,20 @@ void Lidar::publishLaserScan()
 
 void Lidar::publishTF()
 {
-  // Get lidar node
-  webots::Node *lidar_node = wb->getFromDevice(lidar);
-
-  // Get lidar translation
-  webots::Field *lidar_translation_field = lidar_node->getField("translation");
-  const double *lidar_translation = lidar_translation_field->getSFVec3f();
-
-  ROS_DEBUG("Lidar translation: [%f, %f, %f]",
-           lidar_translation[0],
-           lidar_translation[1],
-           lidar_translation[2]);
-
-  // Get lidar rotation
-  webots::Field *lidar_rotation_field = lidar_node->getField("rotation");
-  const double *lidar_rotation = lidar_rotation_field->getSFRotation();
-
-  ROS_DEBUG("Lidar rotation: [%f, %f, %f, %f]",
-           lidar_rotation[0],
-           lidar_rotation[1],
-           lidar_rotation[2],
-           lidar_rotation[3]);
-
   // Create transform msg
   geometry_msgs::TransformStamped msg;
   msg.header.stamp = ros::Time::now();
   msg.header.frame_id = "base_link";
   msg.child_frame_id = frame_id;
 
-  // Translate from Webots to ROS coordinates
-  msg.transform.translation.x = lidar_translation[0];
-  msg.transform.translation.y = -1 * lidar_translation[2];
-  msg.transform.translation.z = lidar_translation[1];
+  msg.transform.translation.x = 0;
+  msg.transform.translation.y = 0;
+  msg.transform.translation.z = 0;
 
-  tf2::Quaternion rot;
-  rot.setRotation({lidar_rotation[0],
-                   lidar_rotation[1],
-                   lidar_rotation[2]}, lidar_rotation[3]);
-
-  tf2::Quaternion ros_to_webots;
-  ros_to_webots.setRPY(1.5708, 0, 0);
-
-  tf2::Quaternion quat = ros_to_webots * rot;
-  msg.transform.rotation.x = quat.x();
-  msg.transform.rotation.y = quat.y();
-  msg.transform.rotation.z = quat.z();
-  msg.transform.rotation.w = quat.w();
+  msg.transform.rotation.x = 0;
+  msg.transform.rotation.y = 0;
+  msg.transform.rotation.z = 0;
+  msg.transform.rotation.w = 1;
 
   static_broadcaster.sendTransform(msg);
 }

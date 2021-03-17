@@ -7,6 +7,7 @@
 #include "steering/diffSteering.hpp"
 #include "utils/KeyboardController.hpp"
 #include "webots/Motor.hpp"
+#include "webots/LED.hpp"
 #include "webots/Supervisor.hpp"
 
 int main(int argc, char **argv)
@@ -32,6 +33,12 @@ int main(int argc, char **argv)
       supervisor->getMotor("front_right_wheel"),
       supervisor->getMotor("rear_left_wheel"),
       supervisor->getMotor("rear_right_wheel")};
+
+  // Turn on LEDs
+  supervisor->getLED("front_left_led")->set(1);
+  supervisor->getLED("front_right_led")->set(1);
+  supervisor->getLED("rear_left_led")->set(1);
+  supervisor->getLED("rear_right_led")->set(1);
 
   // Instantiate sensor wrappers
   AutomatED::Lidar lidar = AutomatED::Lidar(supervisor, &nh);

@@ -25,7 +25,7 @@ GPS::GPS(webots::Supervisor *webots_supervisor, ros::NodeHandle *ros_handle)
   nh->param<std::string>("gps/coordinate_topic", coordinate_topic,
                          "/gps/coordinates");
   nh->param("gps/noise_mean", noise_mean, 0.0);
-  nh->param("gps/noise_std", noise_std, 0.15);
+  nh->param("gps/noise_std", noise_std, 0.000001);
   nh->param("gps/noise_seed", noise_seed, 17);
 
   // Create publishers

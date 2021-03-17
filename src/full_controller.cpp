@@ -7,6 +7,7 @@
 #include "steering/diffSteering.hpp"
 #include "utils/KeyboardController.hpp"
 #include "webots/Motor.hpp"
+#include "webots/LED.hpp"
 #include "webots/Supervisor.hpp"
 
 int main(int argc, char **argv)
@@ -33,6 +34,12 @@ int main(int argc, char **argv)
       supervisor->getMotor("rear_left_wheel"),
       supervisor->getMotor("rear_right_wheel")};
 
+  // Turn on LEDs
+  supervisor->getLED("front_left_led")->set(1);
+  supervisor->getLED("front_right_led")->set(1);
+  supervisor->getLED("rear_left_led")->set(1);
+  supervisor->getLED("rear_right_led")->set(1);
+
   // Instantiate sensor wrappers
   AutomatED::Lidar lidar = AutomatED::Lidar(supervisor, &nh);
   AutomatED::GPS gps = AutomatED::GPS(supervisor, &nh);
@@ -45,9 +52,11 @@ int main(int argc, char **argv)
   AutomatED::DiffSteering diffSteering = AutomatED::DiffSteering(motors, &nh);
 
   // Instaniate keyboard steering
-  AutomatED::KeyboardController keyboard =
-      AutomatED::KeyboardController(supervisor, &nh);
-
+  AutomatED::KeyboardController *keyboard;
+  if (use_keyboard_control) {
+    keyboard = new AutomatED::KeyboardController(supervisor, &nh);
+  }
+  
   while (supervisor->step(step_size) != -1)
   {
     lidar.publishLaserScan();
@@ -59,7 +68,7 @@ int main(int argc, char **argv)
 
     if (use_keyboard_control)
     {
-      keyboard.keyLoop();
+      keyboard->keyLoop();
     }
 
     ros::spinOnce();

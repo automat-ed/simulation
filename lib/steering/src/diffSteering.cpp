@@ -22,11 +22,6 @@ DiffSteering::DiffSteering(std::vector<webots::Motor *> motors,
   nh->param("wheel_separation", wheel_separation, 0.6);
   nh->param("wheel_radius", wheel_radius, 0.12);
 
-  // Create publishers
-  ground_truth_pub =
-      nh->advertise<geometry_msgs::TwistWithCovarianceStamped>(ground_truth_topic, 1);
-  noise_pub = nh->advertise<geometry_msgs::TwistWithCovarianceStamped>(noise_topic, 1);
-
   // Create Subscriber
   cmd_vel_sub =
       nh->subscribe("/cmd_vel", 1, &DiffSteering::velocityCallback, this);
@@ -42,8 +37,6 @@ DiffSteering::DiffSteering(std::vector<webots::Motor *> motors,
 DiffSteering::~DiffSteering()
 {
   // Clean up
-  ground_truth_pub.shutdown();
-  noise_pub.shutdown();
   cmd_vel_sub.shutdown();
   stopMotors();
 }

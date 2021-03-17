@@ -25,8 +25,6 @@ InertialUnit::InertialUnit(webots::Supervisor *webots_supervisor,
   nh->param<std::string>("imu/noise_topic", noise_topic, "/imu/data");
   nh->param("imu/noise_mean", noise_mean, 0.0);
   nh->param("imu/noise_std", noise_std, 0.02);
-  nh->param("imu/bias_mean", bias_mean, 0.005);
-  nh->param("imu/bias_std", bias_std, 0.001);
   nh->param<int>("imu/noise_seed", noise_seed, 17);
 
   // Create publishers
@@ -42,10 +40,6 @@ InertialUnit::InertialUnit(webots::Supervisor *webots_supervisor,
 
   // Initialize generator with seed
   gen = new std::mt19937{(long unsigned int)noise_seed};
-
-  // Sample bias
-  std::normal_distribution<double> d{bias_mean, bias_std};
-  bias = d(*gen);
 }
 
 InertialUnit::~InertialUnit()
@@ -60,6 +54,9 @@ void InertialUnit::publishImuQuaternion()
   // Get sensor reading
   const double *reading = imu->getRollPitchYaw();
 
+  // Get time
+  ros::Time current_time = ros::Time::now();
+
   // Extract data
   double webots_yaw = reading[2];
 
@@ -73,7 +70,7 @@ void InertialUnit::publishImuQuaternion()
 
   // Publish ground truth
   sensor_msgs::Imu gt;
-  gt.header.stamp = ros::Time::now();
+  gt.header.stamp = current_time;
   gt.header.frame_id = frame_id;
   gt.orientation.x = quaternion.getX();
   gt.orientation.y = quaternion.getY();
@@ -82,6 +79,24 @@ void InertialUnit::publishImuQuaternion()
   gt.angular_velocity_covariance[0] = -1;      // no information
   gt.linear_acceleration_covariance[0] = -1.0; // no information
   ground_truth_pub.publish(gt);
+
+  // Convert to Quaternion (with noise)
+  tf2::Quaternion noisy_quaternion;
+  noisy_quaternion.setRPY(0, 0, webots_yaw + gaussianNoise());
+  noisy_quaternion.normalize();
+
+  // Publish noisy data
+  sensor_msgs::Imu msg;
+  msg.header.stamp = current_time;
+  msg.header.frame_id = frame_id;
+  msg.orientation.x = noisy_quaternion.getX();
+  msg.orientation.y = noisy_quaternion.getY();
+  msg.orientation.z = noisy_quaternion.getZ();
+  msg.orientation.w = noisy_quaternion.getW();
+  msg.orientation_covariance[8] = std::pow(noise_mean + noise_std, 2);
+  msg.angular_velocity_covariance[0] = -1;      // no information
+  msg.linear_acceleration_covariance[0] = -1.0; // no information
+  noise_pub.publish(msg);
 }
 
 void InertialUnit::publishTF()

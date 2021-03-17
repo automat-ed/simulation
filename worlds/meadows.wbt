@@ -6,7 +6,7 @@ WorldInfo {
   ]
   coordinateSystem "NUE"
   gpsCoordinateSystem "WGS84"
-  gpsReference 55.94168 -3.19207 0
+  gpsReference 55.94168 -3.19207 50
   lineScale 3
 }
 Viewpoint {

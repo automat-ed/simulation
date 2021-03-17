@@ -2,7 +2,7 @@
 WorldInfo {
   coordinateSystem "NUE"
   gpsCoordinateSystem "WGS84"
-  gpsReference 50 0 0
+  gpsReference 50 50 50
 }
 Viewpoint {
   orientation 0.9113685411687799 0.39270023148399746 0.12326358083515525 5.6198074471793396

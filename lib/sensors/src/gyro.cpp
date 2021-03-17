@@ -22,8 +22,6 @@ Gyro::Gyro(webots::Supervisor *webots_supervisor, ros::NodeHandle *ros_handle)
   nh->param<std::string>("gyro/noise_topic", noise_topic, "/gyro/data");
   nh->param("gyro/noise_mean", noise_mean, 0.0);
   nh->param("gyro/noise_std", noise_std, 0.0002);
-  nh->param("gyro/bias_mean", bias_mean, 0.0000075);
-  nh->param("gyro/bias_std", bias_std, 0.0000008);
   nh->param<int>("gyro/noise_seed", noise_seed, 17);
 
   // Create publishers
@@ -39,10 +37,6 @@ Gyro::Gyro(webots::Supervisor *webots_supervisor, ros::NodeHandle *ros_handle)
 
   // Initialize generator with seed
   gen = new std::mt19937{(long unsigned int)noise_seed};
-
-  // Sample bias
-  std::normal_distribution<double> d{bias_mean, bias_std};
-  bias = d(*gen);
 }
 
 Gyro::~Gyro()
@@ -57,6 +51,9 @@ void Gyro::publishGyro()
   // Get data from Gyro
   const double *reading = gyro->getValues();
 
+  // Get time
+  ros::Time current_time = ros::Time::now();
+
   // Extract data
   double webots_x = reading[0];
   double webots_y = reading[1];
@@ -64,17 +61,30 @@ void Gyro::publishGyro()
 
   // Publish ground truth
   sensor_msgs::Imu gt;
-  gt.header.stamp = ros::Time::now();
+  gt.header.stamp = current_time;
   gt.header.frame_id = frame_id;
-
   // Unset values are set to 0 by default
   gt.orientation_covariance[0] = -1.0; // means no orientation information
   gt.angular_velocity.x = 0;
   gt.angular_velocity.y = 0;
   gt.angular_velocity.z = webots_y;
-  gt.linear_acceleration_covariance[0] = -1.0; // means no information
+  gt.linear_acceleration_covariance[0] = -1.0; // means no lin acc information
 
   ground_truth_pub.publish(gt);
+
+  // Publish noisy data
+  sensor_msgs::Imu msg;
+  msg.header.stamp = current_time;
+  msg.header.frame_id = frame_id;
+  // Unset values are set to 0 by default
+  msg.orientation_covariance[0] = -1.0; // means no orientation information
+  msg.angular_velocity.x = 0;
+  msg.angular_velocity.y = 0;
+  msg.angular_velocity.z = webots_y + gaussianNoise();
+  msg.angular_velocity_covariance[8] = std::pow(noise_mean + noise_std, 2);
+  msg.linear_acceleration_covariance[0] = -1.0; // means no lin acc information
+
+  noise_pub.publish(msg);
 }
 
 void Gyro::publishTF()

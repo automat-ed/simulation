@@ -26,8 +26,6 @@ Accelerometer::Accelerometer(webots::Supervisor *webots_supervisor,
                          "/accelerometer/data");
   nh->param("accelerometer/noise_mean", noise_mean, 0.0);
   nh->param("accelerometer/noise_std", noise_std, 0.017);
-  nh->param("accelerometer/bias_mean", bias_mean, 0.1);
-  nh->param("accelerometer/bias_std", bias_std, 0.001);
   nh->param<int>("accelerometer/noise_seed", noise_seed, 17);
 
   // Create publishers
@@ -43,10 +41,6 @@ Accelerometer::Accelerometer(webots::Supervisor *webots_supervisor,
 
   // Initialize generator with seed
   gen = new std::mt19937{(long unsigned int)noise_seed};
-
-  // Sample bias
-  std::normal_distribution<double> d{bias_mean, bias_std};
-  bias = d(*gen);
 }
 
 Accelerometer::~Accelerometer()
@@ -66,22 +60,37 @@ void Accelerometer::publishAccelerometer()
   double webots_y = reading[1];
   double webots_z = reading[2];
 
+  // Get time
+  ros::Time current_time = ros::Time::now();
+
   // Publish ground truth
   sensor_msgs::Imu gt;
-  gt.header.stamp = ros::Time::now();
+  gt.header.stamp = current_time;
   gt.header.frame_id = frame_id;
 
   // Unset values are set to 0 by default
-  gt.orientation_covariance[0] = -1.0; // means no orientation information
-  gt.angular_velocity_covariance[0] = -1.0; // no angular_velocity information
+  gt.orientation_covariance[0] = -1.0;      // means no orientation information
+  gt.angular_velocity_covariance[0] = -1.0; // no angular velocity information
   gt.linear_acceleration.x = webots_x;
   gt.linear_acceleration.y = 0;
   gt.linear_acceleration.z = 0;
 
-  for (int i = 0; i < 9; i++) // means "covariance unknown"
-    gt.linear_acceleration_covariance[i] = 0;
-
   ground_truth_pub.publish(gt);
+
+  // Publish noisy data
+  sensor_msgs::Imu msg;
+  msg.header.stamp = current_time;
+  msg.header.frame_id = frame_id;
+
+  // Unset values are set to 0 by default
+  msg.orientation_covariance[0] = -1.0;      // means no orientation information
+  msg.angular_velocity_covariance[0] = -1.0; // no angular velocity information
+  msg.linear_acceleration.x = webots_x + gaussianNoise();
+  msg.linear_acceleration.y = 0;
+  msg.linear_acceleration.z = 0;
+  msg.linear_acceleration_covariance[0] = std::pow(noise_mean + noise_std, 2);
+
+  noise_pub.publish(msg);
 }
 
 void Accelerometer::publishTF()

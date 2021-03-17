@@ -27,10 +27,6 @@ namespace AutomatED
     double wheel_separation;
     double wheel_radius;
 
-    // ROS publisher
-    ros::Publisher ground_truth_pub;
-    ros::Publisher noise_pub;
-
     // ROS Subscriber
     ros::Subscriber cmd_vel_sub;
 

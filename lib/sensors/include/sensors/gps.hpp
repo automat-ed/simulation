@@ -26,8 +26,6 @@ namespace AutomatED
     std::string gps_name;
     std::string frame_id;
     int sampling_period;
-    std::string gt_coordinate_topic;
-    std::string coordinate_topic;
     double noise_mean;
     double noise_std;
     int noise_seed;

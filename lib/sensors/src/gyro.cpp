@@ -17,16 +17,13 @@ Gyro::Gyro(webots::Supervisor *webots_supervisor, ros::NodeHandle *ros_handle)
   nh->param<std::string>("gyro/name", gyro_name, "gyro");
   nh->param<std::string>("gyro/frame_id", frame_id, "gyro");
   nh->param("gyro/sampling_period", sampling_period, 32);
-  nh->param<std::string>("gyro/ground_truth_topic", ground_truth_topic,
-                         "/gyro/ground_truth");
-  nh->param<std::string>("gyro/noise_topic", noise_topic, "/gyro/data");
   nh->param("gyro/noise_mean", noise_mean, 0.0);
   nh->param("gyro/noise_std", noise_std, 0.0002);
   nh->param<int>("gyro/noise_seed", noise_seed, 17);
 
   // Create publishers
-  ground_truth_pub = nh->advertise<sensor_msgs::Imu>(ground_truth_topic, 1);
-  noise_pub = nh->advertise<sensor_msgs::Imu>(noise_topic, 1);
+  ground_truth_pub = nh->advertise<sensor_msgs::Imu>("/gyro/ground_truth", 1);
+  noise_pub = nh->advertise<sensor_msgs::Imu>("/gyro/data", 1);
 
   // Setup IMU device
   gyro = wb->getGyro(gyro_name);

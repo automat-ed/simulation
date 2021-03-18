@@ -20,17 +20,13 @@ Accelerometer::Accelerometer(webots::Supervisor *webots_supervisor,
                          "accelerometer");
   nh->param<std::string>("accelerometer/frame_id", frame_id, "accelerometer");
   nh->param("accelerometer/sampling_period", sampling_period, 32);
-  nh->param<std::string>("accelerometer/ground_truth_topic", ground_truth_topic,
-                         "/accelerometer/ground_truth");
-  nh->param<std::string>("accelerometer/noise_topic", noise_topic,
-                         "/accelerometer/data");
   nh->param("accelerometer/noise_mean", noise_mean, 0.0);
   nh->param("accelerometer/noise_std", noise_std, 0.017);
   nh->param<int>("accelerometer/noise_seed", noise_seed, 17);
 
   // Create publishers
-  ground_truth_pub = nh->advertise<sensor_msgs::Imu>(ground_truth_topic, 1);
-  noise_pub = nh->advertise<sensor_msgs::Imu>(noise_topic, 1);
+  ground_truth_pub = nh->advertise<sensor_msgs::Imu>("/accelerometer/ground_truth", 1);
+  noise_pub = nh->advertise<sensor_msgs::Imu>("/accelerometer/data", 1);
 
   // Setup accelerometer device
   accelerometer = wb->getAccelerometer(accelerometer_name);

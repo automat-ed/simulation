@@ -20,18 +20,14 @@ GPS::GPS(webots::Supervisor *webots_supervisor, ros::NodeHandle *ros_handle)
   nh->param<std::string>("gps/name", gps_name, "gps");
   nh->param<std::string>("gps/frame_id", frame_id, "gps");
   nh->param("gps/sampling_period", sampling_period, 32);
-  nh->param<std::string>("gps/gt_coordinate_topic", gt_coordinate_topic,
-                         "/gps/ground_truth/coordinates");
-  nh->param<std::string>("gps/coordinate_topic", coordinate_topic,
-                         "/gps/coordinates");
   nh->param("gps/noise_mean", noise_mean, 0.0);
   nh->param("gps/noise_std", noise_std, 0.15);
   nh->param("gps/noise_seed", noise_seed, 17);
 
   // Create publishers
   gt_coordinate_pub =
-      nh->advertise<sensor_msgs::NavSatFix>(gt_coordinate_topic, 1);
-  coordinate_pub = nh->advertise<sensor_msgs::NavSatFix>(coordinate_topic, 1);
+      nh->advertise<sensor_msgs::NavSatFix>("/gps/ground_truth/coordinates", 1);
+  coordinate_pub = nh->advertise<sensor_msgs::NavSatFix>("/gps/coordinates", 1);
 
   // Setup GPS device
   gps = wb->getGPS(gps_name);

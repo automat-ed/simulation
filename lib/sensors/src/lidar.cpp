@@ -21,17 +21,14 @@ Lidar::Lidar(webots::Supervisor *webots_supervisor,
   nh->param<std::string>("lidar/name", lidar_name, "RobotisLds01");
   nh->param<std::string>("lidar/frame_id", frame_id, "lidar");
   nh->param("lidar/sampling_period", sampling_period, 32);
-  nh->param<std::string>("lidar/ground_truth_topic", ground_truth_topic,
-                         "/lidar/ground_truth");
-  nh->param<std::string>("lidar/noise_topic", noise_topic, "/lidar/data");
   nh->param("lidar/noise_mean", noise_mean, 0.0);
   nh->param("lidar/noise_std", noise_std, 0.01);
   nh->param<int>("lidar/noise_seed", noise_seed, 17);
 
   // Create publishers
   ground_truth_pub =
-      nh->advertise<sensor_msgs::LaserScan>(ground_truth_topic, 1);
-  noise_pub = nh->advertise<sensor_msgs::LaserScan>(noise_topic, 1);
+      nh->advertise<sensor_msgs::LaserScan>("/lidar/ground_truth", 1);
+  noise_pub = nh->advertise<sensor_msgs::LaserScan>("/lidar/data", 1);
 
   // Setup LiDAR device
   lidar = wb->getLidar(lidar_name);

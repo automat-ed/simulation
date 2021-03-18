@@ -21,7 +21,7 @@ GPS::GPS(webots::Supervisor *webots_supervisor, ros::NodeHandle *ros_handle)
   nh->param<std::string>("gps/frame_id", frame_id, "gps");
   nh->param("gps/sampling_period", sampling_period, 32);
   nh->param("gps/noise_mean", noise_mean, 0.0);
-  nh->param("gps/noise_std", noise_std, 0.15);
+  nh->param("gps/noise_std", noise_std, 0.000001);
   nh->param("gps/noise_seed", noise_seed, 17);
 
   // Create publishers

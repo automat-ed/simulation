@@ -69,7 +69,6 @@ int main(int argc, char **argv)
     accelerometer.publishAccelerometer();
     wheel_odom.publishWheelOdom();
 
-
     if (use_keyboard_control)
     {
       keyboard->keyLoop();

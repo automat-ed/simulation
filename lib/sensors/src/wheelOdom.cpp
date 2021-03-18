@@ -20,8 +20,6 @@ WheelOdom::WheelOdom(webots::Supervisor *webots_supervisor, ros::NodeHandle *ros
     nh->param<std::string>("wheel_odom/front_left_name", fl_name, "fl_odom");
     nh->param<std::string>("wheel_odom/frame_id", frame_id, "base_link");
     nh->param("wheel_odom/sampling_period", sampling_period, 32);
-    nh->param<std::string>("wheel_odom/ground_truth_topic", ground_truth_topic, "/wheel_odom/ground_truth");
-    nh->param<std::string>("wheel_odom/noise_topic", noise_topic, "/wheel_odom/data");
     nh->param("wheel_odom/noise_mean", noise_mean, 0.0);
     nh->param("wheel_odom/noise_std", noise_std, 0.002);
     nh->param<int>("wheel_odom/noise_seed", noise_seed, 17);
@@ -29,8 +27,8 @@ WheelOdom::WheelOdom(webots::Supervisor *webots_supervisor, ros::NodeHandle *ros
     nh->param("wheel_radius", wheel_radius, 0.12);
 
     // Create publishers
-    ground_truth_pub = nh->advertise<geometry_msgs::TwistWithCovarianceStamped>(ground_truth_topic, 1);
-    noise_pub = nh->advertise<geometry_msgs::TwistWithCovarianceStamped>(noise_topic, 1);
+    ground_truth_pub = nh->advertise<geometry_msgs::TwistWithCovarianceStamped>("/wheel_odom/ground_truth", 1);
+    noise_pub = nh->advertise<geometry_msgs::TwistWithCovarianceStamped>("/wheel_odom/data", 1);
 
     // Get wheel position sensors
     rr_odom = wb->getPositionSensor(rr_name);

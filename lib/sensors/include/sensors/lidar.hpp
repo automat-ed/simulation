@@ -27,8 +27,6 @@ namespace AutomatED
     std::string lidar_name;
     std::string frame_id;
     int sampling_period;
-    std::string ground_truth_topic;
-    std::string noise_topic;
     double noise_mean;
     double noise_std;
     int noise_seed;

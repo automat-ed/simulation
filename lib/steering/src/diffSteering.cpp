@@ -15,10 +15,6 @@ DiffSteering::DiffSteering(std::vector<webots::Motor *> motors,
 
   // Get ROS parameters
   nh->param<std::string>("wheel_odom/frame_id", frame_id, "base_link");
-  nh->param<std::string>("wheel_odom/ground_truth_topic", ground_truth_topic,
-                         "/wheel_odom/ground_truth");
-  nh->param<std::string>("wheel_odom/noise_topic", noise_topic,
-                         "/wheel_odom/data");
   nh->param("wheel_separation", wheel_separation, 0.6);
   nh->param("wheel_radius", wheel_radius, 0.12);
 

@@ -20,19 +20,13 @@ Accelerometer::Accelerometer(webots::Supervisor *webots_supervisor,
                          "accelerometer");
   nh->param<std::string>("accelerometer/frame_id", frame_id, "accelerometer");
   nh->param("accelerometer/sampling_period", sampling_period, 32);
-  nh->param<std::string>("accelerometer/ground_truth_topic", ground_truth_topic,
-                         "/accelerometer/ground_truth");
-  nh->param<std::string>("accelerometer/noise_topic", noise_topic,
-                         "/accelerometer/data");
   nh->param("accelerometer/noise_mean", noise_mean, 0.0);
   nh->param("accelerometer/noise_std", noise_std, 0.017);
-  nh->param("accelerometer/bias_mean", bias_mean, 0.1);
-  nh->param("accelerometer/bias_std", bias_std, 0.001);
   nh->param<int>("accelerometer/noise_seed", noise_seed, 17);
 
   // Create publishers
-  ground_truth_pub = nh->advertise<sensor_msgs::Imu>(ground_truth_topic, 1);
-  noise_pub = nh->advertise<sensor_msgs::Imu>(noise_topic, 1);
+  ground_truth_pub = nh->advertise<sensor_msgs::Imu>("/accelerometer/ground_truth", 1);
+  noise_pub = nh->advertise<sensor_msgs::Imu>("/accelerometer/data", 1);
 
   // Setup accelerometer device
   accelerometer = wb->getAccelerometer(accelerometer_name);
@@ -43,10 +37,6 @@ Accelerometer::Accelerometer(webots::Supervisor *webots_supervisor,
 
   // Initialize generator with seed
   gen = new std::mt19937{(long unsigned int)noise_seed};
-
-  // Sample bias
-  std::normal_distribution<double> d{bias_mean, bias_std};
-  bias = d(*gen);
 }
 
 Accelerometer::~Accelerometer()
@@ -61,96 +51,60 @@ void Accelerometer::publishAccelerometer()
   // Read from sensor
   const double *reading = accelerometer->getValues();
 
+  // Extract data
+  double webots_x = reading[0];
+  double webots_y = reading[1];
+  double webots_z = reading[2];
+
+  // Get time
+  ros::Time current_time = ros::Time::now();
+
   // Publish ground truth
   sensor_msgs::Imu gt;
-  gt.header.stamp = ros::Time::now();
+  gt.header.stamp = current_time;
   gt.header.frame_id = frame_id;
 
   // Unset values are set to 0 by default
-  gt.orientation_covariance[0] = -1.0; // means no orientation information
-  gt.angular_velocity_covariance[0] = -1.0; // no angular_velocity information
-  gt.linear_acceleration.x = reading[0];
-  gt.linear_acceleration.y = reading[1];
-  gt.linear_acceleration.z = reading[2];
-
-  for (int i = 0; i < 9; i++) // means "covariance unknown"
-    gt.linear_acceleration_covariance[i] = 0;
+  gt.orientation_covariance[0] = -1.0;      // means no orientation information
+  gt.angular_velocity_covariance[0] = -1.0; // no angular velocity information
+  gt.linear_acceleration.x = webots_x;
+  gt.linear_acceleration.y = 0;
+  gt.linear_acceleration.z = 0;
 
   ground_truth_pub.publish(gt);
 
   // Publish noisy data
   sensor_msgs::Imu msg;
-  msg.header.stamp = ros::Time::now();
+  msg.header.stamp = current_time;
   msg.header.frame_id = frame_id;
 
   // Unset values are set to 0 by default
-  msg.orientation_covariance[0] = -1;      // means no orientation information
-  msg.angular_velocity_covariance[0] = -1; // no angular_velocity information
-  msg.linear_acceleration.x = reading[0] + bias + gaussianNoise();
-  msg.linear_acceleration.y = reading[1] + bias + gaussianNoise();
-  msg.linear_acceleration.z = reading[2] + bias + gaussianNoise();
-
-  // Populate variance along the diagonal
-  msg.linear_acceleration_covariance[0] = std::pow(bias + noise_mean + noise_std, 2);
-  msg.linear_acceleration_covariance[4] = std::pow(bias + noise_mean + noise_std, 2);
-  msg.linear_acceleration_covariance[8] = std::pow(bias + noise_mean + noise_std, 2);
+  msg.orientation_covariance[0] = -1.0;      // means no orientation information
+  msg.angular_velocity_covariance[0] = -1.0; // no angular velocity information
+  msg.linear_acceleration.x = webots_x + gaussianNoise();
+  msg.linear_acceleration.y = 0;
+  msg.linear_acceleration.z = 0;
+  msg.linear_acceleration_covariance[0] = std::pow(noise_mean + noise_std, 2);
 
   noise_pub.publish(msg);
 }
 
 void Accelerometer::publishTF()
 {
-  // Get accelerometer node
-  webots::Node *accelerometer_node = wb->getFromDevice(accelerometer);
-
-  // Get accelerometer translation
-  webots::Field *accelerometer_translation_field =
-      accelerometer_node->getField("translation");
-  const double *accelerometer_translation =
-      accelerometer_translation_field->getSFVec3f();
-
-  ROS_DEBUG("Accelerometer translation: [%f, %f, %f]",
-            accelerometer_translation[0],
-            accelerometer_translation[1],
-            accelerometer_translation[2]);
-
-  // Get accelerometer rotation
-  webots::Field *accelerometer_rotation_field =
-      accelerometer_node->getField("rotation");
-  const double *accelerometer_rotation =
-      accelerometer_rotation_field->getSFRotation();
-
-  ROS_DEBUG("Accelerometer rotation: [%f, %f, %f, %f]",
-            accelerometer_rotation[0],
-            accelerometer_rotation[1],
-            accelerometer_rotation[2],
-            accelerometer_rotation[3]);
-
   // Create transform msg
   geometry_msgs::TransformStamped msg;
   msg.header.stamp = ros::Time::now();
   msg.header.frame_id = "base_link";
   msg.child_frame_id = frame_id;
 
-  // Translate from ROS to Webots coordinates
-  msg.transform.translation.x = accelerometer_translation[0];
-  msg.transform.translation.y = -1 * accelerometer_translation[2];
-  msg.transform.translation.z = accelerometer_translation[1];
+  msg.transform.translation.x = 0;
+  msg.transform.translation.y = 0;
+  msg.transform.translation.z = 0;
 
-  tf2::Quaternion rot;
-  rot.setRotation({accelerometer_rotation[0],
-                   accelerometer_rotation[1],
-                   accelerometer_rotation[2]}, accelerometer_rotation[3]);
-
-  tf2::Quaternion ros_to_webots;
-  ros_to_webots.setRPY(1.5708, 0, 0);
-
-  tf2::Quaternion quat = ros_to_webots * rot;
-  quat.normalize();
-  msg.transform.rotation.x = quat.x();
-  msg.transform.rotation.y = quat.y();
-  msg.transform.rotation.z = quat.z();
-  msg.transform.rotation.w = quat.w();
+  msg.transform.rotation.x = 0;
+  msg.transform.rotation.y = 0;
+  msg.transform.rotation.z = 0;
+  msg.transform.rotation.w = 1;
 
   static_broadcaster.sendTransform(msg);
 }

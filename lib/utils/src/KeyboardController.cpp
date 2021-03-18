@@ -7,7 +7,7 @@ using namespace AutomatED;
 
 KeyboardController::KeyboardController(webots::Supervisor *webots_supervisor,
                                        ros::NodeHandle *ros_handle) {
-  ROS_INFO("Starting C++ Keyboard Controller...");
+  ROS_INFO("Starting C++ keyboard controller...");
 
   // ROS Node Handle
   nh_ = ros_handle;

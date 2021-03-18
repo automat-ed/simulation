@@ -4,9 +4,11 @@
 #include "sensors/gyro.hpp"
 #include "sensors/inertialUnit.hpp"
 #include "sensors/lidar.hpp"
+#include "sensors/wheelOdom.hpp"
 #include "steering/diffSteering.hpp"
 #include "utils/KeyboardController.hpp"
 #include "webots/Motor.hpp"
+#include "webots/LED.hpp"
 #include "webots/Supervisor.hpp"
 
 int main(int argc, char **argv)
@@ -40,13 +42,23 @@ int main(int argc, char **argv)
   AutomatED::Gyro gyro = AutomatED::Gyro(supervisor, &nh);
   AutomatED::Accelerometer accelerometer =
       AutomatED::Accelerometer(supervisor, &nh);
+  AutomatED::WheelOdom wheel_odom = AutomatED::WheelOdom(supervisor, &nh);
 
   // Instantiate steering
   AutomatED::DiffSteering diffSteering = AutomatED::DiffSteering(motors, &nh);
 
   // Instaniate keyboard steering
-  AutomatED::KeyboardController keyboard =
-      AutomatED::KeyboardController(supervisor, &nh);
+  AutomatED::KeyboardController *keyboard;
+  if (use_keyboard_control)
+  {
+    keyboard = new AutomatED::KeyboardController(supervisor, &nh);
+  }
+
+  // Turn on LEDs
+  supervisor->getLED("front_left_led")->set(1);
+  supervisor->getLED("front_right_led")->set(1);
+  supervisor->getLED("rear_left_led")->set(1);
+  supervisor->getLED("rear_right_led")->set(1);
 
   while (supervisor->step(step_size) != -1)
   {
@@ -55,11 +67,11 @@ int main(int argc, char **argv)
     imu.publishImuQuaternion();
     gyro.publishGyro();
     accelerometer.publishAccelerometer();
-    diffSteering.publish();
+    wheel_odom.publishWheelOdom();
 
     if (use_keyboard_control)
     {
-      keyboard.keyLoop();
+      keyboard->keyLoop();
     }
 
     ros::spinOnce();

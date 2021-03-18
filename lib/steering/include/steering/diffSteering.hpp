@@ -22,8 +22,6 @@ namespace AutomatED
 
     // ROS Parameters
     std::string frame_id;
-    std::string ground_truth_topic;
-    std::string noise_topic;
     double wheel_separation;
     double wheel_radius;
 

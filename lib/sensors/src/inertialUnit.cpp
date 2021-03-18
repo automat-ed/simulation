@@ -20,16 +20,13 @@ InertialUnit::InertialUnit(webots::Supervisor *webots_supervisor,
   nh->param<std::string>("imu/name", imu_name, "imu");
   nh->param<std::string>("imu/frame_id", frame_id, "imu");
   nh->param("imu/sampling_period", sampling_period, 32);
-  nh->param<std::string>("imu/ground_truth_topic", ground_truth_topic,
-                         "/imu/ground_truth");
-  nh->param<std::string>("imu/noise_topic", noise_topic, "/imu/data");
   nh->param("imu/noise_mean", noise_mean, 0.0);
   nh->param("imu/noise_std", noise_std, 0.02);
   nh->param<int>("imu/noise_seed", noise_seed, 17);
 
   // Create publishers
-  ground_truth_pub = nh->advertise<sensor_msgs::Imu>(ground_truth_topic, 1);
-  noise_pub = nh->advertise<sensor_msgs::Imu>(noise_topic, 1);
+  ground_truth_pub = nh->advertise<sensor_msgs::Imu>("/imu/ground_truth", 1);
+  noise_pub = nh->advertise<sensor_msgs::Imu>("/imu/data", 1);
 
   // Setup IMU device
   imu = wb->getInertialUnit(imu_name);

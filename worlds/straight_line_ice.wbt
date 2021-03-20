@@ -2,6 +2,7 @@
 WorldInfo {
   basicTimeStep 8
   coordinateSystem "NUE"
+  gpsReference 50 50 50
   contactProperties [
     ContactProperties {
       material2 "ice"

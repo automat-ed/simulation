@@ -1,6 +1,8 @@
 #VRML_SIM R2021a utf8
 WorldInfo {
   coordinateSystem "NUE"
+  gpsCoordinateSystem "WGS84"
+  gpsReference 50 50 50
 }
 Viewpoint {
   orientation 0.8241432530809494 -0.5656974858396937 -0.027825400550569736 6.163959687501386

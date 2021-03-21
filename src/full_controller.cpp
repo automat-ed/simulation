@@ -7,6 +7,7 @@
 #include "sensors/wheelOdom.hpp"
 #include "steering/diffSteering.hpp"
 #include "utils/KeyboardController.hpp"
+#include "utils/GroundTruthPose.hpp"
 #include "webots/Motor.hpp"
 #include "webots/LED.hpp"
 #include "webots/Supervisor.hpp"
@@ -47,6 +48,9 @@ int main(int argc, char **argv)
   // Instantiate steering
   AutomatED::DiffSteering diffSteering = AutomatED::DiffSteering(motors, &nh);
 
+  // Instantiate ground truth pose
+  AutomatED::GroundTruthPose groundTruthPose = AutomatED::GroundTruthPose(supervisor, &nh);
+
   // Instaniate keyboard steering
   AutomatED::KeyboardController *keyboard;
   if (use_keyboard_control)
@@ -68,6 +72,7 @@ int main(int argc, char **argv)
     gyro.publishGyro();
     accelerometer.publishAccelerometer();
     wheel_odom.publishWheelOdom();
+    groundTruthPose.publishPose();
 
     if (use_keyboard_control)
     {

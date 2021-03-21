@@ -68,7 +68,7 @@ add_library(sensors
     lib/sensors/src/wheelOdom.cpp
 )
 add_library(steering lib/steering/src/diffSteering.cpp)
-add_library(utils lib/utils/src/KeyboardController.cpp)
+add_library(utils lib/utils/src/KeyboardController.cpp lib/utils/src/GroundTruthPose.cpp)
 target_link_libraries(sensors ${WEBOTS_LIB} ${catkin_LIBRARIES})
 target_link_libraries(steering ${WEBOTS_LIB} ${catkin_LIBRARIES})
 target_link_libraries(utils ${WEBOTS_LIB} ${catkin_LIBRARIES})

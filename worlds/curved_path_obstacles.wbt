@@ -6,7 +6,7 @@ WorldInfo {
 }
 Viewpoint {
   orientation -0.7879186109743468 -0.5459179504264913 -0.28488217543818845 0.8118726108190326
-  position -18.680694141069903 53.61516860634716 64.56069446464143
+  position 1.9947375955464892 21.83662140435235 57.09629762191056
 }
 TexturedBackground {
 }
@@ -99,9 +99,6 @@ CardboardBox {
 CardboardBox {
   translation -9.2 0.41 23.99
   name "cardboard box(6)"
-}
-Tree {
-  translation 7 0.11 0
 }
 Tree {
   translation 3 0.11 0

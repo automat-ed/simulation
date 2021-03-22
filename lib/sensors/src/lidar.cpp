@@ -125,8 +125,8 @@ void Lidar::publishTF()
 
   msg.transform.rotation.x = 0;
   msg.transform.rotation.y = 0;
-  msg.transform.rotation.z = 0;
-  msg.transform.rotation.w = 1;
+  msg.transform.rotation.z = 1;
+  msg.transform.rotation.w = 0.0000463;
 
   static_broadcaster.sendTransform(msg);
 }

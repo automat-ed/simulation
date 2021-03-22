@@ -5,8 +5,8 @@ WorldInfo {
   gpsReference 50 50 50
 }
 Viewpoint {
-  orientation 0.8241432530809494 -0.5656974858396937 -0.027825400550569736 6.163959687501386
-  position 1.005348021572965 0.4979530764216802 32.61544946995368
+  orientation 0.9952839394163054 -0.07330161765492217 -0.0635354451399487 4.850208124966318
+  position 6.031440644010086 13.233761854813494 31.955829067777387
 }
 TexturedBackground {
 }
@@ -99,6 +99,21 @@ StraightRoadSegment {
   roadBoundingObject TRUE
   rightBorderBoundingObject TRUE
   leftBorderBoundingObject TRUE
+}
+CardboardBox {
+  translation 2.64 0.3 30.2
+}
+CardboardBox {
+  translation 4.9 0.3 28.93
+  name "cardboard box(1)"
+}
+CardboardBox {
+  translation 6.59 0.3 30.76
+  name "cardboard box(2)"
+}
+CardboardBox {
+  translation 8.23 0.3 29.03
+  name "cardboard box(3)"
 }
 StraightRoadSegment {
   translation -23 0.11 -13
@@ -237,5 +252,30 @@ CurvedRoadSegment {
   leftBorderBoundingObject TRUE
 }
 StreetSmart {
-  translation 0.884936 0.23 29.9651
+  hidden position_0_0 -5.429335218879991
+  hidden position_0_1 -5.693119677936887
+  hidden position_0_2 6.005843308328649
+  hidden position_0_3 6.1528359066086145
+  hidden rotation_16 0 0 1 5.429335218879991
+  hidden rotation_17 0 0 1 5.693119677936887
+  hidden rotation_18 0 0 -1 6.005843308328649
+  hidden rotation_19 0 0 -1 6.152835906608614
+  translation 0.9390092042821744 0.22584226120772283 29.945101683682356
+  rotation 1.905114307889714e-05 -0.9999999642442015 0.000266737042041558 0.015866293101632217
+  sensors [
+    Gyro {
+    }
+    Accelerometer {
+    }
+    InertialUnit {
+      name "imu"
+    }
+    GPS {
+    }
+    RobotisLds01 {
+      translation 0 0.16 0
+      rotation 0.7071097811792553 1.0171596852318468e-08 0.707103781181112 3.14159
+      name "RobotisLds01"
+    }
+  ]
 }

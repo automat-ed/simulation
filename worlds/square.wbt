@@ -5,8 +5,8 @@ WorldInfo {
   gpsReference 50 50 50
 }
 Viewpoint {
-  orientation 0.9952839394163054 -0.07330161765492217 -0.0635354451399487 4.850208124966318
-  position 6.031440644010086 13.233761854813494 31.955829067777387
+  orientation 0.9896087578227878 -0.12073094118255519 -0.07809318972620849 5.125341602043045
+  position 6.433454614738949 10.655306371503606 34.54773688154404
 }
 TexturedBackground {
 }
@@ -101,18 +101,18 @@ StraightRoadSegment {
   leftBorderBoundingObject TRUE
 }
 CardboardBox {
-  translation 2.64 0.3 30.2
+  translation 7.91 0.3 30.77
 }
 CardboardBox {
-  translation 4.9 0.3 28.93
+  translation 7.85 0.3 29.96
   name "cardboard box(1)"
 }
 CardboardBox {
-  translation 6.59 0.3 30.76
+  translation 5.39 0.3 28.93
   name "cardboard box(2)"
 }
 CardboardBox {
-  translation 8.23 0.3 29.03
+  translation 5.39 0.3 29.66
   name "cardboard box(3)"
 }
 StraightRoadSegment {

@@ -1,0 +1,266 @@
+#VRML_SIM R2021a utf8
+WorldInfo {
+  coordinateSystem "NUE"
+  gpsCoordinateSystem "WGS84"
+  gpsReference 50 50 50
+}
+Viewpoint {
+  orientation -0.7879186109743468 -0.5459179504264913 -0.28488217543818845 0.8118726108190326
+  position 1.9947375955464892 21.83662140435235 57.09629762191056
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+StraightRoadSegment {
+  translation 10 0.11 40
+  name "road(9)"
+  width 3
+  numberOfLanes 1
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+StraightRoadSegment {
+  translation 8.05604 0.11 -39.4918
+  rotation 0 1 0 0.26180030610042526
+  name "road(2)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+StraightRoadSegment {
+  translation 10.6399 0.11 -29.8715
+  rotation 0 1 0 0.26180030610042526
+  name "road(16)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+Solid {
+  translation 0 0.1 0
+  children [
+    DEF Grass Shape {
+      appearance PBRAppearance {
+        baseColor 0.3 0.4 0
+        roughness 1
+        metalness 0
+      }
+      geometry Plane {
+        size 35 110
+      }
+    }
+  ]
+  boundingObject USE Grass
+}
+Rock17cm {
+  translation 11 0.11 -13
+}
+Rock17cm {
+  translation 12 0.11 -13
+  name "rock 17 cm(1)"
+}
+TrashBin {
+  translation 14 0.11 -18
+}
+WorkTrashContainer {
+  translation 9 0.11 -35
+  rotation 0 1 0 -1.3089953071795861
+}
+CardboardBox {
+  translation 10 0.41 41
+}
+CardboardBox {
+  translation 9 0.41 41
+  name "cardboard box(1)"
+}
+CardboardBox {
+  translation 7.5 0.41 32
+  name "cardboard box(2)"
+}
+CardboardBox {
+  translation 5 0.41 32
+  name "cardboard box(3)"
+}
+CardboardBox {
+  translation 1 0.41 29
+  name "cardboard box(4)"
+}
+CardboardBox {
+  translation -4 0.41 30
+  name "cardboard box(5)"
+}
+CardboardBox {
+  translation -9.2 0.41 23.99
+  name "cardboard box(6)"
+}
+Tree {
+  translation 3 0.11 0
+  name "tree(1)"
+}
+Tree {
+  translation 11 0.11 0
+  name "tree(2)"
+}
+Tree {
+  translation 9 0.11 4
+  name "tree(3)"
+}
+Tree {
+  translation 1 0.11 4
+  name "tree(4)"
+}
+Tree {
+  translation -2 0.11 7
+  name "tree(5)"
+}
+Tree {
+  translation 7 0.11 8
+  name "tree(6)"
+}
+StraightRoadSegment {
+  translation 9.12284 0.11 -5.20613
+  rotation 0 1 0 -0.38
+  name "road(3)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+StraightRoadSegment {
+  translation 12.8221 0.11 -14.4908
+  rotation 0 1 0 -0.38
+  name "road(13)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+CurvedRoadSegment {
+  translation 0 0.11 20
+  rotation 0 1 0 -1.5708
+  width 3
+  numberOfLanes 1
+  totalAngle 1.572
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+CurvedRoadSegment {
+  translation 0 0.11 40
+  rotation 0 1 0 1.5707996938995747
+  name "road(10)"
+  width 3
+  numberOfLanes 1
+  totalAngle 1.572
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+CurvedRoadSegment {
+  translation 0 0.11 20
+  rotation 0 1 0 3.141592653589793
+  name "road(6)"
+  width 3
+  numberOfLanes 1
+  totalAngle 0.8
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+CurvedRoadSegment {
+  translation 0 0.11 20
+  rotation 0 1 0 2.3561903061004252
+  name "road(8)"
+  width 3
+  numberOfLanes 1
+  totalAngle 0.3
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+CurvedRoadSegment {
+  translation 0 0.11 20
+  rotation 0 1 0 2.06
+  name "road(1)"
+  width 3
+  numberOfLanes 1
+  totalAngle 0.3
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+CurvedRoadSegment {
+  translation -3.8 0.11 0.34
+  rotation 0 1 0 -0.8819003061004252
+  name "road(4)"
+  width 3
+  numberOfLanes 1
+  totalAngle 0.5
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+CurvedRoadSegment {
+  translation -3.9 0.11 0.44
+  rotation 0 1 0 -0.37
+  name "road(12)"
+  width 3
+  numberOfLanes 1
+  totalAngle 0.5
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+CurvedRoadSegment {
+  translation 3.5 0.11 -18.1
+  rotation 0 1 0 0.03
+  name "road(14)"
+  width 3
+  numberOfLanes 1
+  totalAngle 0.4
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+CurvedRoadSegment {
+  translation 3.5 0.11 -17.8
+  rotation 0 1 0 0.25
+  name "road(15)"
+  width 3
+  numberOfLanes 1
+  totalAngle 0.2
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+Bench {
+  translation -10 0.11 15
+  rotation 0 -1 0 -1.0472053071795866
+}
+Bench {
+  translation -2 0.11 12
+  rotation 0 1 0 -2.8797853071795863
+  name "bench(1)"
+}
+SquareManhole {
+  translation -7 0.0811 13
+}
+Ramp30deg {
+  translation 10.1965 0.11 -7.39985
+  rotation 0 1 0 1.1781003061004252
+}
+StreetSmart {
+  translation 9.9984 0.24 49.1719
+  rotation 0 1 0 1.5708
+}

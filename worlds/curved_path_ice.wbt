@@ -1,0 +1,401 @@
+#VRML_SIM R2021a utf8
+WorldInfo {
+  coordinateSystem "NUE"
+  gpsCoordinateSystem "WGS84"
+  gpsReference 50 50 50
+  contactProperties [
+    ContactProperties {
+      material2 "ice"
+      coulombFriction [
+        0.02
+      ]
+      softCFM 1e-05
+    }
+  ]
+}
+Viewpoint {
+  orientation -0.9928998550976016 -0.11110015044995654 -0.04250452113785892 0.7355649354951865
+  position 7.020921223833536 16.42857100131382 58.547397826773796
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+StraightRoadSegment {
+  translation 10 0.11 40
+  name "road(9)"
+  width 3
+  numberOfLanes 1
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+StraightRoadSegment {
+  translation 8.05604 0.11 -39.4918
+  rotation 0 1 0 0.26180030610042526
+  name "road(2)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+StraightRoadSegment {
+  translation 10.6399 0.11 -29.8715
+  rotation 0 1 0 0.26180030610042526
+  name "road(16)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+Solid {
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.3 0.4 0
+        roughness 1
+        metalness 0
+      }
+      geometry Plane {
+        size 35 110
+      }
+    }
+  ]
+}
+StraightRoadSegment {
+  translation 9.12284 0.11 -5.20613
+  rotation 0 1 0 -0.38
+  name "road(3)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+StraightRoadSegment {
+  translation 12.8221 0.11 -14.4908
+  rotation 0 1 0 -0.38
+  name "road(13)"
+  width 3
+  numberOfLanes 1
+  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+CurvedRoadSegment {
+  translation 0 0.11 20
+  rotation 0 1 0 -1.5708
+  width 3
+  numberOfLanes 1
+  totalAngle 1.572
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+CurvedRoadSegment {
+  translation 0 0.11 40
+  rotation 0 1 0 1.5707996938995747
+  name "road(10)"
+  width 3
+  numberOfLanes 1
+  totalAngle 1.572
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+CurvedRoadSegment {
+  translation 0 0.11 20
+  rotation 0 1 0 3.141592653589793
+  name "road(6)"
+  width 3
+  numberOfLanes 1
+  totalAngle 0.8
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+CurvedRoadSegment {
+  translation 0 0.11 20
+  rotation 0 1 0 2.3561903061004252
+  name "road(8)"
+  width 3
+  numberOfLanes 1
+  totalAngle 0.3
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+CurvedRoadSegment {
+  translation 0 0.11 20
+  rotation 0 1 0 2.06
+  name "road(1)"
+  width 3
+  numberOfLanes 1
+  totalAngle 0.3
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+CurvedRoadSegment {
+  translation -3.8 0.11 0.34
+  rotation 0 1 0 -0.8819003061004252
+  name "road(4)"
+  width 3
+  numberOfLanes 1
+  totalAngle 0.5
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+CurvedRoadSegment {
+  translation -3.9 0.11 0.44
+  rotation 0 1 0 -0.37
+  name "road(12)"
+  width 3
+  numberOfLanes 1
+  totalAngle 0.5
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+CurvedRoadSegment {
+  translation 3.5 0.11 -18.1
+  rotation 0 1 0 0.03
+  name "road(14)"
+  width 3
+  numberOfLanes 1
+  totalAngle 0.4
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+CurvedRoadSegment {
+  translation 3.5 0.11 -17.8
+  rotation 0 1 0 0.25
+  name "road(15)"
+  width 3
+  numberOfLanes 1
+  totalAngle 0.2
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+StreetSmart {
+  translation 9.9984 0.24 49.1719
+  rotation 0 1 0 1.5708
+}
+Solid {
+  translation 10 0.1101 44
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.7 0.9 1
+        metalness 0
+      }
+      geometry DEF PATCH Cylinder {
+        height 1e-05
+      }
+    }
+  ]
+  name "ice"
+  contactMaterial "ice"
+  boundingObject Cylinder {
+    height 1e-05
+  }
+}
+Solid {
+  translation 7 0.1101 34
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.7 0.9 1
+        metalness 0
+      }
+      geometry DEF PATCH Cylinder {
+        height 1e-05
+      }
+    }
+  ]
+  name "ice(1)"
+  contactMaterial "ice"
+  boundingObject Cylinder {
+    height 1e-05
+  }
+}
+Solid {
+  translation -7 0.1101 26
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.7 0.9 1
+        metalness 0
+      }
+      geometry DEF PATCH Cylinder {
+        height 1e-05
+      }
+    }
+  ]
+  name "ice(2)"
+  contactMaterial "ice"
+  boundingObject Cylinder {
+    height 1e-05
+  }
+}
+Solid {
+  translation -8 0.1101 27
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.7 0.9 1
+        metalness 0
+      }
+      geometry DEF PATCH Cylinder {
+        height 1e-05
+      }
+    }
+  ]
+  name "ice(3)"
+  contactMaterial "ice"
+  boundingObject Cylinder {
+    height 1e-05
+  }
+}
+Solid {
+  translation -7 0.1101 12
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.7 0.9 1
+        metalness 0
+      }
+      geometry DEF PATCH Cylinder {
+        height 1e-05
+      }
+    }
+  ]
+  name "ice(4)"
+  contactMaterial "ice"
+  boundingObject Cylinder {
+    height 1e-05
+  }
+}
+Solid {
+  translation -4 0.1101 12
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.7 0.9 1
+        metalness 0
+      }
+      geometry DEF PATCH Cylinder {
+        height 1e-05
+      }
+    }
+  ]
+  name "ice(5)"
+  contactMaterial "ice"
+  boundingObject Cylinder {
+    height 1e-05
+  }
+}
+Solid {
+  translation 5 0.1101 5
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.7 0.9 1
+        metalness 0
+      }
+      geometry DEF PATCH Cylinder {
+        height 1e-05
+      }
+    }
+  ]
+  name "ice(6)"
+  contactMaterial "ice"
+  boundingObject Cylinder {
+    height 1e-05
+  }
+}
+Solid {
+  translation 6 0.1101 2
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.7 0.9 1
+        metalness 0
+      }
+      geometry DEF PATCH Cylinder {
+        height 1e-05
+      }
+    }
+  ]
+  name "ice(7)"
+  contactMaterial "ice"
+  boundingObject Cylinder {
+    height 1e-05
+  }
+}
+Solid {
+  translation 7 0.1101 2
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.7 0.9 1
+        metalness 0
+      }
+      geometry DEF PATCH Cylinder {
+        height 1e-05
+      }
+    }
+  ]
+  name "ice(8)"
+  contactMaterial "ice"
+  boundingObject Cylinder {
+    height 1e-05
+  }
+}
+Solid {
+  translation 11 0.1101 -12
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.7 0.9 1
+        metalness 0
+      }
+      geometry DEF PATCH Cylinder {
+        height 1e-05
+      }
+    }
+  ]
+  name "ice(9)"
+  contactMaterial "ice"
+  boundingObject Cylinder {
+    height 1e-05
+  }
+}
+Solid {
+  translation 14 0.1101 -15
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.7 0.9 1
+        metalness 0
+      }
+      geometry DEF PATCH Cylinder {
+        height 1e-05
+      }
+    }
+  ]
+  name "ice(10)"
+  contactMaterial "ice"
+  boundingObject Cylinder {
+    height 1e-05
+  }
+}

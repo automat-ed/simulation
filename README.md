@@ -88,3 +88,16 @@ After running the controller, you should see the lights on the robot model light
 The `full_controller` node takes two main parameters:
 1. `step_size`: determines the [step size of the webots world](https://cyberbotics.com/doc/guide/controller-programming?tab-language=c++#the-step-and-wb_robot_step-functions)
 2. `use_keyboard_control`: determines whether to run the keyboard controller, enabling you to control the robot model with the arrow keys (the Webots world must be in focus to work i.e if your arrow keys aren't moving the robot, try clicking on the robot model and try again).
+
+## Directory Structure
+This section tries to explain the general structure of this repository. For more detailed information, please take a look at the code.
+* `.github/workflows`: contains the Github Actions config file for the [Continuous Integration pipeline](https://github.com/automat-ed/simulation/actions/workflows/ci.yaml)
+* `launch`: Contains the launch files relevant to launching Webots
+* `lib`: Defines three C++ libraries grouped by functionality:
+    * `sensors`: This library contains classes that abstract over the details of extracting sensor data from the simulation and publishing them to ROS topics.
+    * `steering` This library contains a class that allows us to convert linear and angular velocities into individual motor commands for a differential steered robot.
+    * `utils`: Contains miscellaneous classes.
+
+    Most of the classes defined in here will also define additional ROS parameters specific to each class. These must be passed in when launching the external controller as it is all one node.
+* `protos`: Contains the [PROTO file](https://www.cyberbotics.com/doc/reference/proto-definition#!) for the robot model
+* `src`: Contains the `.cpp` file for the external controller. This is added to the robot model and is the sole entry point into the simulation. It is also a ROS node. All classes in `lib` get passed a ROS Handler to this ROS node.

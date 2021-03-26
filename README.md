@@ -109,3 +109,32 @@ This section tries to explain the general structure of this repository. For more
     Most of the classes defined in here will also define additional ROS parameters specific to each class. These must be passed in when launching the external controller as it is all one node.
 * `protos`: Contains the [PROTO file](https://www.cyberbotics.com/doc/reference/proto-definition#!) for the robot model
 * `src`: Contains the `.cpp` file for the external controller. This is added to the robot model and is the sole entry point into the simulation. It is also a ROS node. All classes in `lib` get passed a ROS Handler to this ROS node.
+
+## Topics
+
+### Publishers
+Below we list the set of topics that are published to by the external controller
+
+Topic name | Message Type | Description
+---------- | ------------ | -----------
+/accelerometer/data | `sensor_msgs/Imu` | Linear acceleration with noise
+/acelerometer/ground_truth | `sensor_msgs/Imu` | Ground truth linear acceleration
+/gps/coordinates | `sensor_msgs/NavSatFix` | GPS coordinates (WSG84) with noise
+/gps/ground_truth/coordinates | `sensor_msgs/NavSatFix` | Ground truth GPS coordinates (WSG84)
+/ground_truth/pose | `nav_msgs/Odometry` | Ground truth position of the robot model
+/gryo/data | `sensor_msgs/Imu` | Angular velocity with noise
+/gyro/ground_truth | `sensor_msgs/Imu` | Ground truth angular velocity
+/imu/data | `sensor_msgs/Imu` | Orientation with noise
+/imu/ground_truth | `sensor_msgs/Imu` | Ground truth orientation
+/lidar/data | `sensor_msgs/LaserScan` | Lidar laser scan with noise
+/lidar/ground_truth | `sensor_msgs/LaserScan` | Ground truth laser scan
+/tf_static | `tf2_msgs/TFMessage` | Static stransforms of each sensor
+/wheel_odom/data | `geometry_msgs/TwistWithCovarianceStamped` | Linear velocity with noise
+/wheel_odom/ground_truth | `geometry_msgs/TwistWithCovarianceStamped` | Ground truth linear velocity
+
+### Subscriptions
+Below we list the list of topics t
+
+Topic name | Message Type | Description
+---------- | ------------ | -----------
+/cmd_vel | `geometry_msgs/Twist` | Linear and angular velocities to give to the robot

@@ -39,7 +39,11 @@ The following instructions details how to install the package and its dependenci
     ```bash
     rosdep install --from-paths src --ignore-src -y
     ```
-4. Source workspace
+4. Build workspace (`catkin_make` will also work if you don't have [`catkin_tools`](https://catkin-tools.readthedocs.io/) installed)
+    ```bash
+    catkin build
+    ```
+5. Source workspace
     ```bash
     source devel/setup.bash
     ```

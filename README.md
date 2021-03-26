@@ -39,7 +39,20 @@ The following instructions details how to install the package and its dependenci
     ```bash
     rosdep install --from-paths src --ignore-src -y
     ```
-4. Build workspace (`catkin_make` will also work if you don't have [`catkin_tools`](https://catkin-tools.readthedocs.io/) installed)
+
+4. Set WEBOTS_HOME environment variable to the webots directory obtained from installing Webots (typically `/usr/local/webots` on Linux):
+    ```bash
+    echo "export WEBOTS_HOME=/usr/local/webots" >> ~/.bashrc
+    ```
+    Or if you are using zsh:
+    ```bash
+    echo "export WEBOTS_HOME=/usr/local/webots" >> ~/.zshrc
+    ```
+5. Add to your `.bashrc` file (or `.zshrc` if you use zsh):
+    ```bash
+    export LD_LIBRARY_PATH="${WEBOTS_HOME}/lib/controller:$PATH"
+    ```
+6. Build workspace (`catkin_make` will also work if you don't have [`catkin_tools`](https://catkin-tools.readthedocs.io/) installed)
     ```bash
     catkin build
     ```

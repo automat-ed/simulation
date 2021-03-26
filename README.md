@@ -25,7 +25,7 @@ To run this package you will need to have installed:
 Click the links above to go to their respective installation pages.
 
 ## Installation
-The following instructions will details how to install the package and its dependencies. We assume you have installed the packages listed in the [Prerequisites section](#prerequisites) and that you have sourced your ROS installation (using `source /opt/ros/noetic/setup.bash` or similar).
+The following instructions details how to install the package and its dependencies. We assume you have installed the packages listed in the [Prerequisites section](#prerequisites) and that you have sourced your ROS installation (using `source /opt/ros/noetic/setup.bash` or similar).
 1. Create a workspace
     ```bash
     mkdir -p ~/ros_ws/src

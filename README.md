@@ -9,6 +9,14 @@
 ## Introduction
 This repository is a [ROS 1 Noetic](https://wiki.ros.org/noetic) package. It contains various components (discussed below) that together form a platform ontop of the [Webots simulator](https://www.cyberbotics.com/#cyberbotics) to allow our [software](https://www.github.com/automat-ed/autonomous) to run in a simulated environment. Such components include sensor abstractions that publish to ROS topics, a robot model, keyboard controller, and numerous testing environments with obstacles, ice and humanoids.
 
+Currently the Robot model has 6 sensors:
+1. [Accelerometer](https://github.com/automat-ed/simulation/blob/main/lib/sensors/src/accelerometer.cpp)
+2. [GPS](https://github.com/automat-ed/simulation/blob/main/lib/sensors/src/gps.cpp)
+3. [Gyroscope](https://github.com/automat-ed/simulation/blob/main/lib/sensors/src/gyro.cpp)
+4. [Inertial Unit](https://github.com/automat-ed/simulation/blob/main/lib/sensors/src/inertialUnit.cpp)
+5. [Lidar](https://github.com/automat-ed/simulation/blob/main/lib/sensors/src/lidar.cpp)
+6. [Wheel Odometry](https://github.com/automat-ed/simulation/blob/main/lib/sensors/src/wheelOdom.cpp)
+
 ## Prerequisites
 To run this package you will need to have installed:
 * [ROS 1 Noetic](https://wiki.ros.org/noetic/Installation/Ubuntu)

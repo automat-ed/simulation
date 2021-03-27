@@ -66,6 +66,7 @@ add_library(sensors
     lib/sensors/src/accelerometer.cpp
     lib/sensors/src/gyro.cpp
     lib/sensors/src/wheelOdom.cpp
+    lib/sensors/src/MultiSenseS21.cpp
 )
 add_library(steering lib/steering/src/diffSteering.cpp)
 add_library(utils lib/utils/src/KeyboardController.cpp lib/utils/src/GroundTruthPose.cpp)

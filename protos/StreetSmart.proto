@@ -13,6 +13,22 @@ PROTO StreetSmart [
       translation 0 0.16 0
       name "RobotisLds01"
     }
+    MultiSenseS21 {
+      translation         0 0.25 0
+      rotation            0 -1 0 1.57
+      name                "MultiSense S21"
+      cameraWidth         1024
+      cameraHeight        544
+      cameraFieldOfView   1.4
+      cameraNoise         0
+      rangeFinderNoise    0
+      rangeFinderMaxRange 300
+      leftCamera          TRUE
+      rightCamera         TRUE
+      metaCamera          FALSE
+      metaRangeFinder     FALSE
+      enablePhysics       TRUE
+    }
   ]
 ]
 {

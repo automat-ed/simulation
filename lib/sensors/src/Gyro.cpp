@@ -1,4 +1,4 @@
-#include "sensors/gyro.hpp"
+#include "sensors/Gyro.hpp"
 #include "sensor_msgs/Imu.h"
 #include "tf2/LinearMath/Quaternion.h"
 #include "tf2_ros/static_transform_broadcaster.h"

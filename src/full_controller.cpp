@@ -1,12 +1,12 @@
 #include "ros/ros.h"
-#include "sensors/accelerometer.hpp"
-#include "sensors/gps.hpp"
-#include "sensors/gyro.hpp"
-#include "sensors/inertialUnit.hpp"
-#include "sensors/lidar.hpp"
-#include "sensors/wheelOdom.hpp"
+#include "sensors/Accelerometer.hpp"
+#include "sensors/GPS.hpp"
+#include "sensors/Gyro.hpp"
+#include "sensors/InertialUnit.hpp"
+#include "sensors/Lidar.hpp"
+#include "sensors/WheelOdom.hpp"
 #include "sensors/MultiSenseS21.hpp"
-#include "steering/diffSteering.hpp"
+#include "steering/DiffSteering.hpp"
 #include "utils/KeyboardController.hpp"
 #include "utils/GroundTruthPose.hpp"
 #include "webots/Motor.hpp"
@@ -77,7 +77,7 @@ int main(int argc, char **argv)
     wheel_odom.publishWheelOdom();
     groundTruthPose.publishPose();
     camera.publishCamera();
-    
+
     if (use_keyboard_control)
     {
       keyboard->keyLoop();

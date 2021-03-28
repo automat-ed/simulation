@@ -60,15 +60,15 @@ include_directories(
 
 ## Declare a C++ library
 add_library(sensors
-    lib/sensors/src/lidar.cpp
-    lib/sensors/src/gps.cpp
-    lib/sensors/src/inertialUnit.cpp
-    lib/sensors/src/accelerometer.cpp
-    lib/sensors/src/gyro.cpp
-    lib/sensors/src/wheelOdom.cpp
+    lib/sensors/src/Accelerometer.cpp
+    lib/sensors/src/GPS.cpp
+    lib/sensors/src/Gyro.cpp
+    lib/sensors/src/InertialUnit.cpp
+    lib/sensors/src/Lidar.cpp
     lib/sensors/src/MultiSenseS21.cpp
+    lib/sensors/src/WheelOdom.cpp
 )
-add_library(steering lib/steering/src/diffSteering.cpp)
+add_library(steering lib/steering/src/DiffSteering.cpp)
 add_library(utils lib/utils/src/KeyboardController.cpp lib/utils/src/GroundTruthPose.cpp)
 target_link_libraries(sensors ${WEBOTS_LIB} ${catkin_LIBRARIES})
 target_link_libraries(steering ${WEBOTS_LIB} ${catkin_LIBRARIES})

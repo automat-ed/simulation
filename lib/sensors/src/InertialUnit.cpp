@@ -1,4 +1,4 @@
-#include "sensors/inertialUnit.hpp"
+#include "sensors/InertialUnit.hpp"
 #include "geometry_msgs/TransformStamped.h"
 #include "ros/ros.h"
 #include "sensor_msgs/Imu.h"

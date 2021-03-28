@@ -1,0 +1,148 @@
+#VRML_SIM R2021a utf8
+WorldInfo {
+  coordinateSystem "NUE"
+  gpsCoordinateSystem "WGS84"
+  gpsReference 50 50 50
+}
+Viewpoint {
+  orientation 0.9817353121243889 -0.18970238586387114 -0.014449281144182842 6.128320817565166
+  position 0.9323863471359335 5.012459985030098 76.67850223134604
+  followType "None"
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+StraightRoadSegment {
+  translation 0 0.11 10
+  name "road(1)"
+  width 6
+  numberOfLanes 1
+  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+StraightRoadSegment {
+  translation 0 0.11 20
+  name "road(6)"
+  width 6
+  numberOfLanes 1
+  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+StraightRoadSegment {
+  translation 0 0.11 30
+  name "road(8)"
+  width 6
+  numberOfLanes 1
+  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+StraightRoadSegment {
+  translation 0 0.11 40
+  name "road(9)"
+  width 6
+  numberOfLanes 1
+  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+StraightRoadSegment {
+  translation 0 0.11 -20
+  name "road(2)"
+  width 6
+  numberOfLanes 1
+  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+StraightRoadSegment {
+  translation 0 0.11 -30
+  name "road(5)"
+  width 6
+  numberOfLanes 1
+  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+StraightRoadSegment {
+  translation 0 0.11 -40
+  name "road(7)"
+  width 6
+  numberOfLanes 1
+  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+StraightRoadSegment {
+  translation 0 0.11 -50
+  name "road(11)"
+  width 6
+  numberOfLanes 1
+  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+Solid {
+  translation 0.310069 -8.88184e-16 3.65112
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.3 0.4 0
+        roughness 1
+        metalness 0
+      }
+      geometry Plane {
+        size 30 110
+      }
+    }
+  ]
+}
+Pedestrian {
+  translation 5.60879 1.27 1.04955
+  rotation 0 -1 0 0.26179530717958593
+  name "pedestrian(2)"
+}
+StraightRoadSegment {
+  translation 0 0.11 -10
+  name "road(3)"
+  width 6
+  numberOfLanes 1
+  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+StraightRoadSegment {
+  translation 0 0.11 0
+  name "road(4)"
+  width 6
+  numberOfLanes 1
+  locked FALSE
+  roadBoundingObject TRUE
+  rightBorderBoundingObject TRUE
+  leftBorderBoundingObject TRUE
+}
+Pedestrian {
+  translation 2.69001 1.27 36.4233
+  rotation 0 1 0 -0.261795307179586
+  name "pedestrian(1)"
+}
+StreetSmart {
+  translation -0.00701334 0.23 47.8687
+  rotation 0 1 0 1.5707996938995747
+}
+Pedestrian {
+  translation -4.19925 1.27 15.4843
+  rotation 0 -1 0 -0.7854053071795866
+}

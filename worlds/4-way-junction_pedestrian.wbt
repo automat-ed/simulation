@@ -1,0 +1,87 @@
+#VRML_SIM R2021a utf8
+WorldInfo {
+  info [
+    "World generated using the Open Street Map to Webots importer"
+    "Author: David Mansolino <david.mansolino@epfl.ch>"
+  ]
+  coordinateSystem "NUE"
+  gpsCoordinateSystem "WGS84"
+  gpsReference 55.94168 -3.19207 0
+  lineScale 3
+}
+Viewpoint {
+  orientation 0.5202427631435419 0.8263164433541084 0.21575125223133468 5.352882518535569
+  position -43.32957990055159 32.52418371336382 45.96525946207395
+  near 3
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+Floor {
+  translation 0 -0.02 0
+  size 50 50
+  appearance PBRAppearance {
+    baseColorMap ImageTexture {
+      url [
+        "textures/grass.jpg"
+      ]
+    }
+    roughness 1
+    metalness 0
+  }
+}
+Pedestrian {
+  hidden translation_2 2.7755575615628914e-16 0.005497026170005664 -0.05646130269254599
+  hidden rotation_2 1 0 0 0.29927272727272747
+  hidden translation_3 5.551115123125783e-17 0.008065074062268973 -0.030876335760140247
+  hidden rotation_3 -1 0 0 0.32545454545454694
+  hidden translation_4 1.1102230246251565e-16 -0.003404509039217518 -0.09609620288710885
+  hidden rotation_4 -1 0 0 0.2594545454545477
+  hidden translation_5 2.220446049250313e-16 0.006412255523726373 0.03995538087247966
+  hidden rotation_5 -1 0 0 0.21309090909090472
+  hidden translation_6 -8.326672684688674e-17 -0.0007043000223468376 0.001548501362876424
+  hidden rotation_6 1 0 0 0.017272727272691128
+  hidden translation_7 -2.7755575615628914e-17 -0.007855706454527878 0.048525508992468186
+  hidden rotation_7 1 0 0 0.13236363636363846
+  hidden translation_8 2.7755575615628914e-17 -0.13675432320187242 0.21485456442198805
+  hidden rotation_8 0.9999999999999999 0 0 0.8685454545454524
+  hidden translation_9 0 -0.6297715435138089 -0.7793600930935837
+  hidden rotation_9 -0.9999999999999999 0 0 1.4381818181818145
+  hidden translation_10 2.7755575615628914e-17 -0.006384302811865306 0.060639006250868266
+  hidden rotation_10 1 0 0 0.05218181818182103
+  hidden translation_11 -2.7755575615628914e-17 -0.05268736691358686 -0.2144604869758913
+  hidden rotation_11 -1 0 0 0.746909090909085
+  hidden translation_12 -8.326672684688674e-17 -0.5250284691395991 0.6933867428181962
+  hidden rotation_12 1 0 0 1.21727272727272
+  hidden translation_13 -2.7755575615628914e-17 -0.0016815693098861662 0.01926198280046633
+  hidden rotation_13 1 0 0 0.016545454545457708
+  hidden translation_14 0 0.00035610303544236777 0.029062776210605303
+  hidden rotation_14 -1 0 0 0.07854545454544805
+  translation 4.622751788875653 1.3252727272727276 5.232768010744952
+  rotation 0 1 0 0.7874742849820282
+  controllerArgs [
+    "--speed=2"
+    "--trajectory=-7.44 -6.78, 7.04 7.64"
+  ]
+  rightLegAngle -0.960727272727275
+  rightLowerLegAngle 1.6296363636363647
+  rightFootAngle 0.016545454545453423
+  leftLegAngle 0.16581818181818278
+  leftLowerLegAngle 0.05345454545454658
+  leftFootAngle 0.12218181818182075
+  rightArmAngle 0.12872727272727857
+  rightLowerArmAngle -0.3661818181818225
+  rightHandAngle 0.04581818181818278
+  leftArmAngle -0.03236363636364059
+  leftLowerArmAngle -0.4069090909090931
+  leftHandAngle -0.2005454545454552
+  headAngle 0.055636363636362915
+}
+RoadIntersection {
+  startRoadsLength [
+    10
+  ]
+  startRoadsNumberOfLanes 1
+  startRoadsStartLine []
+}

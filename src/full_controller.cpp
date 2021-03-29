@@ -46,7 +46,7 @@ int main(int argc, char **argv)
   AutomatED::Accelerometer accelerometer =
       AutomatED::Accelerometer(supervisor, &nh);
   AutomatED::WheelOdom wheel_odom = AutomatED::WheelOdom(supervisor, &nh);
-  AutomatED::MultiSenseS21 camera = AutomatED::MultiSenseS21(supervisor, &nh);
+  AutomatED::MultiSenseS21 multi_sense = AutomatED::MultiSenseS21(supervisor, &nh);
 
   // Instantiate steering
   AutomatED::DiffSteering diffSteering = AutomatED::DiffSteering(motors, &nh);
@@ -76,7 +76,8 @@ int main(int argc, char **argv)
     accelerometer.publishAccelerometer();
     wheel_odom.publishWheelOdom();
     groundTruthPose.publishPose();
-    camera.publishCamera();
+    multi_sense.publishCamera();
+    multi_sense.publishRange();
 
     if (use_keyboard_control)
     {

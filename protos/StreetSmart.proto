@@ -25,8 +25,8 @@ PROTO StreetSmart [
       rangeFinderMaxRange 300
       leftCamera          TRUE
       rightCamera         TRUE
-      metaCamera          FALSE
-      metaRangeFinder     FALSE
+      metaCamera          TRUE
+      metaRangeFinder     TRUE
       enablePhysics       TRUE
     }
   ]

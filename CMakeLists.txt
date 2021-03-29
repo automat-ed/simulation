@@ -118,25 +118,25 @@ install(TARGETS utils
 )
 
 ## Mark cpp header files for installation
-install(DIRECTORY lib/sensors/include
+install(DIRECTORY lib/sensors/include/
     DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
 )
 
-install(DIRECTORY lib/steering/include
+install(DIRECTORY lib/steering/include/
     DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
 )
 
-install(DIRECTORY lib/utils/include
+install(DIRECTORY lib/utils/include/
     DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
 )
 
 ## Mark all launch files for installation
 install(DIRECTORY launch/ 
-    DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+    DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/launch
 )
 
 ## Mark all world files for installation
 install(DIRECTORY worlds/ 
-    DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+    DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/worlds
 )
 

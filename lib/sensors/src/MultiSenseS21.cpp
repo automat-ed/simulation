@@ -66,8 +66,7 @@ void MultiSenseS21::publishCamera()
 void MultiSenseS21::publishRange()
 {
   // Get range image from RangeFinder
-  const char *rangeImageVector;
-  rangeImageVector = (const char *)(void *)range->getRangeImage();
+  const float *rangeImageVector = range->getRangeImage();
 
   // Construct Image message
   sensor_msgs::Image image;

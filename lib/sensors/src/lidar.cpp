@@ -72,7 +72,14 @@ void Lidar::publishLaserScan()
     gt.range_max = lidar->getMaxRange();
     for (int i = 0; i < lidar->getHorizontalResolution(); i++)
     {
-      gt.ranges.push_back(rangeImageVector[i]);
+      if (i <=179)
+      {
+        gt.ranges.push_back(rangeImageVector[i]);
+      }
+      else
+      {
+        gt.ranges.push_back(INFINITY);
+      }
     }
 
     ground_truth_pub.publish(gt);
@@ -98,12 +105,16 @@ void Lidar::publishLaserScan()
       {
         msg.ranges.push_back(rangeImageVector[i]);
       }
-      else
+      else if (i<=179)
       {
         double noisy_range = rangeImageVector[i] + gaussianNoise();
         // Make sure value is between `range_min` and `range_max`
         noisy_range = std::max((double)msg.range_min, std::min(noisy_range, (double)msg.range_max));
         msg.ranges.push_back(noisy_range);
+      }
+      else
+      {
+        msg.ranges.push_back(INFINITY);
       }
     }
 

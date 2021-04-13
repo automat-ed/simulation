@@ -1,4 +1,4 @@
-#include "sensors/accelerometer.hpp"
+#include "sensors/Accelerometer.hpp"
 #include "ros/ros.h"
 #include "sensor_msgs/Imu.h"
 #include "tf2/LinearMath/Quaternion.h"

@@ -60,14 +60,15 @@ include_directories(
 
 ## Declare a C++ library
 add_library(sensors
-    lib/sensors/src/lidar.cpp
-    lib/sensors/src/gps.cpp
-    lib/sensors/src/inertialUnit.cpp
-    lib/sensors/src/accelerometer.cpp
-    lib/sensors/src/gyro.cpp
-    lib/sensors/src/wheelOdom.cpp
+    lib/sensors/src/Accelerometer.cpp
+    lib/sensors/src/GPS.cpp
+    lib/sensors/src/Gyro.cpp
+    lib/sensors/src/InertialUnit.cpp
+    lib/sensors/src/Lidar.cpp
+    lib/sensors/src/MultiSenseS21.cpp
+    lib/sensors/src/WheelOdom.cpp
 )
-add_library(steering lib/steering/src/diffSteering.cpp)
+add_library(steering lib/steering/src/DiffSteering.cpp)
 add_library(utils lib/utils/src/KeyboardController.cpp lib/utils/src/GroundTruthPose.cpp)
 target_link_libraries(sensors ${WEBOTS_LIB} ${catkin_LIBRARIES})
 target_link_libraries(steering ${WEBOTS_LIB} ${catkin_LIBRARIES})
@@ -117,25 +118,25 @@ install(TARGETS utils
 )
 
 ## Mark cpp header files for installation
-install(DIRECTORY lib/sensors/include
+install(DIRECTORY lib/sensors/include/
     DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
 )
 
-install(DIRECTORY lib/steering/include
+install(DIRECTORY lib/steering/include/
     DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
 )
 
-install(DIRECTORY lib/utils/include
+install(DIRECTORY lib/utils/include/
     DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
 )
 
 ## Mark all launch files for installation
 install(DIRECTORY launch/ 
-    DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+    DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/launch
 )
 
 ## Mark all world files for installation
 install(DIRECTORY worlds/ 
-    DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+    DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/worlds
 )
 

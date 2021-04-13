@@ -1,4 +1,4 @@
-#include "sensors/lidar.hpp"
+#include "sensors/Lidar.hpp"
 #include "geometry_msgs/TransformStamped.h"
 #include "ros/ros.h"
 #include "sensor_msgs/LaserScan.h"

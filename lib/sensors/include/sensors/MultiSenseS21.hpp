@@ -1,5 +1,6 @@
 #include "ros/ros.h"
 #include "webots/Camera.hpp"
+#include "webots/RangeFinder.hpp"
 #include "webots/Supervisor.hpp"
 
 namespace AutomatED
@@ -13,6 +14,7 @@ namespace AutomatED
     ~MultiSenseS21();
 
     void publishCamera();
+    void publishRange();
 
   private:
     // Handlers
@@ -21,14 +23,17 @@ namespace AutomatED
 
     // Webots devices
     webots::Camera *camera;
+    webots::RangeFinder *range;
 
     // ROS parameters
     std::string camera_name;
+    std::string range_name;
     std::string frame_id;
     int sampling_period;
 
     // ROS publisher
-    ros::Publisher ground_truth_pub;
+    ros::Publisher camera_pub;
+    ros::Publisher range_pub;
   };
 
 } // namespace AutomatED

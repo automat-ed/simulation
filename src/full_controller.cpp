@@ -1,14 +1,16 @@
 #include "ros/ros.h"
-#include "sensors/accelerometer.hpp"
-#include "sensors/gps.hpp"
-#include "sensors/gyro.hpp"
-#include "sensors/inertialUnit.hpp"
-#include "sensors/lidar.hpp"
-#include "sensors/wheelOdom.hpp"
+
+#include "sensors/Accelerometer.hpp"
+#include "sensors/GPS.hpp"
+#include "sensors/Gyro.hpp"
+#include "sensors/InertialUnit.hpp"
+#include "sensors/Lidar.hpp"
+#include "sensors/WheelOdom.hpp"
 #include "sensors/MultiSenseS21.hpp"
-#include "steering/diffSteering.hpp"
+#include "steering/DiffSteering.hpp"
 #include "utils/KeyboardController.hpp"
 #include "utils/GroundTruthPose.hpp"
+
 #include "webots/Motor.hpp"
 #include "webots/LED.hpp"
 #include "webots/Camera.hpp"
@@ -46,7 +48,7 @@ int main(int argc, char **argv)
   AutomatED::Accelerometer accelerometer =
       AutomatED::Accelerometer(supervisor, &nh);
   AutomatED::WheelOdom wheel_odom = AutomatED::WheelOdom(supervisor, &nh);
-  AutomatED::MultiSenseS21 camera = AutomatED::MultiSenseS21(supervisor, &nh);
+  AutomatED::MultiSenseS21 multi_sense = AutomatED::MultiSenseS21(supervisor, &nh);
 
   // Instantiate steering
   AutomatED::DiffSteering diffSteering = AutomatED::DiffSteering(motors, &nh);
@@ -76,8 +78,9 @@ int main(int argc, char **argv)
     accelerometer.publishAccelerometer();
     wheel_odom.publishWheelOdom();
     groundTruthPose.publishPose();
-    camera.publishCamera();
-    
+    multi_sense.publishCamera();
+    multi_sense.publishRange();
+
     if (use_keyboard_control)
     {
       keyboard->keyLoop();

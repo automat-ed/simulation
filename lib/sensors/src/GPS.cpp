@@ -3,7 +3,7 @@
 #include "geometry_msgs/TransformStamped.h"
 #include "ros/ros.h"
 #include "sensor_msgs/NavSatFix.h"
-#include "sensors/gps.hpp"
+#include "sensors/GPS.hpp"
 #include "tf2/LinearMath/Quaternion.h"
 #include "webots/Supervisor.hpp"
 #include "webots_ros/Float64Stamped.h"
